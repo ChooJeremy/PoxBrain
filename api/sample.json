@@ -1,0 +1,137 @@
+{  
+   "id":18,
+   "name":"Abomination",
+   "description":"A mind is a terrible thing to waste. So is a spleen, a kidney, a liver, an eye... - Xulos, Undead Sage",
+   "maxRng":1,
+   "minRng":1,
+   "defense":2,
+   "speed":6,
+   "damage":12,
+   "hitPoints":55,
+   "size":"1x1",
+   "rarity":"UNCOMMON",
+   "classes":[  
+      "Brute"
+   ],
+   "races":[  
+      "Undead",
+      "Zombie"
+   ],
+   "noraCost":70,
+   "hash":"cj9Ej9Dj9CG2BG2Aj9Cj9Dj9Eeeeerzzgvqhtmnj",
+   "artist":"James Ryman",
+   "factions":[  
+      "Forsaken Wastes"
+   ],
+   "runeSet":"Pox Nora Release Set",
+   "forSale":true,
+   "tradeable":true,
+   "allowRanked":true,
+   "deckLimit":2,
+   "startingAbilities":[  
+      {  
+         "id":545,
+         "apCost":0,
+         "name":"Attack: Physical",
+         "shortDescription":"This unit makes a Physical attack at its range. This is a basic attack.",
+         "activationType":3,
+         "level":0,
+         "cooldown":0,
+         "noraCost":2,
+         "iconName":"physical"
+      },
+      {  
+         "id":2142,
+         "apCost":0,
+         "name":"Zombie Apocalypse",
+         "shortDescription":"This champion has \u003cability value\u003d43\u003eImmunity: Disease\u003c/ability\u003e.  While you control at least 5 Zombies, this unit gains \u003cability value\u003d2147\u003eSwarm: Festering Corpse\u003c/ability\u003e.",
+         "activationType":0,
+         "level":0,
+         "cooldown":0,
+         "noraCost":4,
+         "iconName":"zombie_apoc"
+      }
+   ],
+   "abilitySets":[  
+      {  
+         "abilities":[  
+            {  
+               "default":false,
+               "id":25,
+               "apCost":0,
+               "name":"Berserker",
+               "shortDescription":"This champion gets +2 SPD, +4 DMG, and \u003cability value\u003d2005\u003eCareless\u003c/ability\u003e",
+               "activationType":0,
+               "level":3,
+               "cooldown":0,
+               "noraCost":12,
+               "iconName":"berserker"
+            },
+            {  
+               "default":true,
+               "id":24,
+               "apCost":0,
+               "name":"Berserker",
+               "shortDescription":"This champion gets +1 SPD, +3 DMG, and \u003cability value\u003d2005\u003eCareless\u003c/ability\u003e.",
+               "activationType":0,
+               "level":2,
+               "cooldown":0,
+               "noraCost":3,
+               "iconName":"berserker"
+            },
+            {  
+               "default":false,
+               "id":23,
+               "apCost":0,
+               "name":"Berserker",
+               "shortDescription":"This champion gets +2 DMG and \u003cability value\u003d2005\u003eCareless\u003c/ability\u003e",
+               "activationType":0,
+               "level":1,
+               "cooldown":0,
+               "noraCost":-5,
+               "iconName":"berserker"
+            }
+         ]
+      },
+      {  
+         "abilities":[  
+            {  
+               "default":false,
+               "id":108,
+               "apCost":1,
+               "name":"Pummel",
+               "shortDescription":"This champion makes its basic melee attack against target opposing champion. If successful, this unit makes an additional basic attack for free against the same target.",
+               "activationType":1,
+               "level":1,
+               "cooldown":4,
+               "noraCost":8,
+               "iconName":"hammer"
+            },
+            {  
+               "default":false,
+               "id":109,
+               "apCost":1,
+               "name":"Pummel",
+               "shortDescription":"This champion makes its basic melee attack against target opposing champion. If successful, this unit makes an additional basic attack for free against the same target.  This attack costs +1 AP compared to a normal basic attack.",
+               "activationType":1,
+               "level":2,
+               "cooldown":3,
+               "noraCost":11,
+               "iconName":"hammer"
+            },
+            {  
+               "default":true,
+               "id":474,
+               "apCost":1,
+               "name":"Blood Rage",
+               "shortDescription":"This unit makes a melee attack and loses 8 HP. This ability\u0027s AP cost cannot be modified.",
+               "activationType":1,
+               "level":0,
+               "cooldown":2,
+               "noraCost":6,
+               "iconName":"rend"
+            }
+         ]
+      }
+   ]
+}

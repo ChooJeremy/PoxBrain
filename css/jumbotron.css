@@ -1,0 +1,115 @@
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 30px;
+}
+#f-s {
+    background-image: url('/images/symbol_fs.png');
+}
+#f-w {
+    background-image: url('/images/symbol_fw.png');
+}
+#i-s {
+    background-image: url('/images/symbol_if.png');
+}
+#k-f {
+    background-image: url('/images/symbol_kf.png');
+}
+#s-t {
+    background-image: url('/images/symbol_st.png');
+}
+#s-p {
+    background-image: url('/images/symbol_sp.png');
+}
+#s-l {
+    background-image: url('/images/symbol_sl.png');
+}
+#u-d {
+    background-image: url('/images/symbol_ud.png');
+}
+.factions .col-md-6 .col-md-3 {
+    background-size: contain, cover;
+    background-repeat: no-repeat;
+    height: 50px;
+}
+.factions .col-md-6 .col-md-3:hover {
+    background-color: grey;
+    border: 1px inset #eee;
+    margin-top: 2px;
+    height: 48px;
+}
+.factions {
+    background-color: black;/* #eee;*/
+    padding-top: 30px;
+    color: white;
+    padding-bottom: 5px;
+    text-align: right;
+    word-spacing: 99999999px;
+}
+
+#search-form {
+    width: 300px;
+    margin-right: 10%;
+    float: right;
+}
+
+#search-group {
+    position: relative;
+    display: block;
+}
+
+#search-group input {
+    width: 220px;
+}
+
+#search-group #search {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: transparent;
+    z-index: 2;
+}
+
+#search-group #hard-search {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#search-form #search-submit {
+    float: right;
+    width: 45px;
+}
+
+#search {
+    outline: none;
+    border: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+#search-items {
+    position: absolute;
+    top: 34px;
+    left: 0;
+    width: 220px;
+    background-color: white;
+    display: none;
+}
+
+#search-items div {
+    border: 1px solid black;
+    border-top: 0.5px;
+    width: 100%;
+    height: 34px;
+    padding: 3px;
+}
+
+#search-items div:hover {
+    background-color: #eee;
+    cursor: pointer;
+}
+
+#search-items .selected {
+    background-color: #eee;
+}
