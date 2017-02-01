@@ -1,12 +1,5 @@
 <?php
-
-//Connect to the database
-$host = "127.0.0.1";
-$user = "choojeremy";
-$pass = "";
-$db = "c9";
-$port = 3306;
-$mysqli = mysqli_connect($host, $user, $pass, $db, $port)or die(mysql_error());
+require_once('./mysqlaccess.php');
 
 $query = "SELECT LastUpdateID FROM PoxDB;";
 $result = $mysqli->query($query);

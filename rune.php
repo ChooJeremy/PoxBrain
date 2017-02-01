@@ -1,12 +1,5 @@
-<?php
-//Connect to the database
-$host = "127.0.0.1";
-$user = "choojeremy";
-$pass = "";
-$db = "c9";
-$port = 3306;
-$mysqli = mysqli_connect($host, $user, $pass, $db, $port)or die(mysql_error());
-
+<?php 
+require_once('./mysqlaccess.php');
 $table = "";
 if($_GET["type"] == 1) {
     $table = "Champions";
@@ -73,32 +66,8 @@ $dbCheck->close();
   </head>
 
   <body>
-
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Project name</a>
-        </div>
-        <div id="search-form" class="navbar-collapse collapse">
-          <form class="navbar-form" action="/search.php" method="post" onsubmit="return performSearch()" >
-            <div id="search-group">
-              <input type="text" id="search" placeholder="Search..." autocomplete="off" class="form-control">
-              <input type="text" id="hard-search" disabled="disabled" class="form-control">
-              <div id="search-items">
-              </div>
-            </div>
-            <button id="search-submit" type="submit" class="btn btn-success">Go</button>
-          </form>
-        </div><!--/.navbar-collapse -->
-      </div>
-    </nav>
-
+    
+    <?php require_once('./header.php'); ?>
     <!--<div class="factions">
       <div class="container">
         <div class="col-md-6">
@@ -135,14 +104,7 @@ $dbCheck->close();
     <div class="container" style="padding-top: 20px;">
       <?php echo json_encode($result); ?>
     </div>
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="/js/jquery-3.1.1.min.js"><\/script>')</script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/updatedatabase.js"></script>
-    <script src="/js/search.js"></script>
+    
+    <?php require_once('./js/corejs.php'); ?>
     </body>
 </html>
