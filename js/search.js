@@ -1,9 +1,9 @@
 var searchItemsData = [];
-function onKeyPress(e) {
-  if(e.keyCode == 9) {
+function onKeyPress(e){
+  if(e.keyCode == 9) { //tab
     e.preventDefault();
     
-    $("#search").val($("#search-items .selected").text());
+    $("#search").val($("#search-items .selected")[0].childNodes[0].nodeValue);
     updateSuggestedText(); //We can't just put this outside the if statement since it will run on every key press.
   } else if(e.keyCode == 40) {
     e.preventDefault();
@@ -32,7 +32,7 @@ function clearSearch() {
 }
 function updateSuggestedText() {
   console.log("Updating suggested text...");
-  var suggestion = $("#search-items .selected").text();
+  var suggestion = $("#search-items .selected")[0].childNodes[0].nodeValue;
   var inputText = $("#search").val();
   if(suggestion.toUpperCase().substring(0, inputText.length) == inputText.toUpperCase()) {
     $("#hard-search").val(inputText + suggestion.substring(inputText.length));
@@ -53,8 +53,8 @@ function doSearch(e) {
       searchItemsData = [];
       
       //Find out the list of searches and display a list of possibilites on the bottom
-      for(var i = 0; i < results.rows.length && i < 5; i++ ){
-        $("#search-items").append("<div onclick='startSearch_Selection(" + i + ")'>" + results.rows[i].Name + "</div>")
+      for(var i = 0; i < results.rows.length && i < 5; i++ ) {
+        $("#search-items").append("<div onclick='startSearch_Selection(" + i + ")'>" + results.rows[i].Name + "<span class='subtext'>" +results.rows[i].SubText + "</span></div>");
         searchItemsData.push({"ID": results.rows[i].ID, "Type": results.rows[i].Type});
       }
       
