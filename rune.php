@@ -105,6 +105,6 @@ $dbCheck->close();
       <?php echo json_encode($result); ?>
     </div>
     
-    <?php require_once('./js/corejs.php'); ?>
+        <?php require_once('./js/corejs.php'); ?>
     </body>
 </html>

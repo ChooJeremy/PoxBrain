@@ -1,0 +1,79 @@
+#search-field {
+    margin: 20px;
+}
+#page-search {
+    width: calc(100% - 120px);
+    display: inline;
+}
+#search-field .btn {
+    width: 110px;
+}
+#filters {
+    width: 20%;
+    height: 100%;
+    float: left;
+}
+#search-results {
+    width: 70%;
+    height: 100%;
+    display: inline-block;
+    float: left;
+    margin-left: 20px;
+}
+.search-item {
+    margin: 10px;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    clear: both;
+}
+.search-item h3:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+.score:Before {
+    content: 'Score: ';
+}
+.nora {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.nora:after {
+    content: 'n';
+}
+.flavor {
+    font-style: italic;
+}
+.rune-set {
+    font-size: 80%;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+.artist:before {
+    content: 'Artist: ';
+}
+.ability-set div {
+    float: left;
+    width: 33%;
+}
+.ability-set div {
+    position: relative;
+    padding-top: 10px;
+}
+.ability-set div span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 80%;
+}
+.no-results {
+    text-align: center;
+    width: 100%;
+}
+#filters .filter-section {
+    margin: 10px 0;
+}
+#filters div label {
+    display: block;
+}

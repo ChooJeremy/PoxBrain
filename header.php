@@ -7,12 +7,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Project name</a>
+      <a class="navbar-brand" href="/">Project name</a>
     </div>
     <div id="search-form" class="navbar-collapse collapse">
-      <form class="navbar-form" action="/search.php" method="post" onsubmit="return performSearch()" >
+      <form class="navbar-form" action="/search.php" method="get" onsubmit="return performSearch()" >
         <div id="search-group">
-          <input type="text" id="search" placeholder="Search..." autocomplete="off" class="form-control">
+          <input type="text" name="search" id="search" placeholder="Search..." autocomplete="off" class="form-control">
           <input type="text" id="hard-search" disabled="disabled" class="form-control">
           <div id="search-items">
           </div>
@@ -22,3 +22,6 @@
     </div><!--/.navbar-collapse -->
   </div>
 </nav>
+<div id="ability-popup">
+  
+</div>

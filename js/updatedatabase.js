@@ -59,7 +59,7 @@ function populateDB() {
 }
 
 function dbInsert(objects, counter, callback) {
-    runQuery("INSERT INTO Searches VALUES (?, ?, ?, ?)", [objects[counter].ID, objects[counter].Name, objects[counter].Type, objects[counter].SubText], function(tx, results) {
+    runQuery("INSERT INTO Searches VALUES (?, ?, ?, ?, ?)", [objects[counter].ID, objects[counter].Name, objects[counter].Type, objects[counter].SubText, objects[counter].Explanation], function(tx, results) {
         counter++;
         if(counter < objects.length) {
             dbInsert(objects, counter, callback); 
@@ -77,6 +77,7 @@ function loadDB(tx) {
     "  `Name` text NOT NULL," +
     "  `Type` int(11) NOT NULL," +
     "  `SubText` text NOT NULL," +
+    "  `Explanation` text NOT NULL," +
     "  PRIMARY KEY (`ID`, `Type`)" +
     ")");
     
