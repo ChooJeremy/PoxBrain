@@ -150,8 +150,16 @@ usort($allItems, "cmp");
 
 $allItems = getData($allItems);
 
-function convertSpace($str) {
-    return str_replace("'", "", str_replace(" ", "-", $str));
+function convertFaction($str) {
+    $str = str_replace("Forglar Swamp", "Forglar-Swamp", $str);
+    $str = str_replace("Forsaken Wastes", "Forsaken-Wastes", $str);
+    $str = str_replace("Ironfist Stronghold", "Ironfist-Stronghold", $str);
+    $str = str_replace("K'thir Forest", "Kthir-Forest", $str);
+    $str = str_replace("Savage Tundra", "Savage-Tundra", $str);
+    $str = str_replace("Shattered Peaks", "Shattered-Peaks", $str);
+    $str = str_replace("Sundered Lands", "Sundered-Lands", $str);
+    $str = str_replace("Underdepths", "Underdepths", $str);
+    return $str;
 }
 
 ?>
@@ -171,6 +179,7 @@ function convertSpace($str) {
 
     <!-- Custom styles for this template -->
     <link href="css/jumbotron.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
   </head>
 
   <body>
@@ -250,7 +259,7 @@ function convertSpace($str) {
           <?php 
             foreach ($allItems as $anItem) {
                 if($anItem["Type"] == 1) { ?>
-                    <div class="search-item champion <?php echo convertSpace($anItem["Faction"])." ".$anItem["Rarity"]." ".$anItem["Race"]." ".$anItem["Class"]; ?>" >
+                    <div class="search-item champion <?php echo convertFaction($anItem["Faction"])." ".$anItem["Rarity"]." ".$anItem["Race"]." ".$anItem["Class"]; ?>" >
                         <a href="/rune.php?id=<?php echo $anItem["ID"]; ?>&type=1"><h3><?php echo $anItem["Name"] ?></h3></a>
                         <div class="score"><?php echo $anItem["Score"]; ?></div>
                         <div class="stats"><?php echo $anItem["Damage"]."DMG, ".$anItem["Speed"]."SPD, ".$anItem["MinRng"]."-".$anItem["MaxRng"]."RNG, ".$anItem["Defense"]."DEF, ".$anItem["HitPoints"]."HP "; ?></div>
@@ -259,35 +268,35 @@ function convertSpace($str) {
                         <div class="rarity"><?php echo $anItem["Rarity"]; ?></div>
                         <div class="rune-set"><?php echo $anItem["RuneSet"]; ?></div>
                         <div class="artist"><?php echo $anItem["Artist"]; ?></div>
-                        <div class="ability-set">
-                            <div class="base">
+                        <div class="ability-set row">
+                            <div class="base col-sm-4">
                                 <span>Base</span>
                                 <ul>
                                 <?php foreach($anItem["StartingAbilities"] as $baseAbility) { ?>
-                                    <li class="ability"><?php echo $baseAbility["Name"] ?></li>
+                                    <a href="/rune.php?id=<?php echo $baseAbility["ID"]; ?>&type=7"><li class="ability"><?php echo $baseAbility["Name"] ?></li></a>
                                 <?php } ?>
                                 </ul>
                             </div>
-                            <div class="upgrade-1">
+                            <div class="upgrade-1 col-sm-4">
                                 <span>Upgrade line 1</span>
                                 <ul>
                                 <?php foreach($anItem["AbilitySet"][1] as $anUpgrade) { ?>
-                                    <li class="ability"><?php echo $anUpgrade["Name"]; if($anUpgrade["Default"]) { echo " (Default)"; } ?></li>
+                                    <a href="/rune.php?id=<?php echo $anUpgrade["ID"]; ?>&type=7"><li class="ability"><?php echo $anUpgrade["Name"]; if($anUpgrade["Default"]) { echo " (Default)"; } ?></li></a>
                                 <?php } ?>
                                 </ul>
                             </div>
-                            <div class="upgrade-2">
+                            <div class="upgrade-2 col-sm-4">
                                 <span>Upgrade line 2</span>
                                 <ul>
                                 <?php foreach($anItem["AbilitySet"][2] as $anUpgrade) { ?>
-                                    <li class="ability"><?php echo $anUpgrade["Name"]; if($anUpgrade["Default"]) { echo " (Default)"; } ?></li>
+                                   <a href="/rune.php?id=<?php echo $anUpgrade["ID"]; ?>&type=7"> <li class="ability"><?php echo $anUpgrade["Name"]; if($anUpgrade["Default"]) { echo " (Default)"; } ?></li></a>
                                 <?php } ?>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 <?php } else if($anItem["Type"] == 2) { ?>
-                    <div class="search-item relic <?php echo convertSpace($anItem["Faction"])." ".$anItem["Rarity"]; ?>">
+                    <div class="search-item relic <?php echo convertFaction($anItem["Faction"])." ".$anItem["Rarity"]; ?>">
                         <a href="/rune.php?id=<?php echo $anItem["ID"]; ?>&type=2"><h3><?php echo $anItem["Name"] ?></h3></a>
                         <div class="score"><?php echo $anItem["Score"]; ?></div>
                         <div><?php echo $anItem["Description"]; ?></div>
@@ -298,7 +307,7 @@ function convertSpace($str) {
                         <div class="artist"><?php echo $anItem["Artist"]; ?></div>
                     </div>
                 <?php } else if($anItem["Type"] == 3) { ?>
-                    <div class="search-item spell <?php echo convertSpace($anItem["Faction"])." ".$anItem["Rarity"]; ?>">
+                    <div class="search-item spell <?php echo convertFaction($anItem["Faction"])." ".$anItem["Rarity"]; ?>">
                         <a href="/rune.php?id=<?php echo $anItem["ID"]; ?>&type=3"><h3><?php echo $anItem["Name"] ?></h3></a>
                         <div class="score"><?php echo $anItem["Score"]; ?></div>
                         <div><?php echo $anItem["Description"]; ?></div>
@@ -309,7 +318,7 @@ function convertSpace($str) {
                         <div class="artist"><?php echo $anItem["Artist"]; ?></div>
                     </div>
                 <?php } else if($anItem["Type"] == 4) { ?>
-                    <div class="search-item equipment <?php echo convertSpace($anItem["Faction"])." ".$anItem["Rarity"]; ?>">
+                    <div class="search-item equipment <?php echo convertFaction($anItem["Faction"])." ".$anItem["Rarity"]; ?>">
                         <a href="/rune.php?id=<?php echo $anItem["ID"]; ?>&type=4"><h3><?php echo $anItem["Name"] ?></h3></a>
                         <div class="score"><?php echo $anItem["Score"]; ?></div>
                         <div><?php echo $anItem["Description"]; ?></div>

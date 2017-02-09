@@ -1,5 +1,11 @@
 #ability-popup {
-    position: fixed;
-    width: 150px;
-    margin-left: -75px;
+    position: absolute;
+    width: 300px;
+    margin-left: -150px;
+    display: none;
+    border: 1px solid black;
+    border-radius: 5px;
+    text-align: center;
+    background-color: white;
+    z-index: 2;
 }

@@ -45,7 +45,7 @@ while($row = $result->fetch_assoc()) {
     array_push($champions, array( "ID"=> $row["ID"], "Name" =>$row["Name"], "Type"=> 6, "SubText"=> "Mechanic", "Explanation"=> $row["Description"] ) );
 }
 
-$query = "SELECT ID, Name, ShortDescription, Level FROM Ability;";
+$query = "SELECT ID, Name, Description, Level FROM Ability;";
 $result = $mysqli->query($query);
 
 while($row = $result->fetch_assoc()) {
@@ -53,7 +53,7 @@ while($row = $result->fetch_assoc()) {
     if($row["Level"] != 0) {
         $name = $name . " " .$row["Level"];
     }
-    array_push($champions, array( "ID"=> $row["ID"], "Name" => $name, "Type"=> 7, "SubText"=> "Ability", "Explanation"=> $row["ShortDescription"] ) );
+    array_push($champions, array( "ID"=> $row["ID"], "Name" => $name, "Type"=> 7, "SubText"=> "Ability", "Explanation"=> $row["Description"] ) );
 }
 
 echo json_encode($champions);

@@ -1,52 +1,30 @@
 <?php 
 require_once('./mysqlaccess.php');
-$table = "";
+require_once('./references/Champion.php');
+$item = array("ID" => $_GET["id"], "Type" => $_GET["type"]);
 if($_GET["type"] == 1) {
-    $table = "Champions";
+    preinit($mysqli, true, false, false, false, false, false, false);
 } else if($_GET["type"] == 2) {
-    $table = "Relics";
+    preinit($mysqli, false, true, false, false, false, false, false);
 } else if($_GET["type"] == 3) {
-    $table = "Spells";
+    preinit($mysqli, false, false, true, false, false, false, false);
 } else if($_GET["type"] == 4) {
-    $table = "Equipment";
+    preinit($mysqli, false, false, false, true, false, false, false);
 } else if($_GET["type"] == 5) {
-    $table = "Conditions";
+    preinit($mysqli, false, false, false, false, true, false, false);
 } else if($_GET["type"] == 6) {
-    $table = "Mechanics";
+    preinit($mysqli, false, false, false, false, false, true, false);
 } else if($_GET["type"] == 7) {
-    $table = "Ability";
+    preinit($mysqli, false, false, false, false, false, false, true);
 } else {
     die("No such type");
 }
 
-if (!($dbCheck = $mysqli->prepare("SELECT * FROM " . $table . " WHERE ID = ?"))) {
-    echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error; die();
-}
+$items = array();
+array_push($items, $item);
 
-if (!$dbCheck->bind_param("i", $_GET["id"])) {
-    echo "Binding parameters failed: (" . $dbCheck->errno . ") " . $dbCheck->error; die();
-}
-
-if (!$dbCheck->execute()) {
-    echo "Execute failed: (" . $dbCheck->errno . ") " . $dbCheck->error;  die();
-}
-
-$meta = $dbCheck->result_metadata(); 
-while ($field = $meta->fetch_field()) 
-{ 
-    $params[] = &$row[$field->name]; 
-} 
-
-call_user_func_array(array($dbCheck, 'bind_result'), $params); 
-
-while ($dbCheck->fetch()) { 
-    foreach($row as $key => $val) 
-    { 
-        $c[$key] = $val; 
-    } 
-    $result[] = $c; 
-}
-$dbCheck->close();
+getData($items);
+$item = $items[0];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,6 +41,8 @@ $dbCheck->close();
 
     <!-- Custom styles for this template -->
     <link href="css/jumbotron.css" rel="stylesheet">
+    <link href="css/rune.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
   </head>
 
   <body>
@@ -102,7 +82,119 @@ $dbCheck->close();
     </div>-->
     
     <div class="container" style="padding-top: 20px;">
-      <?php echo json_encode($result); ?>
+        <div class="row">
+            <div id="main-info" class="info-group col-sm-6">
+                <div class="card">
+                  <h1 class="card-header"><?php echo $item["Name"]; ?></h1>
+                  <div class="card-block">
+                      <?php 
+                      if($item["Type"] >= 1 && $item["Type"] <= 4 && !$item["AllowRanked"]) { ?>
+                          <h3 class="ban-text">BANNED IN RANKED</h3>
+                      <?php } ?>
+                    <p class="card-text">
+                        <?php
+                            if($item["Type"] == 1) {
+                                echo "Champion";
+                            } else if($item["Type"] == 2) {
+                                echo "Relic";
+                            } else if($item["Type"] == 3) {
+                                echo "Spell";
+                            } else if($item["Type"] == 4) {
+                                echo "Equipment";
+                            } else if($item["Type"] == 5) {
+                                echo "Condition";
+                            } else if($item["Type"] == 6) {
+                                echo "Mechanic";
+                            } else if($item["Type"] == 7) {
+                                echo "Ability";
+                            }
+                        ?> ● <?php if($item["Type"] >= 1 && $item["Type"] <= 4) {
+                            echo $item["NoraCost"]. " nora ● " . $item["Rarity"] . "";
+                            if($item["Type"] <= 2) { 
+                                if($item["Size"] == "1x1") { echo " ● Small"; } else { echo " ● Large"; } 
+                            }
+                        } else if($item["Type"] == 7) {
+                            echo "worth " . $item["NoraCost"]. " nora";
+                        } ?>
+                    </p>
+                    <div class="stats">
+                        <?php if($item["Type"] == 1) { ?>
+                            <div class="damage"><?php echo $item["Damage"] ?></div>
+                            <div class="speed"><?php echo $item["Speed"] ?></div>
+                            <div class="minrng"><?php echo $item["MinRng"] ?></div>
+                            <div class="maxrng"><?php echo $item["MaxRng"] ?></div>
+                        <?php }
+                        if($item["Type"] == 1 || $item["Type"] == 2) { ?>
+                            <div class="defense"><?php echo $item["Defense"] ?></div>
+                            <div class="health"><?php echo $item["HitPoints"] ?></div>
+                        <?php } ?>
+                    </div>
+                    <?php if($item["Type"] == 1) { ?>
+                    <div class="body-set row">
+                        <div class="base col-sm-4">
+                            <span>Base</span>
+                            <ul>
+                            <?php foreach($item["StartingAbilities"] as $baseAbility) { ?>
+                                <a href="/rune.php?id=<?php echo $baseAbility["ID"]; ?>&type=7"><li class="ability"><?php echo $baseAbility["Name"] ?></li></a>
+                            <?php } ?>
+                            </ul>
+                        </div>
+                        <div class="upgrade-1 col-sm-4">
+                            <span>Upgrade line 1</span>
+                            <ul>
+                            <?php foreach($item["AbilitySet"][1] as $anUpgrade) { ?>
+                                <a href="/rune.php?id=<?php echo $anUpgrade["ID"]; ?>&type=7"><li class="ability"><?php echo $anUpgrade["Name"]; if($anUpgrade["Default"]) { echo " (Default)"; } ?></li></a>
+                            <?php } ?>
+                            </ul>
+                        </div>
+                        <div class="upgrade-2 col-sm-4">
+                            <span>Upgrade line 2</span>
+                            <ul>
+                            <?php foreach($item["AbilitySet"][2] as $anUpgrade) { ?>
+                               <a href="/rune.php?id=<?php echo $anUpgrade["ID"]; ?>&type=7"> <li class="ability"><?php echo $anUpgrade["Name"]; if($anUpgrade["Default"]) { echo " (Default)"; } ?></li></a>
+                            <?php } ?>
+                            </ul>
+                        </div>
+                    </div>
+                    <?php } else { ?>
+                        <div class="body-set">
+                            <?php echo $item["Description"]; ?>
+                        </div>
+                    <?php } ?>
+                    <div class="extras">
+                        <?php if($item["Type"] == 1) { ?>
+                            <div class="flavor"><?php echo $item["Description"]; ?></div>
+                        <?php } else if($item["Type"] >= 2 && $item["Type"] <= 4) { ?>
+                            <div class="flavor"><?php echo $item["FlavorText"]; ?></div>
+                        <?php }
+                        if($item["Type"] >= 1 && $item["Type"] <= 4) { ?>
+                        <div class="rune-set"><?php echo $item["RuneSet"]; ?></div>
+                        <div class="artist"><?php echo $item["Artist"]; ?></div>
+                        <div class="status">
+                            <?php if($item["ForSale"]) {
+                                echo "Sellable ● ";
+                            } else { 
+                                echo "Unsellable ● ";
+                            }
+                            if($item["Tradeable"]) {
+                                echo "Tradeable ● ";
+                            } else {
+                                echo "Untradeable ● ";
+                            }
+                            echo "Limit " . $item["DeckLimit"] . " in deck";
+                            ?>
+                        </div>
+                        <div class="hide">Hash: <?php echo $item["Hash"]; ?></div>
+                        <div class="hide">ID: <?php echo $item["ID"]; ?></div>
+                        <?php } ?>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div id="side-info" class="info-group col-sm-6">
+                <pre><?php echo json_encode($item, JSON_PRETTY_PRINT); ?></pre>
+            </div>
+        </div>
     </div>
     
         <?php require_once('./js/corejs.php'); ?>

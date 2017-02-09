@@ -54,10 +54,6 @@
     content: 'Artist: ';
 }
 .ability-set div {
-    float: left;
-    width: 33%;
-}
-.ability-set div {
     position: relative;
     padding-top: 10px;
 }

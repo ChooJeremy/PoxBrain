@@ -1,0 +1,86 @@
+.info-group {
+    position: relative;
+    padding: 10px;
+}
+.card {
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+}
+.card-header:first-child {
+    border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
+}
+.card-header {
+    padding: .75rem 1.25rem;
+    margin: 0;
+    background-color: #f7f7f9;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+.card-block {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.25rem;
+}
+.nora {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+.nora:after {
+    content: 'n';
+}
+.ban-text {
+    color: red;
+    font-weight: bold;
+    margin-top: 0;
+}
+.stats div {
+    display: inline-block;
+}
+.damage:after {
+    content: 'DMG';
+}
+.speed:after {
+    content: 'SPD';
+}
+.minrng:after {
+    content: '-';
+}
+.maxrng:after {
+    content: 'RNG';
+}
+.defense:after {
+    content: 'DEF';
+}
+.health:after {
+    content: 'HP';
+}
+.artist:before {
+    content: 'Art by: ';
+}
+.rune-set {
+    font-size: 80%;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+.flavor {
+    font-style: italic;
+    font-size: 85%;
+}
+.body-set {
+    border-top: 0.5px solid #eee;
+    border-bottom: 0.5px solid #eee;
+}
