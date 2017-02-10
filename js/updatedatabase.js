@@ -73,7 +73,7 @@ function dbInsert(objects, counter, callback) {
 
 function loadDB(tx) {
         tx.executeSql("CREATE TABLE IF NOT EXISTS `Searches` (" +
-    "  `ID` int(11) NOT NULL," +
+    "  `ID` text NOT NULL," +
     "  `Name` text NOT NULL," +
     "  `Type` int(11) NOT NULL," +
     "  `SubText` text NOT NULL," +

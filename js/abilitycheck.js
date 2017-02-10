@@ -11,6 +11,7 @@ $(document).ready(function() {
             var conditionR = /(<condition value=([a-z]+?)>).+?(<\/condition>)/g;
             var mechanicR = /(<mechanic value=([a-z_]+?)>).+?(<\/mechanic>)/g;
             var extraMechanics = [], extraConditions = [], extraAbility = [];
+            var extraToDisplay = [];
             //var conditionR = new RegExp("(<condition value=([a-z]+?)>).+?(</condition>)");
             var finalDescription = description;
             do {
@@ -46,10 +47,49 @@ $(document).ready(function() {
                 }
             } while(mechanicResult != null);
             
+            //get them all
+            var firstTime = true;
+            var queryString = "";
+            for(var i = 0; i < extraAbility.length; i++) {
+                if(!firstTime) {
+                    queryString = queryString = " UNION ";
+                }
+                queryString = queryString + "SELECT Explanation FROM Searches WHERE ID = " + extraAbility[i] + " AND ID = 7";
+                firstTime = false;
+            }
+            for(var i = 0; i < extraConditions.length; i++) {
+                if(!firstTime) {
+                    queryString = queryString = " UNION ";
+                }
+                queryString = queryString + "SELECT Explanation FROM Searches WHERE ID = " + extraConditions[i] + " AND ID = 5";
+                firstTime = false;
+            }
+            for(var i = 0; i < extraMechanics.length; i++) {
+                if(!firstTime) {
+                    queryString = queryString = " UNION ";
+                }
+                queryString = queryString + "SELECT Explanation FROM Searches WHERE ID = " + extraMechanics[i] + " AND ID = 6";
+                firstTime = false;
+            }
+            console.log(queryString);
             
             var position = $(e.target).offset();
+            var helpLocation = position; 
             position.left = position.left + ($(e.target).width()/2);
             $("#ability-popup").text(finalDescription).css("left", position.left).css("display", "block").css("bottom", window.innerHeight - position.top + 20);
+            
+            runQuery(queryString, [], function(tx, results) {
+                if(helpLocation.left > window.innerWidth/2) {
+                    //Appear on left
+                    helpLocation.left = helpLocation.left - 150;
+                } else {
+                    //Appear on right
+                    helpLocation.left = helpLocation.left + ($(e.target).width()) + 150;
+                }
+                for(var i = 0; i < results.rows.length; i++) {
+                    //make the popup appear, starting from helpLocation
+                }
+            });
         });
     });
     $(".ability").mouseleave(function(e) {
