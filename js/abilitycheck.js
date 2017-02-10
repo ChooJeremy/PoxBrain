@@ -9,22 +9,23 @@ $(document).ready(function() {
             var abilityR = /(<ability value=(\d+?)>).+?(<\/ability>)/g;
             //var abilityR = new RegExp("(<ability value=(\\d+?)>).+?(</ability>)");
             var conditionR = /(<condition value=([a-z]+?)>).+?(<\/condition>)/g;
-            var extraMechanics = [], extraConditions = [];
+            var mechanicR = /(<mechanic value=([a-z_]+?)>).+?(<\/mechanic>)/g;
+            var extraMechanics = [], extraConditions = [], extraAbility = [];
             //var conditionR = new RegExp("(<condition value=([a-z]+?)>).+?(</condition>)");
             var finalDescription = description;
             do {
-                abilityResult = abilityR.exec(description);
+                var abilityResult = abilityR.exec(description);
                 if(abilityResult != null) {
                     //Step 1: remove from original string
                     finalDescription = finalDescription.replace(abilityResult[1], "");
                     finalDescription = finalDescription.replace(abilityResult[3], "");
                     //Step 2: allocate the mechanic to appear by the side
-                    extraMechanics.push(abilityResult[2]);
+                    extraAbility.push(abilityResult[2]);
                 }
             } while (abilityResult != null);
             
             do {
-                conditionResult = conditionR.exec(description);
+                var conditionResult = conditionR.exec(description);
                 if(conditionResult != null) {
                     //Step 1: remove from original string
                     finalDescription = finalDescription.replace(conditionResult[1], "");
@@ -34,8 +35,17 @@ $(document).ready(function() {
                 }
             } while(conditionResult != null);
             
-            console.log(extraMechanics);
-            console.log(extraConditions);
+            do {
+                var mechanicResult = mechanicR.exec(description);
+                if(mechanicResult != null) {
+                    //Step 1: remove from original string
+                    finalDescription = finalDescription.replace(mechanicResult[1], "");
+                    finalDescription = finalDescription.replace(mechanicResult[3], "");
+                    //Step 2: allocate the condition to appear by the side
+                    extraMechanics.push(mechanicResult[2]);
+                }
+            } while(mechanicResult != null);
+            
             
             var position = $(e.target).offset();
             position.left = position.left + ($(e.target).width()/2);
