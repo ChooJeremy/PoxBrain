@@ -115,14 +115,19 @@ $item = $items[0];
                             }
                         } else if($item["Type"] == 7) {
                             echo "worth " . $item["NoraCost"]. " nora";
+                            if($item["Cooldown"] != 0) {
+                                echo " ● Cooldown " . $item["Cooldown"];
+                            }
+                            if($item["Level"] != 0) {
+                                echo " ● Rank " . $item["Level"];
+                            }
                         } ?>
                     </p>
                     <div class="stats">
                         <?php if($item["Type"] == 1) { ?>
                             <div class="damage"><?php echo $item["Damage"] ?></div>
                             <div class="speed"><?php echo $item["Speed"] ?></div>
-                            <div class="minrng"><?php echo $item["MinRng"] ?></div>
-                            <div class="maxrng"><?php echo $item["MaxRng"] ?></div>
+                            <div class="minrng"><?php echo $item["MinRng"] ?></div><div class="maxrng"><?php echo $item["MaxRng"] ?></div>
                         <?php }
                         if($item["Type"] == 1 || $item["Type"] == 2) { ?>
                             <div class="defense"><?php echo $item["Defense"] ?></div>

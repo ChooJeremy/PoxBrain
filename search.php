@@ -34,14 +34,14 @@ $dbCheck->close();
 
 //Abilities
 if (!($dbCheck = $mysqli->prepare("SELECT ChampAbility.ChampID, Ability.Name, MATCH(Ability.Name) AGAINST (? IN NATURAL LANGUAGE MODE) AS Score1, " .
-                        "MATCH(Ability.Name, Ability.ShortDescription) AGAINST (? IN NATURAL LANGUAGE MODE) AS Score2 " .
+                        "MATCH(Ability.Name, Ability.Description) AGAINST (? IN NATURAL LANGUAGE MODE) AS Score2 " .
                         "FROM Ability INNER JOIN ChampAbility ON Ability.ID = ChampAbility.AbilityID " .
-                        "WHERE MATCH(Ability.Name, Ability.ShortDescription) AGAINST (? IN NATURAL LANGUAGE MODE) " .
+                        "WHERE MATCH(Ability.Name, Ability.Description) AGAINST (? IN NATURAL LANGUAGE MODE) " .
                         "UNION ALL " .
                         "SELECT AbilitySet.ChampID, Ability.Name, MATCH(Ability.Name) AGAINST (? IN NATURAL LANGUAGE MODE) AS Score1, " .
-                        "MATCH(Ability.Name, Ability.ShortDescription) AGAINST (? IN NATURAL LANGUAGE MODE) AS Score2 " .
+                        "MATCH(Ability.Name, Ability.Description) AGAINST (? IN NATURAL LANGUAGE MODE) AS Score2 " .
                         "FROM Ability INNER JOIN AbilitySet ON Ability.ID = AbilitySet.AbilityID " .
-                        "WHERE MATCH(Ability.Name, Ability.ShortDescription) AGAINST (? IN NATURAL LANGUAGE MODE) ORDER BY Score1*10 DESC, Score2 DESC"))) {
+                        "WHERE MATCH(Ability.Name, Ability.Description) AGAINST (? IN NATURAL LANGUAGE MODE) ORDER BY Score1*10 DESC, Score2 DESC"))) {
     echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error; die();
 }
 
