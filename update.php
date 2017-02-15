@@ -46,7 +46,7 @@ mysqli_query($mysqli, "DELETE FROM EquipmentFaction");
 echo "Preparing to add new records. Reading: conditions... \n";
 
 //conditions
-$ch = curl_init("https://poxdb-choojeremy.c9users.io/api/conditions.json"); // such as http://example.com/example.xml
+$ch = curl_init("https://www.poxnora.com/api/feed.do?t=json&r=conditions"); // such as http://example.com/example.xml
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HEADER, 0);
 $data = curl_exec($ch);
@@ -73,7 +73,7 @@ foreach ($conditions as $aCondition) {
 
 echo "Preparing to add new records. Reading: mechanics... \n";
 
-$ch = curl_init("https://poxdb-choojeremy.c9users.io/api/mechanics.json"); // such as http://example.com/example.xml
+$ch = curl_init("https://www.poxnora.com/api/feed.do?t=json&r=mechanics"); // such as http://example.com/example.xml
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HEADER, 0);
 $data = curl_exec($ch);
@@ -100,7 +100,7 @@ foreach ($mechanics as $aMechanic) {
 
 echo "Preparing to add new records. Reading: champions, relics, spells and equipment... \n";
 echo "Receiving the information from server...";
-$ch = curl_init("https://poxdb-choojeremy.c9users.io/api/main.json"); // such as http://example.com/example.xml
+$ch = curl_init("https://www.poxnora.com/api/feed.do?t=json"); // such as http://example.com/example.xml
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HEADER, 0);
 $data = curl_exec($ch);
