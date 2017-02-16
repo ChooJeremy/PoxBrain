@@ -8,3 +8,4 @@
 <script src="/js/updatedatabase.js"></script>
 <script src="/js/search.js"></script>
 <script src="/js/abilitycheck.js"></script>
+<script src="/js/dexie.js"></script>
