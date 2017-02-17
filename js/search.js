@@ -41,36 +41,41 @@ function updateSuggestedText() {
   }
 }
 function getSearchResults(searchterm, callback) {
-  //runQuery("SELECT * FROM Searches WHERE Name LIKE ? ORDER BY Name LIKE ? DESC, Name ASC", ["%" + searchterm + "%", searchterm + "%"], function(tx, results) {
-  //  callback(results.rows);
-  //});
-  str = searchterm.toLowerCase();
-  var matchesAtStart = [];
-  var others = [];
-  dexieDB.Searches.filter(function(val) {
-      return val.Name.toLowerCase().indexOf(str) > -1;
-  }).each(function(item) {
-      if(item.Name.substring(0, str.length).toLowerCase() == str) {
-          matchesAtStart.push(item);
-      } else {
-          others.push(item);
-      }
-  }).then(function(response) {
-      function cmp(a, b) {
-        if (a.Name < b.Name)
-          return -1;
-        if (a.Name > b.Name)
-          return 1;
-        return 0;
-      }
-      matchesAtStart.sort(cmp);
-      others.sort(cmp);
-      others.forEach(function(v) {
-          matchesAtStart.push(v);
-      });
-
-      callback(matchesAtStart);
-  });
+  if(!window.openDatabase) {
+    str = searchterm.toLowerCase();
+    var matchesAtStart = [];
+    var others = [];
+    dexieDB.Searches.filter(function(val) {
+        return val.Name.toLowerCase().indexOf(str) > -1;
+    }).each(function(item) {
+        if(item.Name.substring(0, str.length).toLowerCase() == str) {
+            matchesAtStart.push(item);
+        } else if(matchesAtStart.length <= 5) {
+            others.push(item);
+        }
+    }).then(function(response) {
+        function cmp(a, b) {
+          if (a.Name < b.Name)
+            return -1;
+          if (a.Name > b.Name)
+            return 1;
+          return 0;
+        }
+        matchesAtStart.sort(cmp);
+        if(matchesAtStart.length < 5) { //we need at most 5 results.
+          others.sort(cmp);
+          others.forEach(function(v) {
+              matchesAtStart.push(v);
+          });
+        }
+        
+        callback(matchesAtStart);
+    });
+  } else {
+    runQuery("SELECT * FROM Searches WHERE Name LIKE ? ORDER BY Name LIKE ? DESC, Name ASC", ["%" + searchterm + "%", searchterm + "%"], function(tx, results) {
+      callback(results.rows);
+    });
+  }
 }
 function doSearch(e) {
   console.log("Starting search...");
@@ -145,9 +150,9 @@ $(document).ready(function() {
   
   //Load up the list of names
   checkIfRequireUpdate(function(updateRequired) {
+    console.log(updateRequired);
     if(updateRequired) {
       console.log("Outdated database detected. Performing update...");
-      trashDB();
       populateDB();
     }
   });

@@ -45,7 +45,7 @@ function openDB() {
     db = window.openDatabase("database", "1.0", "poxdb", 1000000);
 }
 
-function errorCB(err) {
+function errorCB(transaction, err) {
     console.log("Error occured while executing SQL: "+err.code + ", " + err.message);
     console.log(err);
 }
@@ -55,43 +55,15 @@ function successCB(msg) {
 }
 
 function populateDB() {
-    db.transaction(loadDB, errorCB, successCB);
-}
-
-function dbInsert(objects, counter, callback) {
-    runQuery("INSERT INTO Searches VALUES (?, ?, ?, ?, ?)", [objects[counter].ID, objects[counter].Name, objects[counter].Type, objects[counter].SubText, objects[counter].Explanation], function(tx, results) {
-        counter++;
-        if(counter < objects.length) {
-            dbInsert(objects, counter, callback); 
-            if(counter % 10 == 0) {console.log(counter+"/" + objects.length + " complete");}
-        }
-        else {
-            callback();
-        }
-    });
-}
-
-function dexieOpen() {
-    dexieDB = new Dexie("searches");
-    dexieDB.version(1).stores({
-        Searches: "++_ID,ID,Name,Type,SubText,Explanation"
-    });
-    dexieDB.open();
-}
-
-function dexieTest() {
-    dexieDB = new Dexie("searches");
-
-    dexieDB.version(1).stores({
-        Searches: "++_ID,ID,Name,Type,SubText,Explanation"
-    });
-    dexieDB.open();
-    
-    $.ajax("/getnames.php", {
+    if(!window.openDatabase) {
+      dexieOpen();
+      $.ajax("/getnames.php", {
         "datatype": "json",
         "success": function(data) {
             var result = JSON.parse(data);
-            console.log(data);
+            //before we start
+            saveItem("lastKnownUpdatedID", -1); //-1 means an update is beginning. If you start the page and find that it's -1, that means that there
+            //was an update failure. Please reset the database and try again.
             dexieDB.Searches.bulkAdd(result).then(function() {
                 $.ajax("/getlastid.php", {
                     "datatype": "text",
@@ -102,12 +74,23 @@ function dexieTest() {
                 });
             });
         }
-    });
+      });
+    } else {
+        db.transaction(loadDB, errorCB, successCB);
+    }
 }
 
-
+function dexieOpen() {
+    dexieDB = new Dexie("searches");
+    dexieDB.version(1).stores({
+        Searches: "++_ID,ID,Name,Type,SubText,Explanation"
+    });
+    dexieDB.open();
+}
 
 function loadDB(tx) {
+    saveItem("lastKnownUpdatedID", -1);
+    
         tx.executeSql("CREATE TABLE IF NOT EXISTS `Searches` (" +
     "  `ID` int(11) NOT NULL," +
     "  `Name` text NOT NULL," +
@@ -123,7 +106,7 @@ function loadDB(tx) {
         "success": function(data) {
             var result = JSON.parse(data);
             console.log(result);
-            dbInsert(result, 0, function() {
+            addDBRow(result, 0, function() {
                 $.ajax("/getlastid.php", {
                     "datatype": "text",
                     "success": function(data) {
@@ -131,6 +114,31 @@ function loadDB(tx) {
                     }
                 });
             });
+        }
+    });
+}
+
+function addDBRow(result, counter, callback) {
+    console.log("Running add db row for " + counter);
+    //Parse the result into a long insert string, then run that
+    var params = [];
+    var query = "INSERT INTO Searches (ID, Name, Type, SubText, Explanation) VALUES ";
+    for(var i = counter, l = counter + 18; i < result.length && i < l; i++) {
+        query += "(?, ?, ?, ?, ?)";
+        params.push(result[i].ID, result[i].Name, result[i].Type, result[i].SubText, result[i].Explanation);
+        if(i + 1 != result.length && i + 1 < l) {
+            query += ", ";
+        }
+        counter = i;
+    }
+    counter++;
+    console.log(query);
+    console.log(params);
+    runQuery(query, params, function() {
+        if(counter < result.length) {
+            addDBRow(result, counter, callback)
+        } else {
+            callback();
         }
     });
 }
@@ -143,6 +151,12 @@ function checkIfRequireUpdate(callback) {
     saveItem("lastKnownCheckTime", Date.now());
     if(loadItem("lastKnownUpdatedID") == null || loadItem("lastKnownUpdatedID") == 0) {
         callback(true);
+        return true;
+    } else if(loadItem("lastKnownUpdatedID") < 0) {
+        trashDB(function() {
+            console.log("Trash db called, returning true");
+            callback(true);
+        });
         return true;
     } else {
         $.ajax("/getlastid.php", {
@@ -161,19 +175,32 @@ function checkIfRequireUpdate(callback) {
 }
 
 function runQuery(query, params, callback) {
-    db.transaction(function(tx) {
+  
+   db.transaction(function(tx) {
         tx.executeSql(query, params, callback, errorCB);
     }, errorCB);
 }
 
-function trashDB() {
+function trashDB(callback) {
+    callback = callback || successCB;
     saveItem("lastKnownCheckTime", 0);
     saveItem("lastKnownUpdatedID", 0);
-    db.transaction(function(tx) {
-        tx.executeSql("DROP TABLE Searches");
-    }, errorCB, successCB);
+    if(!window.openDatabase) {
+        dexieDB.delete()
+            .then(callback)
+            .catch(errorCB);
+    } else {
+        db.transaction(function(tx) {
+            tx.executeSql("DROP TABLE Searches");
+        }, errorCB, callback);
+    }
 }
 
 $(document).ready(function() {
-    dexieOpen();
+    //use web sql, but fall back to indexed db if not available
+    if(!window.openDatabase) {
+        dexieOpen();
+    } else {
+        openDB();
+    }
 })
