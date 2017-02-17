@@ -71,6 +71,42 @@ function dbInsert(objects, counter, callback) {
     });
 }
 
+function dexieOpen() {
+    dexieDB = new Dexie("searches");
+    dexieDB.version(1).stores({
+        Searches: "++_ID,ID,Name,Type,SubText,Explanation"
+    });
+    dexieDB.open();
+}
+
+function dexieTest() {
+    dexieDB = new Dexie("searches");
+
+    dexieDB.version(1).stores({
+        Searches: "++_ID,ID,Name,Type,SubText,Explanation"
+    });
+    dexieDB.open();
+    
+    $.ajax("/getnames.php", {
+        "datatype": "json",
+        "success": function(data) {
+            var result = JSON.parse(data);
+            console.log(data);
+            dexieDB.Searches.bulkAdd(result).then(function() {
+                $.ajax("/getlastid.php", {
+                    "datatype": "text",
+                    "success": function(data) {
+                        saveItem("lastKnownUpdatedID", data);
+                        console.log("All done");
+                    }
+                });
+            });
+        }
+    });
+}
+
+
+
 function loadDB(tx) {
         tx.executeSql("CREATE TABLE IF NOT EXISTS `Searches` (" +
     "  `ID` int(11) NOT NULL," +
@@ -138,4 +174,6 @@ function trashDB() {
     }, errorCB, successCB);
 }
 
-openDB();
+$(document).ready(function() {
+    dexieOpen();
+})

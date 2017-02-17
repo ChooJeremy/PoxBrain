@@ -40,6 +40,38 @@ function updateSuggestedText() {
     $("#hard-search").val("");
   }
 }
+function getSearchResults(searchterm, callback) {
+  //runQuery("SELECT * FROM Searches WHERE Name LIKE ? ORDER BY Name LIKE ? DESC, Name ASC", ["%" + searchterm + "%", searchterm + "%"], function(tx, results) {
+  //  callback(results.rows);
+  //});
+  str = searchterm.toLowerCase();
+  var matchesAtStart = [];
+  var others = [];
+  dexieDB.Searches.filter(function(val) {
+      return val.Name.toLowerCase().indexOf(str) > -1;
+  }).each(function(item) {
+      if(item.Name.substring(0, str.length).toLowerCase() == str) {
+          matchesAtStart.push(item);
+      } else {
+          others.push(item);
+      }
+  }).then(function(response) {
+      function cmp(a, b) {
+        if (a.Name < b.Name)
+          return -1;
+        if (a.Name > b.Name)
+          return 1;
+        return 0;
+      }
+      matchesAtStart.sort(cmp);
+      others.sort(cmp);
+      others.forEach(function(v) {
+          matchesAtStart.push(v);
+      });
+
+      callback(matchesAtStart);
+  });
+}
 function doSearch(e) {
   console.log("Starting search...");
   var searchterm = $("#search").val();
@@ -47,18 +79,23 @@ function doSearch(e) {
     clearSearch();
     return;
   }
-  runQuery("SELECT * FROM Searches WHERE Name LIKE ? ORDER BY Name LIKE ? DESC, Name ASC", ["%" + searchterm + "%", searchterm + "%"], function(tx, results) {
-    if(results.rows.length > 0) {
+  getSearchResults(searchterm, function(rows) {
+    if(searchterm !== $("#search").val()) {
+      //Query to search took too long, no point anymore, user input has changed
+      return;
+    }
+    
+    if(rows.length > 0) {
       $("#search-items").empty();
       searchItemsData = [];
       
       //Find out the list of searches and display a list of possibilites on the bottom
-      for(var i = 0; i < results.rows.length && i < 5; i++ ) {
-        $("#search-items").append("<div onclick='startSearch_Selection(" + i + ")'>" + results.rows[i].Name + "<span class='subtext'>" +results.rows[i].SubText + "</span></div>");
-        searchItemsData.push({"ID": results.rows[i].ID, "Type": results.rows[i].Type});
+      for(var i = 0; i < rows.length && i < 5; i++ ) {
+        $("#search-items").append("<div onclick='startSearch_Selection(" + i + ")'>" + rows[i].Name + "<span class='subtext'>" +rows[i].SubText + "</span></div>");
+        searchItemsData.push({"ID": rows[i].ID, "Type": rows[i].Type});
       }
       
-      if(results.rows.length > 0) {
+      if(rows.length > 0) {
         $("#search-items").css("display", "block");
         $("#search-items div:first-child").addClass("selected");
       } else {
