@@ -58,7 +58,7 @@ function preinit($mysqli, $champs, $relics, $spells, $equipment, $condition, $me
                 "INNER JOIN Races ON ChampRace.RaceID = Races.ID " .
                 "GROUP BY Champions.ID;";
         $result = $mysqli->query($query);
-        
+
         while($row = $result->fetch_assoc()) {
             $allChampions[$row["ID"]] = $row;
         }

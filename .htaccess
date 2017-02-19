@@ -1,0 +1,6 @@
+RedirectMatch 404 /\.git
+RedirectMatch 404 update.php
+RedirectMatch 404 README.md
+RedirectMatch 404 mysqlaccess.php
+RedirectMatch 404 php_errors.log
+RedirectMatch 404 php.ini
