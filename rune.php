@@ -85,7 +85,10 @@ $item = $items[0];
         <div class="row">
             <div id="main-info" class="info-group col-sm-6">
                 <div class="card">
-                  <h1 class="card-header"><?php echo $item["Name"]; ?></h1>
+                  <h1 class="card-header">
+                      <img class="img-small" src="https://d2aao99y1mip6n.cloudfront.net/images/runes/sm/<?php echo $item['Hash']; ?>.png" />
+                      <?php echo $item["Name"]; ?>
+                  </h1>
                   <div class="card-block">
                       <?php 
                       if($item["Type"] >= 1 && $item["Type"] <= 4 && !$item["AllowRanked"]) { ?>
@@ -197,6 +200,9 @@ $item = $items[0];
                 </div>
             </div>
             <div id="side-info" class="info-group col-sm-6">
+                <?php if($item["Type"] == 1) { ?>
+                    <img class="img-full" src="https://d2aao99y1mip6n.cloudfront.net/images/runes/med/<?php echo $item['Hash']; ?>.jpg" />
+                <?php } ?>
                 <pre><?php echo json_encode($item, JSON_PRETTY_PRINT); ?></pre>
             </div>
         </div>

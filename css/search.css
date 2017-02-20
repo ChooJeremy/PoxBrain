@@ -73,3 +73,11 @@
 #filters div label {
     display: block;
 }
+.item-title {
+    height: 26px;
+}
+.img-small {
+    height: 100%;
+    display: inline-block;
+    width: auto;
+}

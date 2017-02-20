@@ -87,3 +87,11 @@
     border-top: 0.5px solid #eee;
     border-bottom: 0.5px solid #eee;
 }
+.img-small {
+    height: 100%;
+    display: inline-block;
+    width: auto;
+}
+#img-full {
+    
+}

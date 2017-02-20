@@ -260,7 +260,12 @@ function convertFaction($str) {
             foreach ($allItems as $anItem) {
                 if($anItem["Type"] == 1) { ?>
                     <div class="search-item champion <?php echo convertFaction($anItem["Faction"])." ".$anItem["Rarity"]." ".$anItem["Race"]." ".$anItem["Class"]; ?>" >
-                        <a href="/rune.php?id=<?php echo $anItem["ID"]; ?>&type=1"><h3><?php echo $anItem["Name"] ?></h3></a>
+                        <a href="/rune.php?id=<?php echo $anItem["ID"]; ?>&type=1">
+                            <h3 class="item-title">
+                                <img class="img-small" src="https://d2aao99y1mip6n.cloudfront.net/images/runes/sm/<?php echo $anItem['Hash']; ?>.png" />
+                                <?php echo $anItem["Name"] ?>
+                            </h3>
+                        </a>
                         <div class="score"><?php echo $anItem["Score"]; ?></div>
                         <div class="stats"><?php echo $anItem["Damage"]."DMG, ".$anItem["Speed"]."SPD, ".$anItem["MinRng"]."-".$anItem["MaxRng"]."RNG, ".$anItem["Defense"]."DEF, ".$anItem["HitPoints"]."HP "; ?></div>
                         <div class="flavor"><?php echo $anItem["Description"]; ?></div>
