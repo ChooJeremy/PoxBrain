@@ -154,6 +154,9 @@ $(document).ready(function() {
     if(updateRequired) {
       console.log("Outdated database detected. Performing update...");
       populateDB();
+    } else {
+      //make the thing disappear
+      $("#loading").addClass("hide");
     }
   });
   clearSearch();

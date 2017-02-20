@@ -25,3 +25,13 @@
 <div id="ability-popup">
   
 </div>
+<div id="loading">
+	<div id="loading-circles">
+		<div class="loading-circle"></div>
+		<div class="loading-circle2"></div>
+	</div>
+	<div id="loading-message">
+		<span>We're finishing up some things. Please try to keep this tab open and not navigate away until it finishes. Once this finishes, you'll get suggested
+		  search results as you type and hovering over abilities will tell you what they do</span>
+	</div>
+</div>

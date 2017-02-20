@@ -70,6 +70,7 @@ function populateDB() {
                     "success": function(data) {
                         saveItem("lastKnownUpdatedID", data);
                         console.log("All done");
+                        $("#loading").addClass("hide");
                     }
                 });
             });
@@ -111,6 +112,7 @@ function loadDB(tx) {
                     "datatype": "text",
                     "success": function(data) {
                         saveItem("lastKnownUpdatedID", data);
+                        $("#loading").addClass("hide");
                     }
                 });
             });
