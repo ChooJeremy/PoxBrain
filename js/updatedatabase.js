@@ -146,6 +146,13 @@ function addDBRow(result, counter, callback) {
 }
 
 function checkIfRequireUpdate(callback) {
+    if(loadItem("lastKnownUpdatedID") < 0) {
+        trashDB(function() {
+            console.log("Trash db called, returning true");
+            callback(true);
+        });
+        return true;
+    }
     if(Date.now() - loadItem("lastKnownCheckTime") < 604800000) {
         callback(false);
         return false;
@@ -153,12 +160,6 @@ function checkIfRequireUpdate(callback) {
     saveItem("lastKnownCheckTime", Date.now());
     if(loadItem("lastKnownUpdatedID") == null || loadItem("lastKnownUpdatedID") == 0) {
         callback(true);
-        return true;
-    } else if(loadItem("lastKnownUpdatedID") < 0) {
-        trashDB(function() {
-            console.log("Trash db called, returning true");
-            callback(true);
-        });
         return true;
     } else {
         $.ajax("/getlastid.php", {
