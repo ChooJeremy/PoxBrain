@@ -175,7 +175,7 @@ function handleAbility(e, ability) {
         direction = -1;
     } else {
         //Appear on right
-        helpLocation.left = helpLocation.left + ($(e.target).width()) + 75;
+        helpLocation.left = helpLocation.left + 275;
         direction = 1;
     }
     

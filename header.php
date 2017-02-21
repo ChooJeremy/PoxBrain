@@ -7,7 +7,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/">Project name</a>
+      <a class="navbar-brand" href="/">PoxBrain</a>
     </div>
     <div id="search-form" class="navbar-collapse collapse">
       <form class="navbar-form" action="/search.php" method="get" onsubmit="return performSearch()" >

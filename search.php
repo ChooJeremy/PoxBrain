@@ -171,7 +171,7 @@ function convertFaction($str) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <title>Jumbotron Template for Bootstrap</title>
+    <title>Search - <?php echo $_GET["search"]; ?></title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
