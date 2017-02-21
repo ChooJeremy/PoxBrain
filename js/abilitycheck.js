@@ -132,7 +132,7 @@ function generatePrompts(promptList, helpLocation, direction) {
                 helpLocation.top += newItem.height() + 20;
             }
             
-            helpLocation.left = helpLocation.left + (275 * direction)
+            helpLocation.left = helpLocation.left + (225 * direction)
             helpLocation.top = originalY;
             
             generatePrompts(resultList, helpLocation, direction);

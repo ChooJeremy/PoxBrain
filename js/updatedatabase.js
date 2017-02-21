@@ -165,7 +165,9 @@ function checkIfRequireUpdate(callback) {
             "datatype": "text",
             "success": function(data) {
                 if(parseInt(data) != loadItem("lastKnownUpdatedID")) {
-                    callback(true);
+                    trashDB(function() {
+                        callback(true);
+                    });
                     return true;
                 } else {
                     callback(false);
@@ -196,6 +198,12 @@ function trashDB(callback) {
             tx.executeSql("DROP TABLE Searches");
         }, errorCB, callback);
     }
+}
+
+function logQuery(query) {
+    runQuery(query, [], function(tx, results) {
+        console.log(results.rows);
+    });
 }
 
 $(document).ready(function() {
