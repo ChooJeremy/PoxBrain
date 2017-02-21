@@ -82,6 +82,23 @@ function generatePrompts(promptList, helpLocation, direction) {
     }
     if(!window.openDatabase) {
         //dexie
+        var items = [];
+        var allPromises = [];
+        for(var i = 0; i < promptList.length; i++) {
+            allPromises.push(dexieDB.Searches.where("[ID+Type]").equals([promptList[i]["ID"], promptList[i]["Type"]]).each(function(e) {
+                for(var i = 0, l = items.length; i < l; i++) {
+                    if(items[i]["ID"] == e["ID"] && items[i]["Type"] == e["Type"])
+                    {
+                        return;
+                    }
+                }
+                items.push(e);
+            }));
+        }
+        Promise.all(allPromises).then(values => {
+            var uniques = [];
+            createHelpBoxes(items, helpLocation, direction);
+        });
     } else {
         //get them all
         var firstTime = true;
@@ -101,44 +118,43 @@ function generatePrompts(promptList, helpLocation, direction) {
         console.log(params);
         
         runQuery(queryString, params, function(tx, results) {
-            
-            console.log("Query ran. Result: ");
-            console.log(results.rows);
-            
-            var resultList = [];
-            var originalY = helpLocation.top;            
-
-            //move up accordingly
-            helpLocation.top = helpLocation.top - (results.rows.length/2.0 * 150);
-            for(var i = 0; i < results.rows.length; i++) {
-                var extractedData = extractAllData(results.rows[i].Explanation);
-                var finalDescription = extractedData["Description"];
-                resultList = resultList.concat(extractedData["Result"]);
-                
-                //make the popup appear, starting from helpLocation
-                var newItem = $(document.createElement("div"));
-                newItem.addClass("description-popup");
-                newItem.css("top", helpLocation.top + "px");
-                newItem.css("left", helpLocation.left + "px");
-                var itemName = $(document.createElement("div"));
-                itemName.addClass("description-header");
-                itemName.text(results.rows[i].Name);
-                var itemDescription = $(document.createElement("div"));
-                itemDescription.text(finalDescription);
-                newItem.append(itemName, itemDescription);
-                console.log(newItem);
-                $("body").append(newItem);
-                
-                helpLocation.top += newItem.height() + 20;
-            }
-            
-            helpLocation.left = helpLocation.left + (225 * direction)
-            helpLocation.top = originalY;
-            
-            generatePrompts(resultList, helpLocation, direction);
-
+            createHelpBoxes(results.rows, helpLocation, direction);
         });
     }
+}
+
+function createHelpBoxes(boxList, helpLocation, direction) {
+    var resultList = [];
+    var originalY = helpLocation.top;            
+
+    //move up accordingly
+    helpLocation.top = helpLocation.top - (boxList.length/2.0 * 150);
+    for(var i = 0; i < boxList.length; i++) {
+        var extractedData = extractAllData(boxList[i].Explanation);
+        var finalDescription = extractedData["Description"];
+        resultList = resultList.concat(extractedData["Result"]);
+        
+        //make the popup appear, starting from helpLocation
+        var newItem = $(document.createElement("div"));
+        newItem.addClass("description-popup");
+        newItem.css("top", helpLocation.top + "px");
+        newItem.css("left", helpLocation.left + "px");
+        var itemName = $(document.createElement("div"));
+        itemName.addClass("description-header");
+        itemName.text(boxList[i].Name);
+        var itemDescription = $(document.createElement("div"));
+        itemDescription.text(finalDescription);
+        newItem.append(itemName, itemDescription);
+        console.log(newItem);
+        $("body").append(newItem);
+        
+        helpLocation.top += newItem.height() + 20;
+    }
+    
+    helpLocation.left = helpLocation.left + (225 * direction)
+    helpLocation.top = originalY;
+    
+    generatePrompts(resultList, helpLocation, direction);
 }
 
 function handleAbility(e, ability) {

@@ -84,7 +84,7 @@ function populateDB() {
 function dexieOpen() {
     dexieDB = new Dexie("searches");
     dexieDB.version(1).stores({
-        Searches: "++_ID,ID,Name,Type,SubText,Explanation"
+        Searches: "++_ID,ID,Name,Type,SubText,Explanation,[ID+Type]"
     });
     dexieDB.open();
 }
