@@ -9,6 +9,9 @@
     background-color: white;
     z-index: 2;
 }
+#search-form .navbar-form {
+    padding: 0;
+}
 #search-popup {
     position: fixed;
 }
