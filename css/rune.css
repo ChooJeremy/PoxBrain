@@ -95,3 +95,6 @@
 #img-full {
     
 }
+#side-info pre {
+    display: none;
+}

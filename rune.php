@@ -205,7 +205,6 @@ $item = $items[0];
                 <?php if($item["Type"] >= 1 && $item["Type"] <= 4) { ?>
                     <img class="img-full" src="https://d2aao99y1mip6n.cloudfront.net/images/runes/med/<?php echo $item['Hash']; ?>.jpg" />
                 <?php } ?>
-                <pre><?php echo json_encode($item, JSON_PRETTY_PRINT); ?></pre>
             </div>
         </div>
     </div>
