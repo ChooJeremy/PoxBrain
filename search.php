@@ -395,7 +395,7 @@ function convertFaction($str) {
         $(document).ready(function() {
             console.log("document ready");
            <?php 
-                if(isset($_GET["score"]) && $_GET["score"] != "1") { ?>
+                if(!isset($_GET["score"]) || $_GET["score"] != "1") { ?>
                 $(".score").addClass("hide");
                 <?php }
             ?>
