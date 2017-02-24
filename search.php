@@ -5,6 +5,13 @@ preinit($mysqli, true, true, true, true, true, true, true);
 
 $searchData = $_GET["search"];
 
+//check string for ability matches and pre-remove
+$success = preg_match('/(ability:"(.+?))"/', $searchData, $matches);
+if($success === 1) {
+    //there was a match
+    //var_dump($matches);
+}
+
 //Find everywhere
 //We'll start with champions
 if (!($dbCheck = $mysqli->prepare("SELECT ID, Name, MATCH(Name) AGAINST (? IN NATURAL LANGUAGE MODE) AS Score1, MATCH(Name, Description, Rarity, Artist, RuneSet) AGAINST (? IN NATURAL LANGUAGE MODE) AS Score2 FROM Champions WHERE MATCH(Name, Description, Rarity, Artist, RuneSet) AGAINST (? IN NATURAL LANGUAGE MODE) ORDER BY Score1*10 DESC, Score2 DESC"))) {
@@ -221,7 +228,7 @@ function convertFaction($str) {
     <div class="container" style="padding-top: 20px;">
         <div id="search-field">
             <form method="get" action="search.php">
-                <input id="page-search" class="form-control" type="text" name="search" value="<?php echo $searchData; ?>"/>
+                <input id="page-search" class="form-control" type="text" name="search" value="<?php echo htmlspecialchars($searchData); ?>"/>
                 <input class="btn btn-success" type="submit" value="Search again"/>
             </form>
         </div>
