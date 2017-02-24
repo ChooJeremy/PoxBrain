@@ -6,10 +6,20 @@ preinit($mysqli, true, true, true, true, true, true, true);
 $searchData = $_GET["search"];
 
 //check string for ability matches and pre-remove
-$success = preg_match('/(ability:"(.+?))"/', $searchData, $matches);
-if($success === 1) {
+$success = preg_match_all('/(ability:"(.+?))"/', $searchData, $matches);
+if($success >= 0) {
     //there was a match
-    //var_dump($matches);
+    //identify which abilities to search for
+    $abilityNames = array();
+    $currentPos = 0;
+    do {
+        $abilityName = $matches[2][$currentPos];
+        array_push($abilityNames, $abilityName);
+        $searchData = str_replace($matches[0][$currentPos], "", $searchData);
+        $currentPos = $currentPos + 1;
+    } while ($currentPos < count($matches[0]));
+    var_dump($searchData);
+    var_dump($abilityNames);
 }
 
 //Find everywhere
