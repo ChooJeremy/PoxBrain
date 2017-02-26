@@ -22,8 +22,12 @@ if($success >= 0 && count($matches[0]) > 0) {
     } while ($currentPos < count($matches[0]));
 }
 
-$abilityINParams = "(".implode(',',array_fill(0,count($abilityNames),'?')).")";
-$extraS = implode('', array_fill(0, count($abilityNames)*4, 's'));
+$abilityINParams = " = 'FAKE_ABILITY_NAME'";
+$extraS = "";
+if(count($abilityNames) > 0) {
+    $abilityINParams = " IN (".implode(',',array_fill(0,count($abilityNames),'?')).")";
+    $extraS = implode('', array_fill(0, count($abilityNames)*4, 's'));
+}
 //begin building an array for call_user_func_array in params
 $abilityParams = array_merge(array("ssssss".$extraS, $searchData, $searchData), $abilityNames, array($searchData), $abilityNames, array($searchData, $searchData), $abilityNames, array($searchData), $abilityNames);
 
@@ -58,19 +62,19 @@ $dbCheck->close();
 //Abilities
 if(!($dbCheck = $mysqli->prepare("SELECT ChampAbility.ChampID, Ability.Name, MATCH(Ability.Name) AGAINST (? IN NATURAL LANGUAGE MODE) AS Score1, " .
                         "MATCH(Ability.Name, Ability.Description) AGAINST (? IN NATURAL LANGUAGE MODE) AS Score2, " .
-                        "CASE WHEN Ability.Name IN ".$abilityINParams." THEN 50 ELSE 0 END as AbilityScore, " .
+                        "CASE WHEN Ability.Name ".$abilityINParams." THEN 50 ELSE 0 END as AbilityScore, " .
                         "1 as BaseAbility " . 
                         "FROM Ability INNER JOIN ChampAbility ON Ability.ID = ChampAbility.AbilityID " .
                         "WHERE MATCH(Ability.Name, Ability.Description) AGAINST (? IN NATURAL LANGUAGE MODE) " .
-                        "OR Ability.Name IN ".$abilityINParams." " .
+                        "OR Ability.Name ".$abilityINParams." " .
                         "UNION ALL " .
                         "SELECT AbilitySet.ChampID, Ability.Name, MATCH(Ability.Name) AGAINST (? IN NATURAL LANGUAGE MODE) AS Score1,  " .
                         "MATCH(Ability.Name, Ability.Description) AGAINST (? IN NATURAL LANGUAGE MODE) AS Score2, " .
-                        "CASE WHEN Ability.Name IN ".$abilityINParams." THEN 50 ELSE 0 END as AbilityScore, " .
+                        "CASE WHEN Ability.Name ".$abilityINParams." THEN 50 ELSE 0 END as AbilityScore, " .
                         "AbilitySet.DefaultAbility AS BaseAbility " .
                         "FROM Ability INNER JOIN AbilitySet ON Ability.ID = AbilitySet.AbilityID " .
                         "WHERE MATCH(Ability.Name, Ability.Description) AGAINST (? IN NATURAL LANGUAGE MODE) " .
-                        "OR Ability.Name IN ".$abilityINParams." " .
+                        "OR Ability.Name ".$abilityINParams." " .
                         "ORDER BY Score1*10 DESC, Score2 DESC"))) {
     echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error; die();
 }
@@ -340,7 +344,12 @@ function convertFaction($str) {
                     </div>
                 <?php } else if($anItem["Type"] == 2) { ?>
                     <div class="search-item relic <?php echo convertFaction($anItem["Faction"])." ".$anItem["Rarity"]; ?>">
-                        <a href="/rune.php?id=<?php echo $anItem["ID"]; ?>&type=2"><h3><?php echo $anItem["Name"] ?></h3></a>
+                        <a href="/rune.php?id=<?php echo $anItem["ID"]; ?>&type=2">
+                            <h3 class="item-title">
+                                <img class="img-small" src="https://d2aao99y1mip6n.cloudfront.net/images/runes/sm/<?php echo $anItem['Hash']; ?>.png" />
+                                <?php echo $anItem["Name"] ?>
+                            </h3>
+                        </a>
                         <div class="score"><?php echo $anItem["Score"]; ?></div>
                         <div><?php echo $anItem["Description"]; ?></div>
                         <div class="nora"><?php echo $anItem["NoraCost"] ?></div>
@@ -351,7 +360,12 @@ function convertFaction($str) {
                     </div>
                 <?php } else if($anItem["Type"] == 3) { ?>
                     <div class="search-item spell <?php echo convertFaction($anItem["Faction"])." ".$anItem["Rarity"]; ?>">
-                        <a href="/rune.php?id=<?php echo $anItem["ID"]; ?>&type=3"><h3><?php echo $anItem["Name"] ?></h3></a>
+                        <a href="/rune.php?id=<?php echo $anItem["ID"]; ?>&type=3">
+                            <h3 class="item-title">
+                                <img class="img-small" src="https://d2aao99y1mip6n.cloudfront.net/images/runes/sm/<?php echo $anItem['Hash']; ?>.png" />
+                                <?php echo $anItem["Name"] ?>
+                            </h3>
+                        </a>
                         <div class="score"><?php echo $anItem["Score"]; ?></div>
                         <div><?php echo $anItem["Description"]; ?></div>
                         <div class="nora"><?php echo $anItem["NoraCost"] ?></div>
@@ -362,7 +376,12 @@ function convertFaction($str) {
                     </div>
                 <?php } else if($anItem["Type"] == 4) { ?>
                     <div class="search-item equipment <?php echo convertFaction($anItem["Faction"])." ".$anItem["Rarity"]; ?>">
-                        <a href="/rune.php?id=<?php echo $anItem["ID"]; ?>&type=4"><h3><?php echo $anItem["Name"] ?></h3></a>
+                        <a href="/rune.php?id=<?php echo $anItem["ID"]; ?>&type=4">
+                            <h3 class="item-title">
+                                <img class="img-small" src="https://d2aao99y1mip6n.cloudfront.net/images/runes/sm/<?php echo $anItem['Hash']; ?>.png" />
+                                <?php echo $anItem["Name"] ?>
+                            </h3>
+                        </a>
                         <div class="score"><?php echo $anItem["Score"]; ?></div>
                         <div><?php echo $anItem["Description"]; ?></div>
                         <div class="nora"><?php echo $anItem["NoraCost"] ?></div>
