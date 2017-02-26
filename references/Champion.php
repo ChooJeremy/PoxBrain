@@ -40,6 +40,7 @@ function preinit($mysqli, $champs, $relics, $spells, $equipment, $condition, $me
         
         while($row = $result->fetch_assoc()) {
             $allAbilities[$row["ID"]] = $row;
+            $allAbilities[$row["ID"]]["OriginalName"] = $row["Name"];
             if($row["Level"] != 0) {
                 $allAbilities[$row["ID"]]["Name"] = $row["Name"]." ".$row["Level"];
             }
@@ -125,7 +126,7 @@ function preinit($mysqli, $champs, $relics, $spells, $equipment, $condition, $me
         $result = $mysqli->query($query);
         
         while($row = $result->fetch_assoc()) {
-            $allMechanics[$row["ID"]] = $row;
+            $allMechanics[$row["Identifier"]] = $row;
         }
     }
     if($condition) {
@@ -135,7 +136,7 @@ function preinit($mysqli, $champs, $relics, $spells, $equipment, $condition, $me
         $result = $mysqli->query($query);
         
         while($row = $result->fetch_assoc()) {
-            $allConditions[$row["ID"]] = $row;
+            $allConditions[$row["Identifier"]] = $row;
         }
     }
 }

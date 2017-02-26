@@ -200,6 +200,9 @@ $item = $items[0];
                     </div>
                   </div>
                 </div>
+                <?php if($item["Type"] == 7) { ?>
+                    <a class="btn btn-primary" style="margin-top: 10px" href='/search.php?search=<?php echo htmlspecialchars("ability:\"".$item["OriginalName"]."\""); ?>'>Find Champions with this ability.</a>
+                <?php } ?>
             </div>
             <div id="side-info" class="info-group col-sm-6">
                 <?php if($item["Type"] >= 1 && $item["Type"] <= 4) { ?>
