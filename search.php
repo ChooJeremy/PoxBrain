@@ -7,7 +7,7 @@ $searchData = $_GET["search"];
 
 //check string for ability matches and pre-remove
 $success = preg_match_all('/(ability:"(.+?))"/', $searchData, $matches);
-if($success >= 0) {
+if($success >= 0 && count($matches[0]) > 0) {
     //there was a match
     //identify which abilities to search for
     $abilityNames = array();
@@ -18,8 +18,6 @@ if($success >= 0) {
         $searchData = str_replace($matches[0][$currentPos], "", $searchData);
         $currentPos = $currentPos + 1;
     } while ($currentPos < count($matches[0]));
-    var_dump($searchData);
-    var_dump($abilityNames);
 }
 
 //Find everywhere
