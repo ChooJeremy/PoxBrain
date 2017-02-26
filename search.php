@@ -4,13 +4,15 @@ require_once('references/Champion.php');
 preinit($mysqli, true, true, true, true, true, true, true);
 
 $searchData = $_GET["search"];
+$originalSearchTerm = $searchData;
+$abilityNames = array();
 
 //check string for ability matches and pre-remove
 $success = preg_match_all('/(ability:"(.+?))"/', $searchData, $matches);
 if($success >= 0 && count($matches[0]) > 0) {
     //there was a match
     //identify which abilities to search for
-    $abilityNames = array();
+
     $currentPos = 0;
     do {
         $abilityName = $matches[2][$currentPos];
@@ -19,6 +21,12 @@ if($success >= 0 && count($matches[0]) > 0) {
         $currentPos = $currentPos + 1;
     } while ($currentPos < count($matches[0]));
 }
+
+$abilityINParams = "(".implode(',',array_fill(0,count($abilityNames),'?')).")";
+$extraS = implode('', array_fill(0, count($abilityNames)*4, 's'));
+//begin building an array for call_user_func_array in params
+$abilityParams = array_merge(array("ssssss".$extraS, $searchData, $searchData), $abilityNames, array($searchData), $abilityNames, array($searchData, $searchData), $abilityNames, array($searchData), $abilityNames);
+
 
 //Find everywhere
 //We'll start with champions
@@ -48,19 +56,29 @@ while ($dbCheck->fetch()) {
 $dbCheck->close();
 
 //Abilities
-if (!($dbCheck = $mysqli->prepare("SELECT ChampAbility.ChampID, Ability.Name, MATCH(Ability.Name) AGAINST (? IN NATURAL LANGUAGE MODE) AS Score1, " .
-                        "MATCH(Ability.Name, Ability.Description) AGAINST (? IN NATURAL LANGUAGE MODE) AS Score2 " .
+if(!($dbCheck = $mysqli->prepare("SELECT ChampAbility.ChampID, Ability.Name, MATCH(Ability.Name) AGAINST (? IN NATURAL LANGUAGE MODE) AS Score1, " .
+                        "MATCH(Ability.Name, Ability.Description) AGAINST (? IN NATURAL LANGUAGE MODE) AS Score2, " .
+                        "CASE WHEN Ability.Name IN ".$abilityINParams." THEN 50 ELSE 0 END as AbilityScore, " .
+                        "1 as BaseAbility " . 
                         "FROM Ability INNER JOIN ChampAbility ON Ability.ID = ChampAbility.AbilityID " .
                         "WHERE MATCH(Ability.Name, Ability.Description) AGAINST (? IN NATURAL LANGUAGE MODE) " .
+                        "OR Ability.Name IN ".$abilityINParams." " .
                         "UNION ALL " .
-                        "SELECT AbilitySet.ChampID, Ability.Name, MATCH(Ability.Name) AGAINST (? IN NATURAL LANGUAGE MODE) AS Score1, " .
-                        "MATCH(Ability.Name, Ability.Description) AGAINST (? IN NATURAL LANGUAGE MODE) AS Score2 " .
+                        "SELECT AbilitySet.ChampID, Ability.Name, MATCH(Ability.Name) AGAINST (? IN NATURAL LANGUAGE MODE) AS Score1,  " .
+                        "MATCH(Ability.Name, Ability.Description) AGAINST (? IN NATURAL LANGUAGE MODE) AS Score2, " .
+                        "CASE WHEN Ability.Name IN ".$abilityINParams." THEN 50 ELSE 0 END as AbilityScore, " .
+                        "AbilitySet.DefaultAbility AS BaseAbility " .
                         "FROM Ability INNER JOIN AbilitySet ON Ability.ID = AbilitySet.AbilityID " .
-                        "WHERE MATCH(Ability.Name, Ability.Description) AGAINST (? IN NATURAL LANGUAGE MODE) ORDER BY Score1*10 DESC, Score2 DESC"))) {
+                        "WHERE MATCH(Ability.Name, Ability.Description) AGAINST (? IN NATURAL LANGUAGE MODE) " .
+                        "OR Ability.Name IN ".$abilityINParams." " .
+                        "ORDER BY Score1*10 DESC, Score2 DESC"))) {
     echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error; die();
 }
 
-if (!$dbCheck->bind_param("ssssss", $searchData, $searchData, $searchData, $searchData, $searchData, $searchData)) {
+$tmp = array();
+foreach($abilityParams as $key => $value) $tmp[$key] = &$abilityParams[$key];
+
+if (!call_user_func_array(array($dbCheck, "bind_param"), $tmp)) {
     echo "Binding parameters failed: (" . $dbCheck->errno . ") " . $dbCheck->error; die();
 }
 
@@ -68,12 +86,17 @@ if (!$dbCheck->execute()) {
     echo "Execute failed: (" . $dbCheck->errno . ") " . $dbCheck->error;  die();
 }
 
-$dbCheck->bind_result($champID, $name, $score1, $score2);
+$dbCheck->bind_result($champID, $name, $score1, $score2, $abilityScore, $baseAbility);
 $champAbilityScores = [];
 
 while($dbCheck->fetch()) {
     $score = max($score1*10, $score2);
     $score = $score/10;//Abilities from champions shouldn't have such a high rating.
+    if($baseAbility === 1) {
+        $score = $score + $abilityScore;
+    } else {
+        $score = $score + $abilityScore/5;
+    }
     array_push($champAbilityScores,  array("ID"=> $champID, "Name"=> $name, "Type"=> 1, "Score" => $score));
 }
 
@@ -82,7 +105,7 @@ $dbCheck->close();
 //Merge all champ notifications
 foreach ($champAbilityScores as $anAbilityScore) {
     if(isset($champScores[$anAbilityScore["ID"]])) {
-        $champScores[$anAbilityScore["ID"]]["Score"] = $champScores[$anAbilityScore["ID"]]["Score"] + $anAbilityScore["ID"]["Score"];
+        $champScores[$anAbilityScore["ID"]]["Score"] = $champScores[$anAbilityScore["ID"]]["Score"] + $anAbilityScore["Score"];
     } else {
         $champScores[$anAbilityScore["ID"]] = $anAbilityScore;
     }
@@ -236,7 +259,7 @@ function convertFaction($str) {
     <div class="container" style="padding-top: 20px;">
         <div id="search-field">
             <form method="get" action="search.php">
-                <input id="page-search" class="form-control" type="text" name="search" value="<?php echo htmlspecialchars($searchData); ?>"/>
+                <input id="page-search" class="form-control" type="text" name="search" value="<?php echo htmlspecialchars($originalSearchTerm); ?>"/>
                 <input class="btn btn-success" type="submit" value="Search again"/>
             </form>
         </div>
