@@ -56,26 +56,22 @@
     <div class="container">
       <!-- Example row of columns -->
       <div class="row">
-        <div class="col-md-2">
-          <!-- 
-          <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-          -->
+        <div class="col-md-6">
+          <h2>New update: Search by ability</h2>
+          <p>
+            There's been a new update to PoxBrain. New features include the ability to search by ability!
+            You can search by ability by searching as <a href='search.php?search=ability:"ability-here"'>ability:"ability-here"</a>. For example, to try and find champions with flight, teleport, leap and charge, you can try the search term:
+            <a href='/search.php?search=ability:"flight" ability:"leap" ability:"teleport" ability:"charge"'>ability:"flight" ability:"leap" ability:"teleport" ability:"charge"</a> Note that no champion has all of these abilities, so you'll see champions with as many of them as possible.
+            <p>You'll also find a button to search for champions with this ability when you're on an ability page like the following:</p>
+          </p>
+          <p><a class="btn btn-default" href="/rune.php?id=2501&type=7" role="button">Look at Cast: Light as a Feather</a></p>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-6">
           <h2>A new database?</h2>
           <p>This site is currently available for testing. Please report any bugs, inconsistencies or any comments onto the forum thread.</p>
           <p>Try out the search function and the rune viewing option! (Start by searching any term on the top left)</p>
           <p><a class="btn btn-default" href="http://forums.poxnora.com/index.php?threads/poxbrain-beta.26292/" role="button">View thread</a></p>
        </div>
-        <div class="col-md-2">
-          <!--
-          <h2>Heading</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-          -->
-        </div>
       </div>
 
       <hr>
