@@ -153,7 +153,7 @@ function checkIfRequireUpdate(callback) {
         });
         return true;
     }
-    if(Date.now() - loadItem("lastKnownCheckTime") < 604800000) {
+    if(Date.now() - loadItem("lastKnownCheckTime") < 86400000) {// 604800000) { //time for 1 week
         callback(false);
         return false;
     }
