@@ -1,0 +1,124 @@
+[
+    {
+        "name": "delight-im/http",
+        "version": "v2.0.0",
+        "version_normalized": "2.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/delight-im/PHP-HTTP.git",
+            "reference": "0a19a72a7eac8b1301aa972fb20cff494ac43e09"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/delight-im/PHP-HTTP/zipball/0a19a72a7eac8b1301aa972fb20cff494ac43e09",
+            "reference": "0a19a72a7eac8b1301aa972fb20cff494ac43e09",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2016-07-21 15:05:01",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Delight\\Http\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "description": "Hypertext Transfer Protocol (HTTP) utilities for PHP",
+        "homepage": "https://github.com/delight-im/PHP-HTTP",
+        "keywords": [
+            "headers",
+            "http",
+            "https"
+        ]
+    },
+    {
+        "name": "delight-im/cookie",
+        "version": "v2.1.0",
+        "version_normalized": "2.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/delight-im/PHP-Cookie.git",
+            "reference": "3e41e0d44959b59de98722b5b1b1fb83f9f528f3"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/delight-im/PHP-Cookie/zipball/3e41e0d44959b59de98722b5b1b1fb83f9f528f3",
+            "reference": "3e41e0d44959b59de98722b5b1b1fb83f9f528f3",
+            "shasum": ""
+        },
+        "require": {
+            "delight-im/http": "^2.0",
+            "php": ">=5.3.0"
+        },
+        "time": "2016-11-23 20:09:42",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Delight\\Cookie\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "description": "Modern cookie management for PHP",
+        "homepage": "https://github.com/delight-im/PHP-Cookie",
+        "keywords": [
+            "cookie",
+            "cookies",
+            "csrf",
+            "http",
+            "same-site",
+            "samesite",
+            "xss"
+        ]
+    },
+    {
+        "name": "delight-im/auth",
+        "version": "v3.1.0",
+        "version_normalized": "3.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/delight-im/PHP-Auth.git",
+            "reference": "d527a82bfa434617a9b96525eac5e62621e27e91"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/delight-im/PHP-Auth/zipball/d527a82bfa434617a9b96525eac5e62621e27e91",
+            "reference": "d527a82bfa434617a9b96525eac5e62621e27e91",
+            "shasum": ""
+        },
+        "require": {
+            "delight-im/cookie": "^2.0",
+            "ext-openssl": "*",
+            "php": ">=5.5.0"
+        },
+        "time": "2016-08-20 20:02:18",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Delight\\Auth\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "description": "Authentication for PHP. Simple, lightweight and secure.",
+        "homepage": "https://github.com/delight-im/PHP-Auth",
+        "keywords": [
+            "Authentication",
+            "auth",
+            "login",
+            "security"
+        ]
+    }
+]

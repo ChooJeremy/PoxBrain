@@ -179,6 +179,10 @@ $item = $items[0];
                         <?php }
                         if($item["Type"] >= 1 && $item["Type"] <= 4) { ?>
                         <div class="rune-set"><?php echo $item["RuneSet"]; ?></div>
+                        <?php if($item["Type"] == 1) {
+                                echo "<div class='race'>Race: " . str_replace(" ", ", ", $item["Race"]) . "</div>";
+                                echo "<div class='class'>Class: " . str_replace(" ", ", ", $item["Class"]) . "</div>";
+                        } ?>
                         <div class="artist"><?php echo $item["Artist"]; ?></div>
                         <div class="status">
                             <?php if($item["ForSale"]) {

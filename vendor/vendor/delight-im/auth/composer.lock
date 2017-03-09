@@ -1,0 +1,99 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "22e56875c7a1386807d5cf6ae01f50fa",
+    "content-hash": "b914ccd7ac15e1519d7a04b55dbe725e",
+    "packages": [
+        {
+            "name": "delight-im/cookie",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/delight-im/PHP-Cookie.git",
+                "reference": "a746f4096885b6715a640a2122b1c21324624f8f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/delight-im/PHP-Cookie/zipball/a746f4096885b6715a640a2122b1c21324624f8f",
+                "reference": "a746f4096885b6715a640a2122b1c21324624f8f",
+                "shasum": ""
+            },
+            "require": {
+                "delight-im/http": "^2.0",
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Delight\\Cookie\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Modern cookie management for PHP",
+            "homepage": "https://github.com/delight-im/PHP-Cookie",
+            "keywords": [
+                "cookie",
+                "cookies",
+                "csrf",
+                "http",
+                "same-site",
+                "samesite",
+                "xss"
+            ],
+            "time": "2016-07-21 15:20:20"
+        },
+        {
+            "name": "delight-im/http",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/delight-im/PHP-HTTP.git",
+                "reference": "0a19a72a7eac8b1301aa972fb20cff494ac43e09"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/delight-im/PHP-HTTP/zipball/0a19a72a7eac8b1301aa972fb20cff494ac43e09",
+                "reference": "0a19a72a7eac8b1301aa972fb20cff494ac43e09",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Delight\\Http\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Hypertext Transfer Protocol (HTTP) utilities for PHP",
+            "homepage": "https://github.com/delight-im/PHP-HTTP",
+            "keywords": [
+                "headers",
+                "http",
+                "https"
+            ],
+            "time": "2016-07-21 15:05:01"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": ">=5.5.0",
+        "ext-openssl": "*"
+    },
+    "platform-dev": []
+}
