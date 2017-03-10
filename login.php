@@ -1,5 +1,5 @@
 <?php
-    require 'mysqlaccess.php';
+    require_once('./mysqlaccess.php');
     if ($_POST['remember'] == 1) {
         // keep logged in for one month
         $rememberDuration = (int) (60 * 60 * 24 * 30);

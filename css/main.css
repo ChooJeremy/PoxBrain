@@ -55,19 +55,10 @@
     display: none;
 }
 #login-signup {
-    display: none;
-    position: fixed;
-    left: 50%;
-    top: 50%;
     height: 300px;
     width: 500px;
     margin-left: -250px;
     margin-top: -150px;
-    background-color: white;
-    z-index: 1100;
-    border: 1px groove black;
-    border-radius: 20px;
-    padding: 10px;
 }
 #login-signup>span {
     position: absolute;
@@ -116,6 +107,31 @@
     background-color: #eee;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
+}
+.floating-popup {
+    display: none;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    background-color: white;
+    z-index: 1100;
+    padding: 10px;
+    border: 1px groove black;
+    border-radius: 20px;
+}
+#collection-help {
+    width: 50%;
+    min-height: 50%;
+    height: auto;
+    margin-left: -25%;
+    text-align: center;
+    -webkit-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+}
+#collection-help #collection-textarea {
+    width: 100%;
+    min-height: 100px;
+    border: 1px solid black;
 }
 #loading
 {

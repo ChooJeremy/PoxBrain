@@ -2,6 +2,42 @@
 require_once('./mysqlaccess.php');
 require_once('references/Champion.php');
 preinit($mysqli, true, true, true, true, true, true, true);
+$userIsLoggedIn = $auth->isLoggedIn();
+if ($userIsLoggedIn) {
+    // user is signed in
+    $userID = $auth->getUserId();
+    //retrieve all champion records from the UserCollection
+    $query = "SELECT * FROM UserCollection WHERE UserID = " . $userID;
+    $userCollectionQuery = $mysqli->query($query);
+    
+    $userChamps = array();
+    $userSpells = array();
+    $userRelics = array();
+    $userEquipment = array();
+    while($row = $userCollectionQuery->fetch_assoc()) {
+        if($row["Type"] == 1) {
+            $userChamps[$row["RuneID"]] = array("RuneID" => $row["RuneID"], "Quantity" => $row["Quantity"], "Level" => $row["Level"]);
+        } else if($row["Type"] == 2) {
+            $userRelics[$row["RuneID"]] = array("RuneID" => $row["RuneID"], "Quantity" => $row["Quantity"], "Level" => $row["Level"]);
+        } else if($row["Type"] == 3) {
+            $userSpells[$row["RuneID"]] = array("RuneID" => $row["RuneID"], "Quantity" => $row["Quantity"], "Level" => $row["Level"]);
+        } else if($row["Type"] == 4) {
+            $userEquipment[$row["RuneID"]] = array("RuneID" => $row["RuneID"], "Quantity" => $row["Quantity"], "Level" => $row["Level"]);
+        }
+    }
+}
+else {
+    // user is *not* signed in yet
+}
+
+function appendQuantity($array, $id) {
+    global $userIsLoggedIn;
+    if($userIsLoggedIn) {
+        return " ● ".$userChamps[$row["ID"]]["Quantity"]." owned";
+    } else {
+        return "";
+    }
+}
 
 $searchData = $_GET["search"];
 $originalSearchTerm = $searchData;
@@ -312,6 +348,7 @@ function convertFaction($str) {
                         <div class="stats"><?php echo $anItem["Damage"]."DMG, ".$anItem["Speed"]."SPD, ".$anItem["MinRng"]."-".$anItem["MaxRng"]."RNG, ".$anItem["Defense"]."DEF, ".$anItem["HitPoints"]."HP "; ?></div>
                         <div class="flavor"><?php echo $anItem["Description"]; ?></div>
                         <div class="nora"><?php echo $anItem["NoraCost"] ?></div>
+                        <div class="owned"><?php if($userIsLoggedIn) {echo $userChamps[$anItem["ID"]]["Quantity"]." owned"; } ?></div>
                         <div class="rarity"><?php echo $anItem["Rarity"]; ?></div>
                         <div class="rune-set"><?php echo $anItem["RuneSet"]; ?></div>
                         <div class="artist"><?php echo $anItem["Artist"]; ?></div>
@@ -353,6 +390,7 @@ function convertFaction($str) {
                         <div class="score"><?php echo $anItem["Score"]; ?></div>
                         <div><?php echo $anItem["Description"]; ?></div>
                         <div class="nora"><?php echo $anItem["NoraCost"] ?></div>
+                        <div class="owned"><?php if($userIsLoggedIn) {echo $userRelics[$anItem["ID"]]["Quantity"]." owned"; } ?></div>
                         <div class="flavor"><?php echo $anItem["FlavorText"]; ?></div>
                         <div class="rarity"><?php echo $anItem["Rarity"]; ?></div>
                         <div class="rune-set"><?php echo $anItem["RuneSet"]; ?></div>
@@ -369,6 +407,7 @@ function convertFaction($str) {
                         <div class="score"><?php echo $anItem["Score"]; ?></div>
                         <div><?php echo $anItem["Description"]; ?></div>
                         <div class="nora"><?php echo $anItem["NoraCost"] ?></div>
+                        <div class="owned"><?php if($userIsLoggedIn) {echo $userSpells[$anItem["ID"]]["Quantity"]." owned"; } ?></div>
                         <div class="flavor"><?php echo $anItem["FlavorText"]; ?></div>
                         <div class="rarity"><?php echo $anItem["Rarity"]; ?></div>
                         <div class="rune-set"><?php echo $anItem["RuneSet"]; ?></div>
@@ -385,6 +424,7 @@ function convertFaction($str) {
                         <div class="score"><?php echo $anItem["Score"]; ?></div>
                         <div><?php echo $anItem["Description"]; ?></div>
                         <div class="nora"><?php echo $anItem["NoraCost"] ?></div>
+                        <div class="owned"><?php if($userIsLoggedIn) {echo $userEquipment[$anItem["ID"]]["Quantity"]." owned"; } ?></div>
                         <div class="flavor"><?php echo $anItem["FlavorText"]; ?></div>
                         <div class="rarity"><?php echo $anItem["Rarity"]; ?></div>
                         <div class="rune-set"><?php echo $anItem["RuneSet"]; ?></div>

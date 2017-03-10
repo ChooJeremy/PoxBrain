@@ -1,7 +1,10 @@
+<?php
+  require_once 'mysqlaccess.php';
+?>
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container">
     <a class="navbar-brand" href="/">PoxBrain</a>
-    <div id="accounts">
+    <div id="accounts" data-loggedin="<?php echo $auth->isLoggedIn() ? 1 : 0; ?>">
       <img src="/images/person_icon.png" alt="Handle your account">
     </div>
     <div id="search-form" class="">
@@ -31,7 +34,7 @@
 	</div>
 </div>
 <div id="dim"></div>
-<div id="login-signup">
+<div id="login-signup" class="floating-popup">
   <form id="login" method="post" action="login.php" onsubmit="return performLogin()">
     <div class="form-group">
       <label for="email">Email address</label>
@@ -65,4 +68,15 @@
   </form>
   <span>- OR -</span>
   <div id="exit-icon">X</div>
+</div>
+<div id="collection-help" class="floating-popup">
+  <h3>Track your collection on PoxNora in PoxBrain!</h3>
+  <p>This will display how many copies of each rune you own and their levels on rune and search pages.</p>
+  <p>Step 1: Make sure you're logged in on <a href="https://www.poxnora.com" target="_blank">poxnora.com</a></p>
+  <p>Step 2: Visit <a href="https://www.poxnora.com/runes/load-forge.do?m=checklist" target="_blank">this page</a>. Select everything (Ctrl-A) and copy it (Ctrl-C) into the text box below:</p>
+  <textarea id="collection-textarea">
+    
+  </textarea>
+  <button id="collection-submit" type="button" class="btn btn-primary" onclick="processCollection()">Step 3: Click here!</button>
+  <p id="collection-help-text"></p>
 </div>
