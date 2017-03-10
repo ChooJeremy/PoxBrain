@@ -18,7 +18,7 @@
         
         $shards = $theCollection->balance;
         //Update shards on the user's accounts
-        if (!($shardUpdate = $mysqli->prepare("UPDATE FROM UserData SET Shards = ? WHERE UserID = ?"))) {
+        if (!($shardUpdate = $mysqli->prepare("UPDATE UserData SET Shards = ? WHERE UserID = ?"))) {
             echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error; die();
         }
         

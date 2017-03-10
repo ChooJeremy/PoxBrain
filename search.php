@@ -30,10 +30,19 @@ else {
     // user is *not* signed in yet
 }
 
-function appendQuantity($array, $id) {
+function getOwnedString($array, $id) {
     global $userIsLoggedIn;
     if($userIsLoggedIn) {
-        return " ● ".$userChamps[$row["ID"]]["Quantity"]." owned";
+        $quantity = $array[$id]["Quantity"];
+        if($quantity == 0) {
+            return " owned-0";
+        } else if($quantity == 1) {
+            return " owned-1";
+        } else if($quantity == 2) {
+            return " owned-2";
+        } else {
+            return " owned-3";// or more
+        }
     } else {
         return "";
     }
@@ -332,12 +341,19 @@ function convertFaction($str) {
               <label><input class="filter-box rarity" type="checkbox" checked name="LEGENDARY"/>Legendary</label>
               <label><input class="filter-box rarity" type="checkbox" checked name="LIMITED"/>Limited</label>
           </div>
+          <div class="filter-section">
+              Copies owned: <input class="global" type="checkbox" checked name="owned-filter" />
+              <label><input class="filter-box owned-filter" type="checkbox" checked name="owned-0"/>0</label>
+              <label><input class="filter-box owned-filter" type="checkbox" checked name="owned-1"/>1</label>
+              <label><input class="filter-box owned-filter" type="checkbox" checked name="owned-2"/>2</label>
+              <label><input class="filter-box owned-filter" type="checkbox" checked name="owned-3"/>3+</label>
+          </div>
       </div>
       <div id="search-results">
           <?php 
             foreach ($allItems as $anItem) {
                 if($anItem["Type"] == 1) { ?>
-                    <div class="search-item champion <?php echo convertFaction($anItem["Faction"])." ".$anItem["Rarity"]." ".$anItem["Race"]." ".$anItem["Class"]; ?>" >
+                    <div class="search-item champion <?php echo convertFaction($anItem["Faction"])." ".$anItem["Rarity"]." ".$anItem["Race"]." ".$anItem["Class"].getOwnedString($userChamps, $anItem["ID"]); ?>" >
                         <a href="/rune.php?id=<?php echo $anItem["ID"]; ?>&type=1">
                             <h3 class="item-title">
                                 <img class="img-small" src="https://d2aao99y1mip6n.cloudfront.net/images/runes/sm/<?php echo $anItem['Hash']; ?>.png" />
@@ -348,7 +364,7 @@ function convertFaction($str) {
                         <div class="stats"><?php echo $anItem["Damage"]."DMG, ".$anItem["Speed"]."SPD, ".$anItem["MinRng"]."-".$anItem["MaxRng"]."RNG, ".$anItem["Defense"]."DEF, ".$anItem["HitPoints"]."HP "; ?></div>
                         <div class="flavor"><?php echo $anItem["Description"]; ?></div>
                         <div class="nora"><?php echo $anItem["NoraCost"] ?></div>
-                        <div class="owned"><?php if($userIsLoggedIn) {echo $userChamps[$anItem["ID"]]["Quantity"]." owned"; } ?></div>
+                        <div class="owned"><?php if($userIsLoggedIn) {echo "<br />".$userChamps[$anItem["ID"]]["Quantity"]." owned"; } ?></div>
                         <div class="rarity"><?php echo $anItem["Rarity"]; ?></div>
                         <div class="rune-set"><?php echo $anItem["RuneSet"]; ?></div>
                         <div class="artist"><?php echo $anItem["Artist"]; ?></div>
@@ -380,7 +396,7 @@ function convertFaction($str) {
                         </div>
                     </div>
                 <?php } else if($anItem["Type"] == 2) { ?>
-                    <div class="search-item relic <?php echo convertFaction($anItem["Faction"])." ".$anItem["Rarity"]; ?>">
+                    <div class="search-item relic <?php echo convertFaction($anItem["Faction"])." ".$anItem["Rarity"].getOwnedString($userRelics, $anItem["ID"]); ?>">
                         <a href="/rune.php?id=<?php echo $anItem["ID"]; ?>&type=2">
                             <h3 class="item-title">
                                 <img class="img-small" src="https://d2aao99y1mip6n.cloudfront.net/images/runes/sm/<?php echo $anItem['Hash']; ?>.png" />
@@ -390,14 +406,14 @@ function convertFaction($str) {
                         <div class="score"><?php echo $anItem["Score"]; ?></div>
                         <div><?php echo $anItem["Description"]; ?></div>
                         <div class="nora"><?php echo $anItem["NoraCost"] ?></div>
-                        <div class="owned"><?php if($userIsLoggedIn) {echo $userRelics[$anItem["ID"]]["Quantity"]." owned"; } ?></div>
+                        <div class="owned"><?php if($userIsLoggedIn) {echo "<br />".$userRelics[$anItem["ID"]]["Quantity"]." owned"; } ?></div>
                         <div class="flavor"><?php echo $anItem["FlavorText"]; ?></div>
                         <div class="rarity"><?php echo $anItem["Rarity"]; ?></div>
                         <div class="rune-set"><?php echo $anItem["RuneSet"]; ?></div>
                         <div class="artist"><?php echo $anItem["Artist"]; ?></div>
                     </div>
                 <?php } else if($anItem["Type"] == 3) { ?>
-                    <div class="search-item spell <?php echo convertFaction($anItem["Faction"])." ".$anItem["Rarity"]; ?>">
+                    <div class="search-item spell <?php echo convertFaction($anItem["Faction"])." ".$anItem["Rarity"].getOwnedString($userSpells, $anItem["ID"]); ?>">
                         <a href="/rune.php?id=<?php echo $anItem["ID"]; ?>&type=3">
                             <h3 class="item-title">
                                 <img class="img-small" src="https://d2aao99y1mip6n.cloudfront.net/images/runes/sm/<?php echo $anItem['Hash']; ?>.png" />
@@ -407,14 +423,14 @@ function convertFaction($str) {
                         <div class="score"><?php echo $anItem["Score"]; ?></div>
                         <div><?php echo $anItem["Description"]; ?></div>
                         <div class="nora"><?php echo $anItem["NoraCost"] ?></div>
-                        <div class="owned"><?php if($userIsLoggedIn) {echo $userSpells[$anItem["ID"]]["Quantity"]." owned"; } ?></div>
+                        <div class="owned"><?php if($userIsLoggedIn) {echo "<br />".$userSpells[$anItem["ID"]]["Quantity"]." owned"; } ?></div>
                         <div class="flavor"><?php echo $anItem["FlavorText"]; ?></div>
                         <div class="rarity"><?php echo $anItem["Rarity"]; ?></div>
                         <div class="rune-set"><?php echo $anItem["RuneSet"]; ?></div>
                         <div class="artist"><?php echo $anItem["Artist"]; ?></div>
                     </div>
                 <?php } else if($anItem["Type"] == 4) { ?>
-                    <div class="search-item equipment <?php echo convertFaction($anItem["Faction"])." ".$anItem["Rarity"]; ?>">
+                    <div class="search-item equipment <?php echo convertFaction($anItem["Faction"])." ".$anItem["Rarity"].getOwnedString($userEquipment, $anItem["ID"]); ?>">
                         <a href="/rune.php?id=<?php echo $anItem["ID"]; ?>&type=4">
                             <h3 class="item-title">
                                 <img class="img-small" src="https://d2aao99y1mip6n.cloudfront.net/images/runes/sm/<?php echo $anItem['Hash']; ?>.png" />
@@ -424,7 +440,7 @@ function convertFaction($str) {
                         <div class="score"><?php echo $anItem["Score"]; ?></div>
                         <div><?php echo $anItem["Description"]; ?></div>
                         <div class="nora"><?php echo $anItem["NoraCost"] ?></div>
-                        <div class="owned"><?php if($userIsLoggedIn) {echo $userEquipment[$anItem["ID"]]["Quantity"]." owned"; } ?></div>
+                        <div class="owned"><?php if($userIsLoggedIn) {echo "<br />".$userEquipment[$anItem["ID"]]["Quantity"]." owned"; } ?></div>
                         <div class="flavor"><?php echo $anItem["FlavorText"]; ?></div>
                         <div class="rarity"><?php echo $anItem["Rarity"]; ?></div>
                         <div class="rune-set"><?php echo $anItem["RuneSet"]; ?></div>

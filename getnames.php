@@ -33,7 +33,7 @@ else {
 function appendQuantity($array, $id) {
     global $userIsLoggedIn;
     if($userIsLoggedIn) {
-        return " ● ".$userChamps[$row["ID"]]["Quantity"]." owned";
+        return " ● ".$array[$id]["Quantity"]." owned";
     } else {
         return "";
     }

@@ -41,6 +41,11 @@
 .nora:after {
     content: 'n';
 }
+.owned {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
 .flavor {
     font-style: italic;
 }
