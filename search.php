@@ -341,13 +341,15 @@ function convertFaction($str) {
               <label><input class="filter-box rarity" type="checkbox" checked name="LEGENDARY"/>Legendary</label>
               <label><input class="filter-box rarity" type="checkbox" checked name="LIMITED"/>Limited</label>
           </div>
-          <div class="filter-section">
-              Copies owned: <input class="global" type="checkbox" checked name="owned-filter" />
-              <label><input class="filter-box owned-filter" type="checkbox" checked name="owned-0"/>0</label>
-              <label><input class="filter-box owned-filter" type="checkbox" checked name="owned-1"/>1</label>
-              <label><input class="filter-box owned-filter" type="checkbox" checked name="owned-2"/>2</label>
-              <label><input class="filter-box owned-filter" type="checkbox" checked name="owned-3"/>3+</label>
-          </div>
+          <?php if($auth->isLoggedIn()) { ?>
+              <div class="filter-section">
+                  Copies owned: <input class="global" type="checkbox" checked name="owned-filter" />
+                  <label><input class="filter-box owned-filter" type="checkbox" checked name="owned-0"/>0</label>
+                  <label><input class="filter-box owned-filter" type="checkbox" checked name="owned-1"/>1</label>
+                  <label><input class="filter-box owned-filter" type="checkbox" checked name="owned-2"/>2</label>
+                  <label><input class="filter-box owned-filter" type="checkbox" checked name="owned-3"/>3+</label>
+              </div>
+          <?php } ?>
       </div>
       <div id="search-results">
           <?php 

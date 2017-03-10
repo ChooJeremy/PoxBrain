@@ -54,8 +54,6 @@ if ($auth->isLoggedIn()) {
     $dbCheck->close();
 }
 
-var_dump($item);
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
