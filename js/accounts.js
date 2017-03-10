@@ -83,6 +83,10 @@ function processCollection() {
     $("#collection-submit").text("Processing...");
     $("#collection-help-text")[0].innerHTML = "This shouldn't take too long. Please don't move to another page or close this tab.";
 }
+function dismissPopups() {
+    disableCollectionHelp();
+    disableLogin();
+}
 $(document).ready(function() {
     $("#accounts").on("click", function() {
         if($("#accounts")[0].getAttribute("data-loggedin") === "0") {

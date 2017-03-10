@@ -25,6 +25,37 @@ array_push($items, $item);
 
 getData($items);
 $item = $items[0];
+
+//retrieve how many owned copies of that item
+if ($auth->isLoggedIn()) {
+    // user is signed in
+    $userID = $auth->getUserId();
+    //retrieve all champion records from the UserCollection
+    if (!($dbCheck = $mysqli->prepare("SELECT Quantity FROM UserCollection WHERE UserID = ? AND Type = ? AND RuneID = ?"))) {
+        echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error; die();
+    }
+    
+    if (!$dbCheck->bind_param("iii", $userID, $item["Type"], $item["ID"])) {
+        echo "Binding parameters failed: (" . $dbCheck->errno . ") " . $dbCheck->error; die();
+    }
+    
+    if (!$dbCheck->execute()) {
+        echo "Execute failed: (" . $dbCheck->errno . ") " . $dbCheck->error;  die();
+    }
+    
+    $dbCheck->bind_result($quantity);
+    
+    /* fetch values */
+    //Add relevancy
+    while ($dbCheck->fetch()) {
+        $item["Quantity"] = $quantity;
+    }
+    
+    $dbCheck->close();
+}
+
+var_dump($item);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

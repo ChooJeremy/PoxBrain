@@ -33,7 +33,7 @@
 		  search results as you type and hovering over abilities will tell you what they do</span>
 	</div>
 </div>
-<div id="dim"></div>
+<div id="dim" onclick="dismissPopups()"></div>
 <div id="login-signup" class="floating-popup">
   <form id="login" method="post" action="login.php" onsubmit="return performLogin()">
     <div class="form-group">
