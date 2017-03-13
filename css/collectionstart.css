@@ -1,0 +1,13 @@
+#collection-div #c-textarea {
+    width: 100%;
+}
+#collection-div {
+    display: none;
+}
+#login-div {
+    display: none;
+}
+#signup-result, #login-result, #c-help-text {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

@@ -25,7 +25,7 @@
     }
     catch (\Delight\Auth\EmailNotVerifiedException $e) {
         // email not verified
-        echo "Email not verified";
+        echo "Email not verified, please check your email and follow the link there";
     }
     catch (\Delight\Auth\TooManyRequestsException $e) {
         // too many requests

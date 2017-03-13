@@ -1,4 +1,17 @@
 <?php
+$to      = 'choojeremy4@gmail.com';
+$subject = 'the subject';
+$message = 'hello';
+$headers = 'From: webmaster@poxbrain.jch.ooo' . "\r\n" .
+    'Reply-To: webmaster@poxbrain.jch.ooo' . "\r\n" .
+    'X-Mailer: PHP/' . phpversion();
+
+var_dump(mail($to, $subject, $message, $headers));
+
+echo "Email sent. \n";
+
+die();
+
 require_once('../mysqlaccess.php');
 
 if(isset($_GET["email"])) {
