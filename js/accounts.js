@@ -15,7 +15,7 @@ function disableCollectionHelp() {
     $("#dim").css("display", "none");
 }
 function performLogin() {
-    $.ajax("/login.php", {
+    $.ajax("/accounts/login.php", {
         data: {
             "email": $("#login-email").val(),
             "password": $("#login-password").val(),
@@ -39,7 +39,7 @@ function performLogin() {
     return false;
 }
 function performRegister() {
-    $.ajax("/signup.php", {
+    $.ajax("/accounts/signup.php", {
         data: {
             "username": $("#register-username").val(),
             "password": $("#register-password").val(),
@@ -48,8 +48,9 @@ function performRegister() {
         type: "POST",
         success: function(data, textStatus, jqXHR) {
             if(data == "OK") {
-                //success, refresh page
-                location.reload();
+                //success
+                //user now needs to verify email
+                Location.reload();
             } else {
                 //error
                 alert(data);
