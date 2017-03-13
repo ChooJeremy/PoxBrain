@@ -52,6 +52,7 @@ function performRegister() {
                 location.reload();
             } else {
                 //error
+                alert(data);
             }
         }
     });
