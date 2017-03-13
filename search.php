@@ -48,7 +48,10 @@ function getOwnedString($array, $id) {
     }
 }
 
-$searchData = $_GET["search"];
+$searchData = "";
+if(isset($_GET["search"])) {
+    $searchData = $_GET["search"];
+}
 $originalSearchTerm = $searchData;
 $abilityNames = array();
 
