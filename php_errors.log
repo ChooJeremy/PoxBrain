@@ -4,3 +4,9 @@
 [06-Feb-2017 08:10:01 UTC] PHP Fatal error:  require_once(): Failed opening required 'mysqlaccess.php' (include_path='.:/usr/share/php:/usr/share/pear') in /home/ubuntu/workspace/references/Champion.php on line 2
 [06-Feb-2017 08:10:01 UTC] PHP Stack trace:
 [06-Feb-2017 08:10:01 UTC] PHP   1. {main}() /home/ubuntu/workspace/references/Champion.php:0
+[13-Mar-2017 03:47:56 UTC] PHP Warning:  require_once(./mysqlaccess.php): failed to open stream: No such file or directory in /home/ubuntu/workspace/accounts/login.php on line 2
+[13-Mar-2017 03:47:56 UTC] PHP Stack trace:
+[13-Mar-2017 03:47:56 UTC] PHP   1. {main}() /home/ubuntu/workspace/accounts/login.php:0
+[13-Mar-2017 03:47:56 UTC] PHP Fatal error:  require_once(): Failed opening required './mysqlaccess.php' (include_path='.:/usr/share/php:/usr/share/pear') in /home/ubuntu/workspace/accounts/login.php on line 2
+[13-Mar-2017 03:47:56 UTC] PHP Stack trace:
+[13-Mar-2017 03:47:56 UTC] PHP   1. {main}() /home/ubuntu/workspace/accounts/login.php:0

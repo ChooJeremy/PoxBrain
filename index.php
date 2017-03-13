@@ -69,7 +69,7 @@
         <div class="col-md-6">
           <h2>A new database?</h2>
           <p>This site is currently available for testing. Please report any bugs, inconsistencies or any comments onto the forum thread.</p>
-          <p>Try out the search function and the rune viewing option! (Start by searching any term on the top left)</p>
+          <p>Try out the search function and the rune viewing option! (Start by searching any term on the top right)</p>
           <p><a class="btn btn-default" href="http://forums.poxnora.com/index.php?threads/poxbrain-beta.26292/" role="button">View thread</a></p>
        </div>
       </div>

@@ -34,7 +34,7 @@ function performLogin() {
     });
     if(ga !== undefined) //user does not have ga disabled to some script blocker
     {
-        ga("send", "pageview", "/login.php");
+        ga("send", "pageview", "/accounts/login.php");
     }
     return false;
 }
@@ -59,7 +59,7 @@ function performRegister() {
     });
     if(ga !== undefined) //user does not have ga disabled to some script blocker
     {
-        ga("send", "pageview", "/signup.php");
+        ga("send", "pageview", "/accounts/signup.php");
     }    return false;
 }
 function processCollection() {

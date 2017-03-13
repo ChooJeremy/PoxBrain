@@ -1,5 +1,5 @@
 <?php
-    require_once('./mysqlaccess.php');
+    require_once('../mysqlaccess.php');
 
     try {
         //don't bother with email registration, just give them a user account
