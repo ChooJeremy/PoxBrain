@@ -25,7 +25,9 @@ function performLogin() {
         success: function(data, textStatus, jqXHR) {
             if(data == "OK") {
                 //success, refresh page
-                location.reload();
+                trashDB(function() {
+                    location.reload();
+                });
             } else {
                 //error
                 alert(data);
@@ -39,6 +41,10 @@ function performLogin() {
     return false;
 }
 function performRegister() {
+    if($("#register-password-confirm").val() === $("#register-password").val()) {
+        alert("Passwords do not match. Please try again.");
+        return;
+    }
     $.ajax("/accounts/signup.php", {
         data: {
             "username": $("#register-username").val(),
@@ -60,7 +66,8 @@ function performRegister() {
     if(ga !== undefined) //user does not have ga disabled to some script blocker
     {
         ga("send", "pageview", "/accounts/signup.php");
-    }    return false;
+    }    
+    return false;
 }
 function processCollection() {
     console.log("Attempting to process collection");

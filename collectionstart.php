@@ -25,6 +25,7 @@
       <!-- Example row of columns -->
       <div class="row">
         <div class="col-md-3">
+          <img src="images/search-owned-filter.jpg"></img>
         </div>
         <div class="col-md-6">
           <h2>Track your collection on PoxNora in PoxBrain!</h2>
@@ -83,6 +84,8 @@
           </div>
         </div>
         <div class="col-md-3">
+          <img src="images/search-owned-help.jpg"></img>
+        </div>
        </div>
       </div>
 

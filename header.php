@@ -37,15 +37,15 @@
 <div id="login-signup" class="floating-popup">
   <form id="login" method="post" action="login.php" onsubmit="return performLogin()">
     <div class="form-group">
-      <label for="email">Email address</label>
+      <label for="login-email">Email address</label>
       <input type="email" class="form-control" id="login-email" name="email" required="required" placeholder="Email">
     </div>
     <div class="form-group">
-      <label for="password">Password</label>
+      <label for="login-password">Password</label>
       <input type="password" class="form-control" id="login-password" name="password" required="required" placeholder="Password">
     </div>
     <div class="checkbox">
-      <label>
+      <label for="login-remember">
         <input type="checkbox" name="remember" id="login-remember"> Remember Me
       </label>
     </div>
@@ -53,15 +53,19 @@
   </form>
   <form id="signup" method="post" action="signup.php" onsubmit="return performRegister()">
     <div class="form-group">
-      <label for="email">Email address</label>
+      <label for="register-email">Email address</label>
       <input type="email" class="form-control" id="register-email" name="email" required="required" placeholder="Email">
     </div>
     <div class="form-group">
-      <label for="password">Password</label>
+      <label for="register-password">Password</label>
       <input type="password" class="form-control" id="register-password" name="password" required="required" placeholder="Password">
     </div>
+      <div class="form-group">
+      <label for="register-password-confirm">Confirm Password</label>
+      <input type="password" class="form-control" id="register-password-confirm" name="password-confirm" required="required" placeholder="Password">
+    </div>
     <div class="form-group">
-      <label for="username">Username</label>
+      <label for="register-username">Username</label>
       <input type="username" class="form-control" id="register-username" name="username" required="required" placeholder="Username">
     </div>
     <button type="submit" class="btn btn-info">Register</button>
