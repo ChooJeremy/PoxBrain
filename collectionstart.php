@@ -21,7 +21,7 @@
     
     <?php require_once('./header.php'); ?>
     
-    <div class="container">
+    <div id="main-info" class="container">
       <!-- Example row of columns -->
       <div class="row">
         <div class="col-md-3">

@@ -110,7 +110,7 @@ if ($auth->isLoggedIn()) {
       </div>
     </div>-->
     
-    <div class="container" style="padding-top: 20px;">
+    <div id="main-info" class="container">
         <div class="row">
             <div id="main-info" class="info-group col-sm-6">
                 <div class="card">

@@ -308,7 +308,7 @@ function convertFaction($str) {
       </div>
     </div>-->
     
-    <div class="container" style="padding-top: 20px;">
+    <div id="main-info" class="container">
         <div id="search-field">
             <form method="get" action="search.php">
                 <input id="page-search" class="form-control" type="text" name="search" value="<?php echo htmlspecialchars($originalSearchTerm); ?>"/>

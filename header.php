@@ -34,45 +34,6 @@
 	</div>
 </div>
 <div id="dim" onclick="dismissPopups()"></div>
-<div id="login-signup" class="floating-popup">
-  <form id="login" method="post" action="login.php" onsubmit="return performLogin()">
-    <div class="form-group">
-      <label for="login-email">Email address</label>
-      <input type="email" class="form-control" id="login-email" name="email" required="required" placeholder="Email">
-    </div>
-    <div class="form-group">
-      <label for="login-password">Password</label>
-      <input type="password" class="form-control" id="login-password" name="password" required="required" placeholder="Password">
-    </div>
-    <div class="checkbox">
-      <label for="login-remember">
-        <input type="checkbox" name="remember" id="login-remember"> Remember Me
-      </label>
-    </div>
-    <button type="submit" class="btn btn-primary">Login</button>
-  </form>
-  <form id="signup" method="post" action="signup.php" onsubmit="return performRegister()">
-    <div class="form-group">
-      <label for="register-email">Email address</label>
-      <input type="email" class="form-control" id="register-email" name="email" required="required" placeholder="Email">
-    </div>
-    <div class="form-group">
-      <label for="register-password">Password</label>
-      <input type="password" class="form-control" id="register-password" name="password" required="required" placeholder="Password">
-    </div>
-      <div class="form-group">
-      <label for="register-password-confirm">Confirm Password</label>
-      <input type="password" class="form-control" id="register-password-confirm" name="password-confirm" required="required" placeholder="Password">
-    </div>
-    <div class="form-group">
-      <label for="register-username">Username</label>
-      <input type="username" class="form-control" id="register-username" name="username" required="required" placeholder="Username">
-    </div>
-    <button type="submit" class="btn btn-info">Register</button>
-  </form>
-  <span>- OR -</span>
-  <div id="exit-icon">X</div>
-</div>
 <div id="collection-help" class="floating-popup">
   <h3>Track your collection on PoxNora in PoxBrain!</h3>
   <p>This will display how many copies of each rune you own and their levels on rune and search pages.</p>
