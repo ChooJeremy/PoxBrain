@@ -22,6 +22,7 @@ In no particular order,
 * Work with PoxBox to display rune price on PoxBox
 * Accounts for users.
   * Users will be able to track their collection on PoxNora in PoxBrain
+  * Display owned amount of search suggestions and results
   * Collection statistics for themselves
   * Anonymous aggregated statistics
   * JS code to 'dust' runes that are extras, with certain criterias
