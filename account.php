@@ -14,6 +14,7 @@
     <!-- Custom styles for this template -->
     <link href="css/jumbotron.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/account.css" type="text/css" />
   </head>
 
   <body>
@@ -58,13 +59,18 @@
       <div class="row">
         <div class="col-md-6">
           <form id="login" class="" method="post" action="login.php" onsubmit="return performLogin()">
-            <div class="form-group">
-              <label for="login-email">Email address</label>
-              <input type="email" class="form-control" id="login-email" name="email" required="required" placeholder="Email">
+            <h3>Login into your PoxBrain account</h3>
+            <div class="form-group row">
+              <label class="col-sm-2" for="login-email">Email address</label>
+              <div class="col-sm-10">
+                <input type="email" class="form-control" id="login-email" name="email" required="required" placeholder="Email">
+              </div>
             </div>
-            <div class="form-group">
-              <label for="login-password">Password</label>
-              <input type="password" class="form-control" id="login-password" name="password" required="required" placeholder="Password">
+            <div class="form-group row">
+              <label class="col-sm-2" for="login-password">Password</label>
+              <div class="col-sm-10">
+                <input type="password" class="form-control" id="login-password" name="password" required="required" placeholder="Password">
+              </div>
             </div>
             <div class="checkbox">
               <label for="login-remember">
@@ -76,21 +82,30 @@
         </div>
         <div class="col-md-6">
           <form id="signup" class="" method="post" action="signup.php" onsubmit="return performRegister()">
-            <div class="form-group">
-              <label for="register-email">Email address</label>
-              <input type="email" class="form-control" id="register-email" name="email" required="required" placeholder="Email">
+            <h3>Register for a new account.</h3>
+            <div class="form-group row">
+              <label class="col-sm-2" for="register-email">Email address</label>
+              <div class="col-sm-10">
+                <input type="email" class="form-control" id="register-email" name="email" required="required" placeholder="Email">
+              </div>
             </div>
-            <div class="form-group">
-              <label for="register-password">Password</label>
-              <input type="password" class="form-control" id="register-password" name="password" required="required" placeholder="Password">
+            <div class="form-group row">
+              <label class="col-sm-2" for="register-password">Password</label>
+              <div class="col-sm-10">
+                <input type="password" class="form-control" id="register-password" name="password" required="required" placeholder="Password">
+              </div>
             </div>
-              <div class="form-group">
-              <label for="register-password-confirm">Confirm Password</label>
-              <input type="password" class="form-control" id="register-password-confirm" name="password-confirm" required="required" placeholder="Password">
+              <div class="form-group row">
+              <label class="col-sm-2" for="register-password-confirm">Confirm Password</label>
+              <div class="col-sm-10">
+                <input type="password" class="form-control" id="register-password-confirm" name="password-confirm" required="required" placeholder="Password">
+              </div>
             </div>
-            <div class="form-group">
-              <label for="register-username">Username</label>
-              <input type="username" class="form-control" id="register-username" name="username" required="required" placeholder="Username">
+            <div class="form-group row">
+              <label class="col-sm-2" for="register-username">Username</label>
+              <div class="col-sm-10">
+                <input type="username" class="form-control" id="register-username" name="username" required="required" placeholder="Username">
+              </div>
             </div>
             <button type="submit" class="btn btn-info">Register</button>
           </form>
