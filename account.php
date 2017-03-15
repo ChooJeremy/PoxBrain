@@ -55,47 +55,7 @@
 
     <div id="main-info" class="container">
       <!-- Example row of columns -->
-      <div class="row">
-        <div class="col-md-6">
-          <form id="login" class="" method="post" action="login.php" onsubmit="return performLogin()">
-            <div class="form-group">
-              <label for="login-email">Email address</label>
-              <input type="email" class="form-control" id="login-email" name="email" required="required" placeholder="Email">
-            </div>
-            <div class="form-group">
-              <label for="login-password">Password</label>
-              <input type="password" class="form-control" id="login-password" name="password" required="required" placeholder="Password">
-            </div>
-            <div class="checkbox">
-              <label for="login-remember">
-                <input type="checkbox" name="remember" id="login-remember"> Remember Me
-              </label>
-            </div>
-            <button type="submit" class="btn btn-primary">Login</button>
-          </form>
-        </div>
-        <div class="col-md-6">
-          <form id="signup" class="" method="post" action="signup.php" onsubmit="return performRegister()">
-            <div class="form-group">
-              <label for="register-email">Email address</label>
-              <input type="email" class="form-control" id="register-email" name="email" required="required" placeholder="Email">
-            </div>
-            <div class="form-group">
-              <label for="register-password">Password</label>
-              <input type="password" class="form-control" id="register-password" name="password" required="required" placeholder="Password">
-            </div>
-              <div class="form-group">
-              <label for="register-password-confirm">Confirm Password</label>
-              <input type="password" class="form-control" id="register-password-confirm" name="password-confirm" required="required" placeholder="Password">
-            </div>
-            <div class="form-group">
-              <label for="register-username">Username</label>
-              <input type="username" class="form-control" id="register-username" name="username" required="required" placeholder="Username">
-            </div>
-            <button type="submit" class="btn btn-info">Register</button>
-          </form>
-        </div>
-      </div>
+      
 
       <hr>
 

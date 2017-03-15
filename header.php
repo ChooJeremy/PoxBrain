@@ -43,3 +43,44 @@
   <button id="collection-submit" type="button" class="btn btn-primary" onclick="processCollection()">Step 3: Click here!</button>
   <p id="collection-help-text"></p>
 </div>
+<div id="login-signup" class="floating-popup">
+  <div class="tab-group">
+    <div class="tab active" onclick="loginTab()">
+      Login
+    </div>
+    <div class="tab" onclick="registerTab()">
+      Signup
+    </div>
+  </div>
+  <form id="login" method="post" action="login.php" onsubmit="return performLogin()">
+    <div class="form-group">
+      <input type="email" class="form-control" id="login-email" name="email" required="required" placeholder="Email">
+    </div>
+    <div class="form-group">
+      <input type="password" class="form-control" id="login-password" name="password" required="required" placeholder="Password">
+    </div>
+    <div class="checkbox">
+      <label for="login-remember">
+        <input type="checkbox" name="remember" id="login-remember"> Remember Me
+      </label>
+    </div>
+    <button type="submit" class="btn btn-success">Login</button>
+  </form>
+  <form id="signup" class="hide" method="post" action="signup.php" onsubmit="return performRegister()">
+    <div class="form-group">
+      <input type="email" class="form-control" id="register-email" name="email" required="required" placeholder="Email">
+    </div>
+    <div class="form-group">
+      <input type="password" class="password-control form-control" id="register-password" name="password" required="required" placeholder="Password">
+    </div>
+    <div class="form-group">
+      <input type="password" class="password-control form-control" id="register-password-confirm" name="password-confirm" required="required" placeholder="Password (again)">
+    </div>
+    <p id="password-match"></p>
+    <div class="form-group">
+      <input type="username" class="form-control" id="register-username" name="username" required="required" placeholder="Username">
+    </div>
+    <button type="submit" class="btn btn-success">Register</button>
+  </form>
+  <p id="account-result"></p>
+</div>

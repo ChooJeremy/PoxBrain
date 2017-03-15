@@ -1,10 +1,12 @@
 function enableLogin() {
     $("#login-signup").css("display", "block");
     $("#dim").css("display", "block");
+    $("#account-result")[0].innerHTML = "";
 }
 function disableLogin() {
     $("#login-signup").css("display", "none");
     $("#dim").css("display", "none");
+    $("#account-result")[0].innerHTML = "";
 }
 function enableCollectionHelp() {
     $("#collection-help").css("display", "block");
@@ -30,7 +32,7 @@ function performLogin() {
                 });
             } else {
                 //error
-                alert(data);
+                $("#account-result")[0].innerHTML = data;
             }
         }
     });
@@ -59,7 +61,7 @@ function performRegister() {
                 Location.reload();
             } else {
                 //error
-                alert(data);
+                $("#account-result")[0].innerHTML = data;
             }
         }
     });
@@ -96,6 +98,31 @@ function dismissPopups() {
     disableCollectionHelp();
     disableLogin();
 }
+function loginTab() {
+    $("#login").removeClass("hide");
+    $("#signup").addClass("hide");
+    $(".tab-group .tab").removeClass("active");
+    $(".tab-group .tab:first-child").addClass("active");
+    $("#account-result")[0].innerHTML = "";
+}
+function registerTab() {
+    $("#login").addClass("hide");
+    $("#signup").removeClass("hide");
+    $(".tab-group .tab").removeClass("active");
+    $(".tab-group .tab:last-child").addClass("active");
+    $("#account-result")[0].innerHTML = "";
+}
+function passwordCheck() {
+    if($("#register-password").val() == "" || $("#register-password-confirm").val() == "") {
+        $("#password-match")[0].innerHTML = "";
+        return;
+    }
+    if($("#register-password").val() !== $("#register-password-confirm").val()) {
+        $("#password-match")[0].innerHTML = "The two passwords do not match.";
+    } else {
+        $("#password-match")[0].innerHTML = "";
+    }
+}
 $(document).ready(function() {
     $("#accounts").on("click", function() {
         if($("#accounts")[0].getAttribute("data-loggedin") === "0") {
@@ -122,4 +149,5 @@ $(document).ready(function() {
             disableCollectionHelp();
         }
     });
+    $(".password-control").on("blur", passwordCheck);
 });

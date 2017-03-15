@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <title>Resend Confirmation Email</title>
+    <title>Email Verification</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -20,7 +20,7 @@
     
     <?php require_once('./header.php'); ?>
 
-    <div class="container" style="text-align: left; margin-top: 20px">
+    <div id="main-info" class="container">
       <!-- Example row of columns -->
       <div class="row">
         <div class="col-md-2">
@@ -32,6 +32,9 @@
                 $auth->confirmEmail($_GET['selector'], $_GET['token']);
             
                 // email address has been verified
+                ?>
+                <p>Your email address has been verified. You can log in now.</p>
+                <?php
             }
             catch (\Delight\Auth\InvalidSelectorTokenPairException $e) {
                 // invalid token
