@@ -15,14 +15,16 @@ Design inspired by [NetrunnerDB](https://netrunnerdb.com)
 * Search suggestions as you type on the search bar. Potential search suggestions are loaded locally.
 * Ability to search for runes, sorted by relevancy to search results.
 * Filter search results by rarity, faction and rune Type
+* Accounts for users.
+  * Users are able to track their collection on PoxNora in PoxBrain
+  * Display owned amount of search suggestions and results
+
 
 ## Planned Features
 
 In no particular order,
 * Work with PoxBox to display rune price on PoxBox
 * Accounts for users.
-  * Users will be able to track their collection on PoxNora in PoxBrain
-  * Display owned amount of search suggestions and results
   * Collection statistics for themselves
   * Anonymous aggregated statistics
   * JS code to 'shard' runes that are extras, with certain criterias
