@@ -66,7 +66,22 @@ if($auth->isLoggedIn()) {
               </div>
               <div class="col-md-9">
                   <div id="account-info">
-                      Account information here
+                    <div id="change-password">
+                      <h2>Change password</h2>
+                        <form method="post" action="/accounts/changepassword.php" onsubmit="return attemptChangePassword()">
+                          <div>For security reasons, please re-enter your password: </div>
+                          <div class="form-group">
+                            <input class="form-control" type="password" name="oldpassword" id="oldpassword" placeholder="Old Password"/>
+                          </div>
+                          <div class="form-group">
+                            <input class="form-control" type="password" name="newpassword" id="newpassword" placeholder="New Password" />
+                            <input class="form-control" type="password" name="newpassword-confirm" id="newpassword-confirm" placeholder="Re-enter new password" />
+                            <div id="password-change-match" class="hide">The two passwords do not match.</div>
+                          </div>
+                          <input type="submit" value="Change Password" class="btn btn-primary"/>
+                        </form>
+                        <p id="change-password-result"></p>
+                    </div>
                   </div>
                   <div id="collection" class="hide">
                     <h2>Track your collection on PoxNora in PoxBrain!</h2>

@@ -34,7 +34,7 @@
 	</div>
 </div>
 <div id="dim" onclick="dismissPopups()"></div>
-<div id="collection-help" class="floating-popup">
+<!--<div id="collection-help" class="floating-popup">
   <h3>Track your collection on PoxNora in PoxBrain!</h3>
   <p>This will display how many copies of each rune you own and their levels on rune and search pages.</p>
   <p>Step 1: Make sure you're logged in on <a href="https://www.poxnora.com" target="_blank">poxnora.com</a></p>
@@ -42,7 +42,7 @@
   <textarea id="collection-textarea"></textarea>
   <button id="collection-submit" type="button" class="btn btn-primary" onclick="processCollection()">Step 3: Click here!</button>
   <p id="collection-help-text"></p>
-</div>
+</div>-->
 <div id="login-signup" class="floating-popup">
   <div class="tab-group">
     <div class="tab active" onclick="loginTab()">

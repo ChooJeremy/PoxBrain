@@ -29,3 +29,6 @@
     background: #179b77;
     color: #ffffff;
 }
+#password-change-match {
+    color: red;
+}
