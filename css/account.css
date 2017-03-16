@@ -1,0 +1,31 @@
+#unregistered {
+    margin-top: 70px;
+    text-align: center;
+}
+#unregistered .btn {
+    display: block;
+    margin: 0 auto;
+}
+#registered .col-md-12 {
+    font-size: 200%;
+    padding: 15px;
+}
+#registered .col-md-3 ul li {
+    display: block;
+    padding: 15px;
+    text-align: center;
+    width: 100%;
+    background-color: #eee;
+    color: #a0b3b0;
+    -webkit-transition: .5s ease;
+    transition: .5s ease;
+    cursor: pointer;
+}
+#registered .col-md-3 ul .active {
+    background: #1ab188;
+    color: #ffffff;
+}
+#registered .col-md-3 ul li:hover {
+    background: #179b77;
+    color: #ffffff;
+}

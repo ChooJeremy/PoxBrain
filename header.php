@@ -58,6 +58,7 @@
     </div>
     <div class="form-group">
       <input type="password" class="form-control" id="login-password" name="password" required="required" placeholder="Password">
+      <label id="password-reset">Forgotton your password?</label>
     </div>
     <div class="checkbox">
       <label for="login-remember">

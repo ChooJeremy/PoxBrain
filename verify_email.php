@@ -34,6 +34,7 @@
                 // email address has been verified
                 ?>
                 <p>Your email address has been verified. You can log in now.</p>
+                <button class="btn btn-primary" onclick="enableLogin()">Log In</button>
                 <?php
             }
             catch (\Delight\Auth\InvalidSelectorTokenPairException $e) {

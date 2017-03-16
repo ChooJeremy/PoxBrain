@@ -8,7 +8,7 @@ function email_confirm() {
             console.log(data);
             if(data == "OK") {
                 //success, tell the user
-                $("#email-result")[0].innerHTML = "Email sent!";
+                $("#email-result")[0].innerHTML = "Email sent! Please check your inbox.";
             } else {
                 //error
                 $("#email-result")[0].innerHTML = data;

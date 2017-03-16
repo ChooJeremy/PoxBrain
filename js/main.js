@@ -26,6 +26,7 @@ function performLogin() {
         type: "POST",
         success: function(data, textStatus, jqXHR) {
             if(data == "OK") {
+                $("#account-result")[0].innerHTML = "You have successfully logged in! Now refreshing the page...";
                 //success, refresh page
                 trashDB(function() {
                     location.reload();
@@ -58,7 +59,7 @@ function performRegister() {
             if(data == "OK") {
                 //success
                 //user now needs to verify email
-                Location.reload();
+                $("#account-result")[0].innerHTML = "Sign-up successful! We just need to verify the email address you entered belongs to you. Please visit your email and follow the link shown in the email.";
             } else {
                 //error
                 $("#account-result")[0].innerHTML = data;
@@ -70,6 +71,19 @@ function performRegister() {
         ga("send", "pageview", "/accounts/signup.php");
     }    
     return false;
+}
+function performLogout() {
+    console.log("Logging out...");
+    $.ajax("/accounts/logout.php", {
+        type: "POST",
+        success: function(data, textStatus, jqXHR) {
+            if(data === "OK") {
+                location.href = "/";
+            } else {
+                alert(data);
+            }
+        }
+    })
 }
 function processCollection() {
     console.log("Attempting to process collection");
@@ -132,11 +146,7 @@ $(document).ready(function() {
                 disableLogin();
             }
         } else {
-            if($("#collection-help").css("display") == "none") {
-                enableCollectionHelp();
-            } else {
-                disableCollectionHelp();
-            }
+            location.href = "/account.php";
         }
     });
     $("#exit-icon").on("click", function() {
@@ -144,7 +154,7 @@ $(document).ready(function() {
         disableCollectionHelp();
     });
     $(document).on("keyup", function(e) {
-         if (e.which == 27) { // escape key maps to keycode `27`
+        if (e.which == 27) { // escape key maps to keycode `27`
             disableLogin();
             disableCollectionHelp();
         }

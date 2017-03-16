@@ -101,6 +101,15 @@
 #password-match {
     color: red;
 }
+#password-reset {
+    text-align: left;
+    cursor: pointer;
+    color: blue;
+    display: block;
+}
+#password-reset:hover{
+    text-decoration: underline;
+}
 .hide {
     display: none;
 }
@@ -142,7 +151,7 @@
 #collection-help {
     
 }
-#collection-help #collection-textarea {
+#collection #collection-textarea {
     width: 100%;
     min-height: 100px;
     border: 1px solid black;
