@@ -23,7 +23,15 @@
     <div id="main-info" class="container">
       <!-- Example row of columns -->
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
+          <h2>Track your PoxNora collection on PoxBrain!</h2>
+          <p>
+            You can now save your PoxNora collection here, which will allow you to see how much of each rune you own on PoxBrain, such as in search results. You'll be able to filter by owned quantity while searching as well.
+            More features are planned with this. All you need is an account to link your collection to.
+          </p>
+          <p><a class="btn btn-default" href="/collectionstart.php" role="button">Get Started</a></p>
+        </div>
+        <div class="col-md-4">
           <h2>New update: Search by ability</h2>
           <p>
             There's been a new update to PoxBrain. New features include the ability to search by ability!
@@ -33,7 +41,7 @@
           </p>
           <p><a class="btn btn-default" href="/rune.php?id=2501&type=7" role="button">Look at Cast: Light as a Feather</a></p>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
           <h2>A new database?</h2>
           <p>This site is currently available for testing. Please report any bugs, inconsistencies or any comments onto the forum thread.</p>
           <p>Try out the search function and the rune viewing option! (Start by searching any term on the top right)</p>
