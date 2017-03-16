@@ -66,6 +66,7 @@ if($auth->isLoggedIn()) {
               </div>
               <div class="col-md-9">
                   <div id="account-info">
+                    Your email address is: <?php echo $auth->getEmail(); ?>
                     <div id="change-password">
                       <h2>Change password</h2>
                         <form method="post" action="/accounts/changepassword.php" onsubmit="return attemptChangePassword()">

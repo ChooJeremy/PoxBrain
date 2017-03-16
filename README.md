@@ -9,14 +9,14 @@ Note that the website isn't always updated to the latest commit in this repo.
 
 Design inspired by [NetrunnerDB](https://netrunnerdb.com)
 
-##Features
+## Features
 
 * A page that shows details about a rune, ability, mechanic or condition
 * Search suggestions as you type on the search bar. Potential search suggestions are loaded locally.
 * Ability to search for runes, sorted by relevancy to search results.
 * Filter search results by rarity, faction and rune Type
 
-##Planned Features
+## Planned Features
 
 In no particular order,
 * Work with PoxBox to display rune price on PoxBox
@@ -25,8 +25,8 @@ In no particular order,
   * Display owned amount of search suggestions and results
   * Collection statistics for themselves
   * Anonymous aggregated statistics
-  * JS code to 'dust' runes that are extras, with certain criterias
-  * Show runes that are worth 'dusting' based on PoxBox price. Show other runes that are best sent to PoxBox instead.
+  * JS code to 'shard' runes that are extras, with certain criterias
+  * Show runes that are worth 'sharding' based on PoxBox price. Show other runes that are best sent to PoxBox instead.
   * Other ways to browse their collection than the editor in PoxNora
 * BattleGroups creation and sharing
   * Writeups like NetrunnerDB for their own BG
@@ -36,7 +36,7 @@ In no particular order,
   * Enter achievement conditions and find runes that fit that criteria
   * Link with user accounts to only show runes that the user owns
 
-##Contributing
+## Contributing
 
 Download the repo. You'll need a server, we currently use a LAMP stack. You'll have to initalize the database with the required tables. The SQL code required to generate these tables (imported from phpmyadmin) can be found at [dbinit.sql](./dbinit.sql)
 You'll also need to specify how to connect to the sql database. Currently the codes use mysqli to connect. You'll have to create a mysqlaccess.php file in the root folder, with the following structure:
