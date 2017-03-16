@@ -47,6 +47,5 @@
     </div> <!-- /container -->
     <?php require_once('./js/corejs.php'); ?>
     <script type="text/javascript" src="js/email_confirmation.js"></script>
-    
     </body>
 </html>

@@ -44,9 +44,9 @@ function performLogin() {
     return false;
 }
 function performRegister() {
-    if($("#register-password-confirm").val() === $("#register-password").val()) {
+    if($("#register-password-confirm").val() !== $("#register-password").val()) {
         alert("Passwords do not match. Please try again.");
-        return;
+        return false;
     }
     $.ajax("/accounts/signup.php", {
         data: {
@@ -84,6 +84,10 @@ function performLogout() {
             }
         }
     })
+    if(ga !== undefined) //user does not have ga disabled to some script blocker
+    {
+        ga("send", "pageview", "/accounts/logout.php");
+    }
 }
 function processCollection() {
     console.log("Attempting to process collection");

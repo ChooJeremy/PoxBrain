@@ -58,7 +58,7 @@
     </div>
     <div class="form-group">
       <input type="password" class="form-control" id="login-password" name="password" required="required" placeholder="Password">
-      <label id="password-reset">Forgotten your password?</label>
+      <a href="/forgetpassword.php"><label id="password-reset">Forgotten your password?</label></a>
     </div>
     <div class="checkbox">
       <label for="login-remember">

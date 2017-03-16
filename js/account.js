@@ -71,6 +71,10 @@ function attemptChangePassword() {
         });
     }
     $("#change-password-result")[0].innerHTML = "Processing...";
+    if(ga !== undefined) //user does not have ga disabled to some script blocker
+    {
+        ga("send", "pageview", "/accounts/changepassword.php");
+    }
     return false;
 }
 $(document).ready(function() {

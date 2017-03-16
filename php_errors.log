@@ -20,3 +20,9 @@
 Stack trace:
 #0 /home/ubuntu/workspace/accounts/signup.php(12): Delight\Auth\Auth->register('choojeremy6@gma...', '123456', 'choo', Object(Closure))
 #1 {main}
+[16-Mar-2017 01:08:19 UTC] exception 'Delight\Auth\DatabaseError' in /home/ubuntu/workspace/vendor/vendor/delight-im/auth/src/Auth.php:207
+Stack trace:
+#0 /home/ubuntu/workspace/accounts/signup.php(12): Delight\Auth\Auth->register('jacktayweijie@g...', '1234', '123', Object(Closure))
+#1 {main}
+[16-Mar-2017 01:41:34 UTC] PHP Fatal error:  Cannot use try without catch or finally in /home/ubuntu/workspace/accounts/resetpassword.php on line 12
+[16-Mar-2017 01:41:34 UTC] PHP Fatal error:  Cannot use try without catch or finally in /home/ubuntu/workspace/accounts/resetpassword.php on line 12
