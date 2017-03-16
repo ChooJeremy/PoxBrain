@@ -235,6 +235,8 @@ if ($auth->isLoggedIn()) {
                 </div>
                 <?php if($item["Type"] == 7) { ?>
                     <a class="btn btn-primary" style="margin-top: 10px" href='/search.php?search=<?php echo htmlspecialchars("ability:\"".$item["OriginalName"]."\""); ?>'>Find Champions with this ability.</a>
+                <?php } else if($item["Type"] >= 1 && $item["Type"] <= 4) { ?>
+                    <p>You own <?php echo $item["Quantity"]; ?> copies of this rune.</p>
                 <?php } ?>
             </div>
             <div id="side-info" class="info-group col-sm-6">
