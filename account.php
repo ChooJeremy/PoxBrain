@@ -55,7 +55,7 @@ if($auth->isLoggedIn()) {
           <?php } else { ?>
           <div id="registered">
               <div class="col-md-12">
-                  <?php echo $username." - "; echo $shards; Shards ?> 
+                  <?php echo $username." - "; echo $shards; ?> Shards
               </div>
               <div class="col-md-3">
                   <ul>
