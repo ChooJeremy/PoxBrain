@@ -78,7 +78,7 @@ function performLogout() {
         type: "POST",
         success: function(data, textStatus, jqXHR) {
             if(data === "OK") {
-                location.href = "/";
+                location.reload();
             } else {
                 alert(data);
             }
@@ -142,7 +142,7 @@ function passwordCheck() {
     }
 }
 $(document).ready(function() {
-    $("#accounts").on("click", function() {
+    $("#accounts img").on("click", function() {
         if($("#accounts")[0].getAttribute("data-loggedin") === "0") {
             if($("#login-signup").css("display") == "none") {
                 enableLogin();
@@ -150,7 +150,7 @@ $(document).ready(function() {
                 disableLogin();
             }
         } else {
-            location.href = "/account.php";
+            $("#accounts #account-popup").slideToggle();
         }
     });
     $("#exit-icon").on("click", function() {

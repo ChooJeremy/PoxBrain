@@ -6,6 +6,22 @@
     <a class="navbar-brand" href="/">PoxBrain</a>
     <div id="accounts" data-loggedin="<?php echo $auth->isLoggedIn() ? 1 : 0; ?>">
       <img src="/images/person_icon.png" alt="Handle your account">
+      <div id="account-popup">
+        <?php if($auth->isLoggedIn()) { ?>
+          <div>
+            <div class="top">
+              <?php echo $auth->getUsername(); ?>
+              <span><?php echo $auth->getEmail(); ?></span>
+            </div>
+            <hr>
+              <ul>
+                <a href="/account.php"><li>My Account</li></a>
+                <a href="/account.php?collection"><li>Collection</li></a>
+                <li onclick="performLogout()">Logout</li>
+              </ul>
+          </div>
+        <?php } ?>
+      </div>
     </div>
     <div id="search-form" class="">
       <form class="navbar-form" action="/search.php" method="get" onsubmit="return performSearch()" >

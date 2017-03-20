@@ -77,6 +77,20 @@ function attemptChangePassword() {
     }
     return false;
 }
+function getParameterByName(name, url) {
+    if (!url) {
+      url = window.location.href;
+    }
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
 $(document).ready(function() {
    $("#newpassword, #newpassword-confirm").on("blur", passwordChangeCheck);
+   if(getParameterByName("collection") == "") {
+    showCollection($("#registered .col-md-3 ul li")[1]);
+   }
 });

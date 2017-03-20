@@ -61,7 +61,7 @@ if($auth->isLoggedIn()) {
                   <ul>
                       <li onclick="showAccountInfo(this)" class="active">My Account</li>
                       <li onclick="showCollection(this)">Collection</li>
-                      <li onclick="performLogout()">Logout</li>
+                      <!-- <li onclick="performLogout()">Logout</li> -->
                   </ul>
               </div>
               <div class="col-md-9">

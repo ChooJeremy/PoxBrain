@@ -26,34 +26,40 @@
         <div class="col-md-2">
         </div>
         <div class="col-md-8">
+          <h2>Email Verification</h2>
           <?php
             require_once('./mysqlaccess.php');
-            try {
-                $auth->confirmEmail($_GET['selector'], $_GET['token']);
-            
-                // email address has been verified
-                ?>
-                <p>Your email address has been verified. You can log in now.</p>
-                <button class="btn btn-primary" onclick="enableLogin()">Log In</button>
-                <?php
-            }
-            catch (\Delight\Auth\InvalidSelectorTokenPairException $e) {
-                // invalid token
-                ?>
-                <p>Invalid Token. Please ensure that the link you followed is complete. If the link was correct, you can try getting another email."</p>
+            if(!isset($_GET['selector'], $_GET['token'])) { ?>
+                <p>Incomplete link. Please ensure that the link you followed is complete. If the link was correct, you can try getting another email.</p>
                 <p><a class="btn btn-default" href="https://poxdb-choojeremy.c9users.io/email_confirmation.php" role="button">Get another email</a></p> 
-                <?php
-            }
-            catch (\Delight\Auth\TokenExpiredException $e) {
-                // token expired
-                ?>
-                <p>Token expired. You took too long to verify your email."</p>
-                <p><a class="btn btn-default" href="https://poxdb-choojeremy.c9users.io/email_confirmation.php" role="button">Try again</a></p> 
-                <?php
-            }
-            catch (\Delight\Auth\TooManyRequestsException $e) {
-                // too many requests
-                echo "Too Many Requests have been made from this IP. Please try again later.";
+            <?php } else { 
+              try {
+                  $auth->confirmEmail($_GET['selector'], $_GET['token']);
+              
+                  // email address has been verified
+                  ?>
+                  <p>Your email address has been verified. You can log in now.</p>
+                  <button class="btn btn-primary" onclick="enableLogin()">Log In</button>
+                  <?php
+              }
+              catch (\Delight\Auth\InvalidSelectorTokenPairException $e) {
+                  // invalid token
+                  ?>
+                  <p>Invalid Token. Please ensure that the link you followed is complete. If the link was correct, you can try getting another email.</p>
+                  <p><a class="btn btn-default" href="https://poxdb-choojeremy.c9users.io/email_confirmation.php" role="button">Get another email</a></p> 
+                  <?php
+              }
+              catch (\Delight\Auth\TokenExpiredException $e) {
+                  // token expired
+                  ?>
+                  <p>Token expired. You took too long to verify your email.</p>
+                  <p><a class="btn btn-default" href="https://poxdb-choojeremy.c9users.io/email_confirmation.php" role="button">Try again</a></p> 
+                  <?php
+              }
+              catch (\Delight\Auth\TooManyRequestsException $e) {
+                  // too many requests
+                  echo "Too Many Requests have been made from this IP. Please try again later.";
+              }
             }
           ?>
         </div>
