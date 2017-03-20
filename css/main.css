@@ -144,6 +144,9 @@
 #account-popup a:hover {
     text-decoration: none;
 }
+#account-result {
+    padding: 10px;
+}
 #password-match {
     color: red;
 }
