@@ -4,7 +4,7 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container">
     <a class="navbar-brand" href="/">PoxBrain</a>
-    <div id="accounts" data-loggedin="<?php echo $auth->isLoggedIn() ? 1 : 0; ?>">
+    <div id="accounts" class="hide" data-loggedin="<?php echo $auth->isLoggedIn() ? 1 : 0; ?>">
       <img src="/images/person_icon.png" alt="Handle your account">
       <div id="account-popup">
         <?php if($auth->isLoggedIn()) { ?>
