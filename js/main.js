@@ -29,7 +29,12 @@ function performLogin() {
                 $("#account-result")[0].innerHTML = "You have successfully logged in! Now refreshing the page...";
                 //success, refresh page
                 trashDB(function() {
-                    location.reload();
+                    if(window.location.pathname.substring(0, 13) == "/verify_email") { //If I'm on the verify email page, don't re-show the page
+                    //instead redirect to the home page, no point re-showing the verify email page. {
+                        location.href = "/";
+                    } else {
+                        location.reload();
+                    }
                 });
             } else {
                 //error

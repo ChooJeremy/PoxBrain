@@ -1,9 +1,9 @@
 <?php
 require_once('./mysqlaccess.php');
 
-$userIsLoggedIn = $auth->isLoggedIn();
+$showQuantity = $auth->isLoggedIn();
 
-if ($userIsLoggedIn) {
+if ($showQuantity) {
     // user is signed in
     $userID = $auth->getUserId();
     //retrieve all champion records from the UserCollection
@@ -25,14 +25,18 @@ if ($userIsLoggedIn) {
             $userEquipment[$row["RuneID"]] = array("RuneID" => $row["RuneID"], "Quantity" => $row["Quantity"], "Level" => $row["Level"]);
         }
     }
+    
+    if(count($userChamps) == 0 || count($userSpells) == 0 || count($userRelics) == 0 || count($userEquipment) == 0) {
+        $showQuantity = false;
+    }
 }
 else {
     // user is *not* signed in yet
 }
 
 function appendQuantity($array, $id) {
-    global $userIsLoggedIn;
-    if($userIsLoggedIn) {
+    global $showQuantity;
+    if($showQuantity) {
         return " ● ".$array[$id]["Quantity"]." owned";
     } else {
         return "";

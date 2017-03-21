@@ -2,8 +2,8 @@
 require_once('./mysqlaccess.php');
 require_once('references/Champion.php');
 preinit($mysqli, true, true, true, true, true, true, true);
-$userIsLoggedIn = $auth->isLoggedIn();
-if ($userIsLoggedIn) {
+$quantityFound = $auth->isLoggedIn();
+if ($quantityFound) {
     // user is signed in
     $userID = $auth->getUserId();
     //retrieve all champion records from the UserCollection
@@ -25,14 +25,18 @@ if ($userIsLoggedIn) {
             $userEquipment[$row["RuneID"]] = array("RuneID" => $row["RuneID"], "Quantity" => $row["Quantity"], "Level" => $row["Level"]);
         }
     }
+    
+    if(count($userChamps) == 0 || count($userSpells) == 0 || count($userRelics) == 0 || count($userEquipment) == 0) {
+        $quantityFound = false;
+    }
 }
 else {
     // user is *not* signed in yet
 }
 
 function getOwnedString($array, $id) {
-    global $userIsLoggedIn;
-    if($userIsLoggedIn) {
+    global $quantityFound;
+    if($quantityFound) {
         $quantity = $array[$id]["Quantity"];
         if($quantity == 0) {
             return " owned-0";
@@ -344,7 +348,7 @@ function convertFaction($str) {
               <label><input class="filter-box rarity" type="checkbox" checked name="LEGENDARY"/>Legendary</label>
               <label><input class="filter-box rarity" type="checkbox" checked name="LIMITED"/>Limited</label>
           </div>
-          <?php if($auth->isLoggedIn()) { ?>
+          <?php if($quantityFound) { ?>
               <div class="filter-section">
                   Copies owned: <input class="global" type="checkbox" checked name="owned-filter" />
                   <label><input class="filter-box owned-filter" type="checkbox" checked name="owned-0"/>0</label>
@@ -369,7 +373,7 @@ function convertFaction($str) {
                         <div class="stats"><?php echo $anItem["Damage"]."DMG, ".$anItem["Speed"]."SPD, ".$anItem["MinRng"]."-".$anItem["MaxRng"]."RNG, ".$anItem["Defense"]."DEF, ".$anItem["HitPoints"]."HP "; ?></div>
                         <div class="flavor"><?php echo $anItem["Description"]; ?></div>
                         <div class="nora"><?php echo $anItem["NoraCost"] ?></div>
-                        <div class="owned"><?php if($userIsLoggedIn) {echo "<br />".$userChamps[$anItem["ID"]]["Quantity"]." owned"; } ?></div>
+                        <div class="owned"><?php if($quantityFound) {echo "<br />".$userChamps[$anItem["ID"]]["Quantity"]." owned"; } ?></div>
                         <div class="rarity"><?php echo $anItem["Rarity"]; ?></div>
                         <div class="rune-set"><?php echo $anItem["RuneSet"]; ?></div>
                         <div class="artist"><?php echo $anItem["Artist"]; ?></div>
@@ -411,7 +415,7 @@ function convertFaction($str) {
                         <div class="score"><?php echo $anItem["Score"]; ?></div>
                         <div><?php echo $anItem["Description"]; ?></div>
                         <div class="nora"><?php echo $anItem["NoraCost"] ?></div>
-                        <div class="owned"><?php if($userIsLoggedIn) {echo "<br />".$userRelics[$anItem["ID"]]["Quantity"]." owned"; } ?></div>
+                        <div class="owned"><?php if($quantityFound) {echo "<br />".$userRelics[$anItem["ID"]]["Quantity"]." owned"; } ?></div>
                         <div class="flavor"><?php echo $anItem["FlavorText"]; ?></div>
                         <div class="rarity"><?php echo $anItem["Rarity"]; ?></div>
                         <div class="rune-set"><?php echo $anItem["RuneSet"]; ?></div>
@@ -428,7 +432,7 @@ function convertFaction($str) {
                         <div class="score"><?php echo $anItem["Score"]; ?></div>
                         <div><?php echo $anItem["Description"]; ?></div>
                         <div class="nora"><?php echo $anItem["NoraCost"] ?></div>
-                        <div class="owned"><?php if($userIsLoggedIn) {echo "<br />".$userSpells[$anItem["ID"]]["Quantity"]." owned"; } ?></div>
+                        <div class="owned"><?php if($quantityFound) {echo "<br />".$userSpells[$anItem["ID"]]["Quantity"]." owned"; } ?></div>
                         <div class="flavor"><?php echo $anItem["FlavorText"]; ?></div>
                         <div class="rarity"><?php echo $anItem["Rarity"]; ?></div>
                         <div class="rune-set"><?php echo $anItem["RuneSet"]; ?></div>
@@ -445,7 +449,7 @@ function convertFaction($str) {
                         <div class="score"><?php echo $anItem["Score"]; ?></div>
                         <div><?php echo $anItem["Description"]; ?></div>
                         <div class="nora"><?php echo $anItem["NoraCost"] ?></div>
-                        <div class="owned"><?php if($userIsLoggedIn) {echo "<br />".$userEquipment[$anItem["ID"]]["Quantity"]." owned"; } ?></div>
+                        <div class="owned"><?php if($quantityFound) {echo "<br />".$userEquipment[$anItem["ID"]]["Quantity"]." owned"; } ?></div>
                         <div class="flavor"><?php echo $anItem["FlavorText"]; ?></div>
                         <div class="rarity"><?php echo $anItem["Rarity"]; ?></div>
                         <div class="rune-set"><?php echo $anItem["RuneSet"]; ?></div>
