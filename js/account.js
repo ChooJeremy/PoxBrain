@@ -19,7 +19,7 @@ function processCollection() {
         }
     });
     $("#collection-submit").text("Processing...");
-    $("#collection-help-text")[0].innerHTML = "This shouldn't take too long. Please don't move to another page or close this tab.";
+    $("#collection-help-text")[0].innerHTML = "This shouldn't take too long - about a minute or so. Please don't move to another page or close this tab.";
 }
 function removeAllTabs() {
     $("#registered .col-md-9>div").addClass("hide");

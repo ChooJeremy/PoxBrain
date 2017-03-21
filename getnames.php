@@ -3,6 +3,11 @@ require_once('./mysqlaccess.php');
 
 $showQuantity = $auth->isLoggedIn();
 
+$userChamps = array();
+$userSpells = array();
+$userRelics = array();
+$userEquipment = array();
+
 if ($showQuantity) {
     // user is signed in
     $userID = $auth->getUserId();
@@ -10,10 +15,6 @@ if ($showQuantity) {
     $query = "SELECT * FROM UserCollection WHERE UserID = " . $userID;
     $userCollectionQuery = $mysqli->query($query);
     
-    $userChamps = array();
-    $userSpells = array();
-    $userRelics = array();
-    $userEquipment = array();
     while($row = $userCollectionQuery->fetch_assoc()) {
         if($row["Type"] == 1) {
             $userChamps[$row["RuneID"]] = array("RuneID" => $row["RuneID"], "Quantity" => $row["Quantity"], "Level" => $row["Level"]);

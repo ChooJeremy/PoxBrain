@@ -14,7 +14,7 @@ function collectionRegister() {
             if(data == "OK") {
                 //success
                 //user now needs to verify email
-                $("#signup-result")[0].innerHTML = "OK, now we just need to verify that you own that email address. We've sent you an email from no-reply@poxbrain.jch.ooo, please check your email and click on that link. <button type='button' onclick='accountFinish()' class='btn btn-primary'>Once you're done, click here</button>"
+                $("#signup-result")[0].innerHTML = "OK, now we just need to verify that you own that email address. We've sent you an email from no-reply@poxbrain.jch.ooo, please check your email and click on that link. If you don't see the message, check your spam folder. <button type='button' onclick='accountFinish()' class='btn btn-primary'>Once you're done, click here</button>"
                 $("#collection-register button").removeClass("btn-primary").addClass("btn-default");
                 window.scrollTo(0,document.body.scrollHeight);
             } else {
@@ -93,5 +93,5 @@ function collectionComplete() {
         }
     });
     $("#c-submit").text("Processing...");
-    $("#c-help-text")[0].innerHTML = "This shouldn't take too long. Please don't move to another page or close this tab.";
+    $("#c-help-text")[0].innerHTML = "This shouldn't take too long - about a minute or so. Please don't move to another page or close this tab.";
 }

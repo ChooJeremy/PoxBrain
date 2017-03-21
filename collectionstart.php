@@ -76,6 +76,7 @@
           </div>
           <?php } ?>
           <div id="collection-div" <?php if($auth->isLoggedIn()) { echo "style=\"display: block;\""; } ?> >
+            <p>You're almost done! This is the last step.</p>
             <p>Please make sure you're logged in on <a href="https://www.poxnora.com" target="_blank">poxnora.com</a></p>
             <p>Next, we need you to visit <a href="https://www.poxnora.com/runes/load-forge.do?m=checklist" target="_blank">this page</a>. Select everything (Ctrl+A) and copy it (Ctrl+C) into the text box below:</p>
             <textarea id="c-textarea"></textarea>
