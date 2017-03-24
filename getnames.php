@@ -104,14 +104,14 @@ $query = "SELECT ID, Class FROM Classes";
 $result = $mysqli->query($query);
 
 while($row = $result->fetch_assoc()) {
-    array_push($champions, array( "ID"=> $row["ID"], "Name" =>$row["Class"], "Type"=> 8, "SubText"=> "Find all ".$row["Class"], "Explanation"=> "" ) );
+    array_push($champions, array( "ID"=> $row["ID"], "Name" =>$row["Class"], "Type"=> 8, "SubText"=> "Search for ".$row["Class"], "Explanation"=> "" ) );
 }
 
 $query = "SELECT ID, Race FROM Races";
 $result = $mysqli->query($query);
 
 while($row = $result->fetch_assoc()) {
-    array_push($champions, array( "ID"=> $row["ID"], "Name" =>$row["Race"], "Type"=> 9, "SubText"=> "Find all ".$row["Race"], "Explanation"=> "" ) );
+    array_push($champions, array( "ID"=> $row["ID"], "Name" =>$row["Race"], "Type"=> 9, "SubText"=> "Search for ".$row["Race"], "Explanation"=> "" ) );
 }
 
 echo json_encode($champions);
