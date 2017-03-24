@@ -63,7 +63,7 @@ $abilityNames = array();
 $success = preg_match_all('/(ability:"(.+?))"/', $searchData, $matches);
 if($success >= 0 && count($matches[0]) > 0) {
     //there was a match
-    //identify which abilities to search for
+    //identify which abilities to search for, add them into $abilityNames, remove them from the search string $searchData
 
     $currentPos = 0;
     do {
@@ -74,15 +74,67 @@ if($success >= 0 && count($matches[0]) > 0) {
     } while ($currentPos < count($matches[0]));
 }
 
+//Build the early parameters to be includedd in the SQL query, i.e. IN (s, s, s) when there are 3 abilities.
+//If no matches, default is below
 $abilityINParams = " = 'FAKE_ABILITY_NAME'";
 $extraS = "";
 if(count($abilityNames) > 0) {
     $abilityINParams = " IN (".implode(',',array_fill(0,count($abilityNames),'?')).")";
     $extraS = implode('', array_fill(0, count($abilityNames)*4, 's'));
 }
-//begin building an array for call_user_func_array in params
+//begin building an array for call_user_func_array in params, for the query. All of these will replace the '?' in the ability query.
 $abilityParams = array_merge(array("ssssss".$extraS, $searchData, $searchData), $abilityNames, array($searchData), $abilityNames, array($searchData, $searchData), $abilityNames, array($searchData), $abilityNames);
 
+$matches = array();
+$classNames = array();
+//check for class (then race). Essentially same code as the ability searching
+$success = preg_match_all('/(class:"(.+?))"/', $searchData, $matches);
+if($success >= 0 && count($matches[0]) > 0) {
+    //there was a match
+    //identify which class to search for
+
+    $currentPos = 0;
+    do {
+        $className = $matches[2][$currentPos];
+        array_push($classNames, $className);
+        $searchData = str_replace($matches[0][$currentPos], "", $searchData);
+        $currentPos = $currentPos + 1;
+    } while ($currentPos < count($matches[0]));
+}
+
+$classINParams = " = 'FAKE_CLASS_NAME'";
+$extraS = "";
+if(count($classNames) > 0) {
+    $classINParams = " IN (".implode(',',array_fill(0,count($classNames),'?')).")";
+    $extraS = implode('', array_fill(0, count($classNames), 's'));
+}
+
+$classParams = array_merge(array("".$extraS), $classNames);
+
+$matches = array();
+$raceNames = array();
+$success = preg_match_all('/(race:"(.+?))"/', $searchData, $matches);
+if($success >= 0 && count($matches[0]) > 0) {
+    //there was a match
+    //identify which race to search for
+
+    $currentPos = 0;
+    do {
+        $raceName = $matches[2][$currentPos];
+        array_push($raceNames, $raceName);
+        $searchData = str_replace($matches[0][$currentPos], "", $searchData);
+        $currentPos = $currentPos + 1;
+    } while ($currentPos < count($matches[0]));
+}
+
+$raceINParams = " = 'FAKE_RACE_NAME'";
+$extraS = "";
+if(count($raceNames) > 0) {
+    $raceINParams = " IN (".implode(',',array_fill(0,count($raceNames),'?')).")";
+    $extraS = implode('', array_fill(0, count($raceNames), 's'));
+}
+
+$raceParams = array_merge(array("".$extraS), $raceNames);
 
 //Find everywhere
 //We'll start with champions
@@ -131,6 +183,8 @@ if(!($dbCheck = $mysqli->prepare("SELECT ChampAbility.ChampID, Ability.Name, MAT
     echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error; die();
 }
 
+//If this isn't done, there will be a mysqli error:
+//Warning: Parameter X to mysqli_stmt::bind_param() expected to be a reference, value given in <file> on line <line>
 $tmp = array();
 foreach($abilityParams as $key => $value) $tmp[$key] = &$abilityParams[$key];
 
@@ -157,6 +211,54 @@ while($dbCheck->fetch()) {
 }
 
 $dbCheck->close();
+
+//Classes and races
+if(count($raceNames) > 0 || count($classNames) > 0) {
+    $query = "";
+    $paramsToDisplay = array("");
+    if(count($raceNames) > 0) {
+        $query = "SELECT ChampRace.ChampID AS ChampID FROM ChampRace " .
+                    "INNER JOIN Races ON Races.ID = ChampRace.RaceID " .
+                    "WHERE Races.Race".$raceINParams;
+        $paramsToDisplay = array_merge($paramsToDisplay, $raceNames); //$raceParams actually has a 'sss...' in front, we don't need that
+        $paramsToDisplay[0] = $paramsToDisplay[0] . $raceParams[0];
+    }
+    
+    if(count($classNames) > 0) {
+        if($query !== "") {
+            $query = $query . " UNION ";
+        }
+        $query = $query . "SELECT ChampClass.ChampID AS ChampID FROM ChampClass " .
+                            "INNER JOIN Classes ON Classes.ID = ChampClass.ClassID " .
+                            "WHERE Classes.Class".$classINParams;
+        $paramsToDisplay = array_merge($paramsToDisplay, $classNames);
+        $paramsToDisplay[0] = $paramsToDisplay[0] . $classParams[0];
+    }
+    
+    if(!($dbCheck = $mysqli->prepare($query))) {
+        echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error; die();
+    }
+    
+    $tmp = array();
+    foreach($paramsToDisplay as $key => $value) $tmp[$key] = &$paramsToDisplay[$key];
+    
+    if (!call_user_func_array(array($dbCheck, "bind_param"), $tmp)) {
+        echo "Binding parameters failed: (" . $dbCheck->errno . ") " . $dbCheck->error; die();
+    }
+    
+    if (!$dbCheck->execute()) {
+        echo "Execute failed: (" . $dbCheck->errno . ") " . $dbCheck->error;  die();
+    }
+    
+    $dbCheck->bind_result($champID);
+    $champAbilityScores = [];
+    
+    while($dbCheck->fetch()) {
+        array_push($champAbilityScores,  array("ID"=> $champID, "Name"=> "UNKNOWN", "Type"=> 1, "Score" => 30));
+    }
+    
+    $dbCheck->close();
+}
 
 //Merge all champ notifications
 foreach ($champAbilityScores as $anAbilityScore) {
