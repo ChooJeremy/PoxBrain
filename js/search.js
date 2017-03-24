@@ -97,7 +97,7 @@ function doSearch(e) {
       //Find out the list of searches and display a list of possibilites on the bottom
       for(var i = 0; i < rows.length && i < 5; i++ ) {
         $("#search-items").append("<div onclick='startSearch_Selection(" + i + ")'>" + rows[i].Name + "<span class='subtext'>" +rows[i].SubText + "</span></div>");
-        searchItemsData.push({"ID": rows[i].ID, "Type": rows[i].Type});
+        searchItemsData.push({"ID": rows[i].ID, "Type": rows[i].Type, "Name": rows[i].Name});
       }
       
       if(rows.length > 0) {
@@ -133,13 +133,28 @@ function performSearch(num) {
     }
   }
   if(itemToSearch !== undefined) {
+    console.log(itemToSearch);
+    //Exception for class and race
+    if(itemToSearch.Type == 8) //Class
+    {
+      $("#search").val('class:"' + itemToSearch.Name + '"');
+      $("#hard-search").val($("#search").val());
+      return true;
+    } else if(itemToSearch.Type == 9) //Race
+    {
+      $("#search").val('race:"' + itemToSearch.Name + '"');
+      $("#hard-search").val($("#search").val());
+      return true;
+    }
     window.location.href = "/rune.php?id=" + itemToSearch.ID + "&type=" + itemToSearch.Type;
     return false;
   }
   return true;
 }
 function startSearch_Selection(index) {
-  performSearch(index);
+  if(performSearch(index)) {
+    window.location.href = "/search.php?search="+ $("#search").val();
+  }
 }
 $(document).ready(function() {
   var e = document.getElementById('search');
