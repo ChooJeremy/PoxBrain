@@ -208,10 +208,18 @@ if ($auth->isLoggedIn()) {
                         <?php }
                         if($item["Type"] >= 1 && $item["Type"] <= 4) { ?>
                         <div class="rune-set"><?php echo $item["RuneSet"]; ?></div>
-                        <?php if($item["Type"] == 1) {
-                                echo "<div class='race'>Race: " . str_replace(" ", ", ", $item["Race"]) . "</div>";
-                                echo "<div class='class'>Class: " . str_replace(" ", ", ", $item["Class"]) . "</div>";
-                        } ?>
+                        <?php if($item["Type"] == 1) { ?>
+                            <div class='race'>Race: <?php
+                                foreach (explode(" ", $item["Race"]) as $value) { ?>
+                                    <a href='/search.php?search=race:"<?php echo $value; ?>"'><?php echo $value; ?></a>
+                                <?php }
+                            ?> </div>
+                            <div class='class'>Class: <?php
+                                foreach (explode(" ", $item["Class"]) as $value) { ?>
+                                    <a href='/search.php?search=class:"<?php echo $value; ?>"'><?php echo $value; ?></a>
+                                <?php }
+                            ?> </div>
+                        <?php } ?>
                         <div class="artist"><?php echo $item["Artist"]; ?></div>
                         <div class="status">
                             <?php if($item["ForSale"]) {
