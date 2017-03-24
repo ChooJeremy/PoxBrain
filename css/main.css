@@ -205,6 +205,14 @@
     min-height: 100px;
     border: 1px solid black;
 }
+#unregistered {
+    margin-top: 70px;
+    text-align: center;
+}
+#unregistered .btn {
+    display: block;
+    margin: 0 auto;
+}
 #loading
 {
     padding-top: 20px;

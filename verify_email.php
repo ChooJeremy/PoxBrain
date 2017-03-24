@@ -58,7 +58,7 @@
               }
               catch (\Delight\Auth\TooManyRequestsException $e) {
                   // too many requests
-                  echo "Too Many Requests have been made from this IP. Please try again later.";
+                  echo "<p>Too Many Requests have been made from this IP. Please try again later.</p>";
               }
             }
           ?>

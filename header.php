@@ -16,7 +16,7 @@
             <hr>
               <ul>
                 <a href="/account.php"><li>My Account</li></a>
-                <a href="/account.php?collection"><li>Collection</li></a>
+                <a href="/account.php?collection"><li>Update Collection</li></a>
                 <li onclick="performLogout()">Logout</li>
               </ul>
           </div>
