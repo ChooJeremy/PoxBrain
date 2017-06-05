@@ -25,7 +25,7 @@
     }
     catch (\Delight\Auth\EmailNotVerifiedException $e) {
         // email not verified
-        echo "Email not verified, please check your email and follow the link there";
+        echo "Email not verified, please check your email and follow the link there. If you don't see an email from no-reply@pox.jch.ooo, check your spam folder. If you still don't see an email, you can try requesting another <a href='/email_confirmation'>here</a>.";
     }
     catch (\Delight\Auth\TooManyRequestsException $e) {
         // too many requests

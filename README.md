@@ -40,7 +40,7 @@ In no particular order,
 
 ## Contributing
 
-Download the repo. You'll need a server, we currently use a LAMP stack. You'll have to initalize the database with the required tables. The SQL code required to generate these tables (imported from phpmyadmin) can be found at [dbinit.sql](./dbinit.sql)
+Download the repo. You'll need a server, we currently use a LAMP stack. We also currently use SendGrid to send our emails, namely the emails for accounts. You can either follow and create a SendGrid account as well, or utilize your own, or choose to remove the feature entirely. If you choose not to use SendGrid, you can edit the codes that send email, all of which are located under the [/accounts/ folder](./accounts/). If you choose to use SendGrid, you'll need an API key to be specified, in the same place that we specify our database connection below. You'll have to initalize the database with the required tables. The SQL code required to generate these tables (imported from phpmyadmin) can be found at [dbinit.sql](./dbinit.sql)
 You'll also need to specify how to connect to the sql database. Currently the codes use mysqli to connect. You'll have to create a mysqlaccess.php file in the root folder, with the following structure:
 
 ```php
@@ -50,6 +50,7 @@ $user = "username";
 $pass = "mypassword";
 $db = "dbname";
 $port = 80;
+$sendGridAPIKey = "SG.yoursendgridapikey";
 
 $userdb = "user_accounts";
 $mysqli = mysqli_connect($host, $user, $pass, $db, $port)or die(mysql_error());

@@ -64,7 +64,7 @@ function performRegister() {
             if(data == "OK") {
                 //success
                 //user now needs to verify email
-                $("#account-result")[0].innerHTML = "Sign-up successful! We just need to verify the email address you entered belongs to you. Please visit your email and follow the link shown in the email. If you don't see the message, check your spam folder.";
+                $("#account-result")[0].innerHTML = "Sign-up successful! We just need to verify the email address you entered belongs to you. Please visit your email and follow the link shown in the email. If you don't see the message, check your spam folder. You should see a message from no-reply@pox.jch.ooo";
             } else {
                 //error
                 $("#account-result")[0].innerHTML = data;

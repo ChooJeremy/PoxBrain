@@ -53,7 +53,6 @@ if ($auth->isLoggedIn()) {
     
     $dbCheck->close();
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

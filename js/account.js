@@ -10,7 +10,7 @@ function processCollection() {
                 $("#collection-help-text")[0].innerHTML = "We're almost done! Just some finishing up.";
                 trashDB(function() {
                     populateDB();
-                    $("#collection-help-text")[0].innerHTML = "We're done! You should now see your collection on many locations around PoxNora!";
+                    $("#collection-help-text")[0].innerHTML = "We're done! You should now see your collection on many locations around PoxBrain!";
                 });
             } else {
                 $("#collection-help-text")[0].innerHTML = data;
