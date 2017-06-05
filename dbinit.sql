@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `Ability` (
   `ID` int(11) NOT NULL,
   `APCost` int(11) NOT NULL,
   `Name` varchar(50) NOT NULL,
-  `Description` varchar(500) NOT NULL,
+  `Description` varchar(1000) NOT NULL,
   `ActivationType` int(11) NOT NULL,
   `Level` int(11) NOT NULL,
   `Cooldown` int(11) NOT NULL,
@@ -112,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `ChampRace` (
 CREATE TABLE IF NOT EXISTS `Champions` (
   `ID` int(11) NOT NULL,
   `Name` varchar(100) NOT NULL,
-  `Description` varchar(500) NOT NULL,
+  `Description` varchar(1000) NOT NULL,
   `MaxRng` int(11) NOT NULL,
   `MinRng` int(11) NOT NULL,
   `Defense` int(11) NOT NULL,
@@ -162,7 +162,7 @@ CREATE TABLE IF NOT EXISTS `Conditions` (
   `ID` int(11) NOT NULL,
   `Name` varchar(30) NOT NULL,
   `Identifier` varchar(30) NOT NULL,
-  `Description` varchar(500) NOT NULL,
+  `Description` varchar(1000) NOT NULL,
   PRIMARY KEY (`Identifier`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -225,7 +225,7 @@ CREATE TABLE IF NOT EXISTS `Mechanics` (
   `ID` int(11) NOT NULL,
   `Name` varchar(30) NOT NULL,
   `Identifier` varchar(30) NOT NULL,
-  `Description` varchar(500) NOT NULL,
+  `Description` varchar(1000) NOT NULL,
   PRIMARY KEY (`Identifier`),
   FULLTEXT KEY `Name` (`Name`,`Description`),
   FULLTEXT KEY `Name_2` (`Name`)

@@ -144,7 +144,7 @@ foreach ($champions as $aChampion) {
                 echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error; die();
             }
             
-            if (!$classAdd->bind_param("is", count($classNames), $aClass)) {
+            if (!$classAdd->bind_param("is", $position, $aClass)) {
                 echo "Binding parameters failed: (" . $classAdd->errno . ") " . $classAdd->error; die();
             }
             
@@ -182,7 +182,7 @@ foreach ($champions as $aChampion) {
                 echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error; die();
             }
             
-            if (!$raceAdd->bind_param("is", count($raceNames), $aRace)) {
+            if (!$raceAdd->bind_param("is", $position, $aRace)) {
                 echo "Binding parameters failed: (" . $raceAdd->errno . ") " . $raceAdd->error; die();
             }
             
@@ -452,11 +452,12 @@ foreach($allData->equips as $anEquipment) {
 
 echo "\rEquipment complete. Starting database maintenance...                                      \n";
 
+$lastUpdateTime = date('Y-m-d H:i:s');
 if (!($dbUpdate = $mysqli->prepare("UPDATE PoxDB SET LastUpdateID = LastUpdateID + 1, LastUpdateTime = ?"))) {
     echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error; die();
 }
 
-if (!$dbUpdate->bind_param("s", date('Y-m-d H:i:s'))) {
+if (!$dbUpdate->bind_param("s", $lastUpdateTime)) {
     echo "Binding parameters failed: (" . $dbUpdate->errno . ") " . $dbUpdate->error; die();
 }
 
