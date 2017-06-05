@@ -1,5 +1,6 @@
 {
     "require": {
-        "delight-im/auth": "^3.1"
+        "delight-im/auth": "^3.1",
+	"sendgrid/sendgrid": "~5.1"
     }
 }
