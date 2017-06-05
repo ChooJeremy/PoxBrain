@@ -62,7 +62,7 @@ $auth = new \Delight\Auth\Auth($authDB);
 ```
 
 This will allow all the codes to use your database.
-Once you've started the database, you'll need to update it. Simply run update.php (preferably from the command line, so you get the echo'ed messages as they come) to populate the database with the necessary information.
+Once you've started the database, you'll need to update it. Simply run update.php (preferably from the command line, so you get the echo'ed messages as they come) to populate the database with the necessary information. You may receive a message saying something like `$_SERVER["REMOTE_ADDR"] is not defined`, ignore it, it's basically saying it can't find the other party's IP address (normal as you're running from the own machine).
 Once done, the website should run normally. PHP Auth is inside the repo already, located under ./vendor/vendor/delight-im
 
 Note: this repo contains a .htaccess so that it can be installed directly into the server www/ directory. If installed correctly with .htaccess files enabled, it will return 404 on attempts to access files that do not pertain to the site.
