@@ -215,6 +215,20 @@ CREATE TABLE IF NOT EXISTS `Factions` (
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+-- 
+-- Preinit Factions table with the relevant data.
+--
+
+INSERT INTO Factions (`ID`, `Faction`) VALUES(1, "Forglar Swamp"),
+  (2, "Forsaken Wastes"),
+  (3, "Ironfist Stronghold"),
+  (4, "K'thir Forest"),
+  (5, "Savage Tundra"),
+  (6, "Shattered Peaks"), 
+  (7, "Sundered Lands"), 
+  (8, "Underdepths");
+
 -- --------------------------------------------------------
 
 --
