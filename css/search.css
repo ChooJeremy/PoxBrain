@@ -2,11 +2,14 @@
     margin: 20px;
 }
 #page-search {
-    width: calc(100% - 120px);
+    width: calc(100% - 258px);
     display: inline;
 }
-#search-field .btn {
+#search-field .btn-success {
     width: 110px;
+}
+#search-field .btn-info {
+    width: 138px;
 }
 #filters {
     width: 20%;

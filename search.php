@@ -60,6 +60,21 @@ if(isset($_GET["search"])) {
 $originalSearchTerm = $searchData;
 $abilityNames = array();
 
+$abilitySearches = "";
+//Check for searches within the ability names
+$success = preg_match_all('/(in-ability:"(.+?))"/', $searchData, $matches);
+if($success >= 0 && count($matches[0]) > 0) {
+	//there was a match
+	//identify which abilities to search for, add them into $abilityNames, remove them from the search string $searchData
+	$currentPos = 0;
+	do {
+		$searchAbilityName = $matches[2][$currentPos];
+		$abilitySearches = $abilitySearches . " " . $searchAbilityName;
+		$searchData = str_replace($matches[0][$currentPos], "", $searchData);
+		$currentPos = $currentPos + 1;
+	} while ($currentPos < count($matches[0]));
+}
+
 //check string for ability matches and pre-remove
 $success = preg_match_all('/(ability:"(.+?))"/', $searchData, $matches);
 if($success >= 0 && count($matches[0]) > 0) {
@@ -84,7 +99,7 @@ if(count($abilityNames) > 0) {
 	$extraS = implode('', array_fill(0, count($abilityNames)*4, 's'));
 }
 //begin building an array for call_user_func_array in params, for the query. All of these will replace the '?' in the ability query.
-$abilityParams = array_merge(array("ssssss".$extraS, $searchData, $searchData), $abilityNames, array($searchData), $abilityNames, array($searchData, $searchData), $abilityNames, array($searchData), $abilityNames);
+$abilityParams = array_merge(array("ssssssssss".$extraS, $searchData, $searchData), $abilityNames, array($abilitySearches, $searchData, $abilitySearches), $abilityNames, array($searchData, $searchData), $abilityNames, array($abilitySearches, $searchData, $abilitySearches), $abilityNames);
 
 $matches = array();
 $classNames = array();
@@ -168,17 +183,21 @@ $dbCheck->close();
 if(!($dbCheck = $mysqli->prepare("SELECT ChampAbility.ChampID, Ability.Name, MATCH(Ability.Name) AGAINST (? IN NATURAL LANGUAGE MODE) AS Score1, " .
 						"MATCH(Ability.Name, Ability.Description) AGAINST (? IN NATURAL LANGUAGE MODE) AS Score2, " .
 						"CASE WHEN Ability.Name ".$abilityINParams." THEN 50 ELSE 0 END as AbilityScore, " .
+						"MATCH(Ability.Name) AGAINST (? IN NATURAL LANGUAGE MODE) AS Score3, " .
 						"1 as BaseAbility " . 
 						"FROM Ability INNER JOIN ChampAbility ON Ability.ID = ChampAbility.AbilityID " .
 						"WHERE MATCH(Ability.Name, Ability.Description) AGAINST (? IN NATURAL LANGUAGE MODE) " .
+						"OR MATCH(Ability.Name) AGAINST (? IN NATURAL LANGUAGE MODE) " .
 						"OR Ability.Name ".$abilityINParams." " .
 						"UNION ALL " .
 						"SELECT AbilitySet.ChampID, Ability.Name, MATCH(Ability.Name) AGAINST (? IN NATURAL LANGUAGE MODE) AS Score1,  " .
 						"MATCH(Ability.Name, Ability.Description) AGAINST (? IN NATURAL LANGUAGE MODE) AS Score2, " .
 						"CASE WHEN Ability.Name ".$abilityINParams." THEN 50 ELSE 0 END as AbilityScore, " .
+						"MATCH(Ability.Name) AGAINST (? IN NATURAL LANGUAGE MODE) AS Score3, " .
 						"AbilitySet.DefaultAbility AS BaseAbility " .
 						"FROM Ability INNER JOIN AbilitySet ON Ability.ID = AbilitySet.AbilityID " .
 						"WHERE MATCH(Ability.Name, Ability.Description) AGAINST (? IN NATURAL LANGUAGE MODE) " .
+						"OR MATCH(Ability.Name) AGAINST (? IN NATURAL LANGUAGE MODE) " .
 						"OR Ability.Name ".$abilityINParams." " .
 						"ORDER BY Score1*10 DESC, Score2 DESC"))) {
 	echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error; die();
@@ -197,12 +216,13 @@ if (!$dbCheck->execute()) {
 	echo "Execute failed: (" . $dbCheck->errno . ") " . $dbCheck->error;  die();
 }
 
-$dbCheck->bind_result($champID, $name, $score1, $score2, $abilityScore, $baseAbility);
+$dbCheck->bind_result($champID, $name, $score1, $score2, $abilityScore, $score3, $baseAbility);
 $champAbilityScores = [];
 
 while($dbCheck->fetch()) {
 	$score = max($score1*10, $score2);
 	$score = $score/10;//Abilities from champions shouldn't have such a high rating.
+	$score = $score3 * 5;
 	if($baseAbility === 1) {
 		$score = $score + $abilityScore;
 	} else {
@@ -420,6 +440,7 @@ function convertFaction($str) {
 			<form method="get" action="search.php">
 				<input id="page-search" class="form-control" type="text" name="search" value="<?php echo htmlspecialchars($originalSearchTerm); ?>"/>
 				<input class="btn btn-success" type="submit" value="Search again"/>
+				<a href="/advancedsearch"><button class="btn btn-info" type="button">Advanced Search</button></a>
 			</form>
 		</div>
 	  <div id="filters">
