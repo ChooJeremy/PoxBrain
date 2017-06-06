@@ -142,7 +142,7 @@ if ($auth->isLoggedIn()) {
                                 echo "Ability";
                             }
                         ?> ● <?php if($item["Type"] >= 1 && $item["Type"] <= 4) {
-                            echo $item["NoraCost"]. " nora ● " . $item["Rarity"] . "";
+                            echo $item["NoraCost"]. " nora ● " . $item["Faction"] . " ● " . $item["Rarity"] . "";
                             if($item["Type"] <= 2) { 
                                 if($item["Size"] == "1x1") { echo " ● Small"; } else { echo " ● Large"; } 
                             }
