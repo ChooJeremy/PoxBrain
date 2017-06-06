@@ -574,8 +574,18 @@ function convertFaction($str) {
 	<?php require_once('./js/corejs.php'); ?>
 	<script>
 		function onFilter(e) {
-			$(".search-item").removeClass("hide");
-			var filterList = $(".filter-box");
+			//Workaround for factions. Basically, if there is a faction included in at least one of the item, then allow it to be displayed.
+			//Basically, for example an SL - ST champion should be displayed if either ST or SL filteirng is ticked, not only when both is ticked
+			//If based on the above code, then it would only display with both is ticked.
+			$(".search-item").addClass("hide");
+			var factionFilters = $(".faction");
+			for(var i = 0; i < factionFilters.length; i++) {
+				if(factionFilters[i].checked) {
+					$("." + factionFilters[i].name).removeClass("hide");
+				}
+			}
+
+			var filterList = $(".type, .rarity, .owned-filter");
 			for(var i = 0; i < filterList.length; i++) {
 				if(!filterList[i].checked) {
 					$("." + filterList[i].name).addClass("hide");
