@@ -2,6 +2,11 @@
 require_once('./mysqlaccess.php');
 require_once('references/Champion.php');
 preinit($mysqli, true, true, true, true, true, true, true);
+
+$userChamps = array();
+$userSpells = array();
+$userRelics = array();
+$userEquipment = array();
 $quantityFound = $auth->isLoggedIn();
 if ($quantityFound) {
 	// user is signed in
@@ -10,10 +15,6 @@ if ($quantityFound) {
 	$query = "SELECT * FROM UserCollection WHERE UserID = " . $userID;
 	$userCollectionQuery = $mysqli->query($query);
 	
-	$userChamps = array();
-	$userSpells = array();
-	$userRelics = array();
-	$userEquipment = array();
 	while($row = $userCollectionQuery->fetch_assoc()) {
 		if($row["Type"] == 1) {
 			$userChamps[$row["RuneID"]] = array("RuneID" => $row["RuneID"], "Quantity" => $row["Quantity"], "Level" => $row["Level"]);
