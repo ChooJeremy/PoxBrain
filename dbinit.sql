@@ -257,6 +257,12 @@ CREATE TABLE IF NOT EXISTS `PoxDB` (
   PRIMARY KEY (`LastUpdateID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Insert the required data for PoxDB 
+--
+INSERT INTO PoxDB (`LastUpdateID`, `LastUpdateTime`) VALUES(1, "1990-01-01");
+
+
 -- --------------------------------------------------------
 
 --
