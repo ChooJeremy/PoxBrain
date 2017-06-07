@@ -57,13 +57,19 @@ $(document).ready(function() {
 	var abilityList, raceList, classList;
 	if(!window.openDatabase) {
 		var abilityPromise = dexieDB.Searches.where("Type").equals(7).sortBy("Name", function(arr) {
-			abilityList = arr.map(a => a.Name);
+			abilityList = arr.map(function(a) {
+				return a.Name;
+			});
 		});
 		var racePromise = dexieDB.Searches.where("Type").equals(9).sortBy("Name", function(arr) {
-			raceList = arr.map(a => a.Name);
+			raceList = arr.map(function(a) {
+				return a.Name;
+			});
 		});
 		var classPromise = dexieDB.Searches.where("Type").equals(8).sortBy("Name", function(arr) {
-			classList = arr.map(a => a.Name);
+			classList = arr.map(function(a) {
+				return a.Name;
+			});
 		});
 		Promise.all([abilityPromise, racePromise, classPromise]).then(function() {
 			createMultiSelectors(abilityList, raceList, classList);

@@ -23,25 +23,31 @@
 		<div id="main-info" class="container">
 			<!-- Example row of columns -->
 			<div class="row">
-				<div class="col-md-4 hide">
+				<div class="col-md-4">
 					<h2>Track your PoxNora collection on PoxBrain!</h2>
 					<p>
 						You can now save your PoxNora collection here, which will allow you to see how much of each rune you own on PoxBrain, such as in search results. You'll be able to filter by owned quantity while searching as well.
-						More features are planned with this. All you need is an account to link your collection to.
+						All you need is an account here so we can link your collection to someone.
 					</p>
-					<p><a class="btn btn-default" href="/collectionstart.php" role="button">Get Started</a></p>
+					<p><a class="btn btn-default" href="/collectionstart" role="button">Get Started</a></p>
+					<p>
+						Other changes: <br />
+						I think search might be somewhat confusing with all the different potential options, so I made a guided search page. It should now be significantly easier and simpler to find what you're looking for, like any runes that you need for quests.
+					</p>
+					<p><a class="btn btn-default" href="/advancedsearch" role="button">Try a guided search</a></p>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-4">
 					<h2>New update: Search by ability</h2>
 					<p>
 						There's been a new update to PoxBrain. New features include the ability to search by ability!
-						You can search by ability by searching as <a href='search.php?search=ability:"ability-here"'>ability:"ability-here"</a>. For example, to try and find champions with flight, teleport, leap and charge, you can try the search term:
-						<a href='/search.php?search=ability:"flight" ability:"leap" ability:"teleport" ability:"charge"'>ability:"flight" ability:"leap" ability:"teleport" ability:"charge"</a> Note that no champion has all of these abilities, so you'll see champions with as many of them as possible.
+						You can search by ability by searching as <a href='search?search=ability:"ability-here"'>ability:"ability-here"</a>. For example, to try and find champions with flight, teleport, leap and charge, you can try the search term:
+						<a href='/search?search=ability:"flight" ability:"leap" ability:"teleport" ability:"charge"'>ability:"flight" ability:"leap" ability:"teleport" ability:"charge"</a> Note that no champion has all of these abilities, so you'll see champions with as many of them as possible.
 						<p>You'll also find a button to search for champions with this ability when you're on an ability page like the following:</p>
 					</p>
-					<p><a class="btn btn-default" href="/rune.php?id=2501&type=7" role="button">Look at Cast: Light as a Feather</a></p>
+					<p><a class="btn btn-default" href="/rune?id=2501&type=7" role="button">Look at Cast: Light as a Feather</a></p>
+					<p>All of the above is simplified now, you can perform a <a class="btn btn-default" href="/advancedsearch" role="button">Guided search</a></p>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-4">
 					<h2>A new database?</h2>
 					<p>This site is currently available for testing. Please report any bugs, inconsistencies or any comments onto the forum thread.</p>
 					<p>Try out the search function and the rune viewing option! (Start by searching any term on the top right)</p>

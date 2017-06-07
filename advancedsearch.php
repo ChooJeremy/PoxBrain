@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-		<title>PoxBrain Advanced Search</title>
+		<title>PoxBrain Guided Search</title>
 
 		<!-- Bootstrap core CSS -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -28,7 +28,7 @@
 				<div class="col-md-1">
 				</div>
 				<div class="col-md-8">
-					<p class="head">Advanced Search</p>
+					<p class="head">Guided Search</p>
 					<p class="head-section">
 						Find runes that match as many of the following as possible:
 					</p>

@@ -439,7 +439,7 @@ function convertFaction($str) {
 			<form method="get" action="search.php">
 				<input id="page-search" class="form-control" type="text" name="search" value="<?php echo htmlspecialchars($originalSearchTerm); ?>"/>
 				<input class="btn btn-success" type="submit" value="Search again"/>
-				<a href="/advancedsearch"><button class="btn btn-info" type="button">Advanced Search</button></a>
+				<a href="/advancedsearch"><button class="btn btn-info" type="button">Guided Search</button></a>
 			</form>
 		</div>
 	  <div id="filters">

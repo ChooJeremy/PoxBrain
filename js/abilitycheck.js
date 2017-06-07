@@ -95,7 +95,7 @@ function generatePrompts(promptList, helpLocation, direction) {
                 items.push(e);
             }));
         }
-        Promise.all(allPromises).then(values => {
+        Promise.all(allPromises).then(function(values) {
             var uniques = [];
             createHelpBoxes(items, helpLocation, direction);
         });

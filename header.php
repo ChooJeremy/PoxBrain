@@ -4,7 +4,7 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container">
     <a class="navbar-brand" href="/">PoxBrain</a>
-    <div id="accounts" class="hide" data-loggedin="<?php echo $auth->isLoggedIn() ? 1 : 0; ?>">
+    <div id="accounts" class="" data-loggedin="<?php echo $auth->isLoggedIn() ? 1 : 0; ?>">
       <img src="/images/person_icon.png" alt="Handle your account">
       <div id="account-popup">
         <?php if($auth->isLoggedIn()) { ?>
@@ -101,3 +101,7 @@
   </form>
   <p id="account-result"></p>
 </div>
+<script type="text/javascript">
+    if(/MSIE \d|Trident.*rv:/.test(navigator.userAgent))
+        document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.5/bluebird.min.js"><\/script>');
+</script>
