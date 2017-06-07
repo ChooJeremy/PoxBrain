@@ -1,0 +1,23 @@
+.col-md-8 .head {
+	font-size: 150%;
+}
+.col-md-8 .head-section {
+	font-size: 120%;
+}
+.search-row {
+	clear: both;
+	margin: 10px;
+}
+.search-row .search-left {
+	float: left;
+	text-align: center;
+	padding: 5px;
+	padding-bottom: 20px;
+}
+.search-row .search-right {
+	float: right;
+	width: 50%;
+}
+.search-row .search-right button {
+	float: right;
+}

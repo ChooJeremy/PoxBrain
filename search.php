@@ -272,7 +272,6 @@ if(count($raceNames) > 0 || count($classNames) > 0) {
 	}
 	
 	$dbCheck->bind_result($champID);
-	$champAbilityScores = [];
 	
 	while($dbCheck->fetch()) {
 		array_push($champAbilityScores,  array("ID"=> $champID, "Name"=> "UNKNOWN", "Type"=> 1, "Score" => 30));

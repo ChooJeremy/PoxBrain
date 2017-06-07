@@ -31,7 +31,7 @@
             require_once('./mysqlaccess.php');
             if(!isset($_GET['selector'], $_GET['token'])) { ?>
                 <p>Incomplete link. Please ensure that the link you followed is complete. If the link was correct, you can try getting another email.</p>
-                <p><a class="btn btn-default" href="https://poxdb-choojeremy.c9users.io/email_confirmation.php" role="button">Get another email</a></p> 
+                <p><a class="btn btn-default" href="/email_confirmation" role="button">Get another email</a></p> 
             <?php } else { 
               try {
                   $auth->confirmEmail($_GET['selector'], $_GET['token']);
@@ -46,14 +46,14 @@
                   // invalid token
                   ?>
                   <p>Invalid Token. Please ensure that the link you followed is complete. If the link was correct, you can try getting another email.</p>
-                  <p><a class="btn btn-default" href="https://poxdb-choojeremy.c9users.io/email_confirmation.php" role="button">Get another email</a></p> 
+                  <p><a class="btn btn-default" href="/email_confirmation" role="button">Get another email</a></p> 
                   <?php
               }
               catch (\Delight\Auth\TokenExpiredException $e) {
                   // token expired
                   ?>
                   <p>Token expired. You took too long to verify your email.</p>
-                  <p><a class="btn btn-default" href="https://poxdb-choojeremy.c9users.io/email_confirmation.php" role="button">Try again</a></p> 
+                  <p><a class="btn btn-default" href="/email_confirmation" role="button">Try again</a></p> 
                   <?php
               }
               catch (\Delight\Auth\TooManyRequestsException $e) {

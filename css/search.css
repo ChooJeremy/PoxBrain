@@ -1,92 +1,92 @@
 #search-field {
-    margin: 20px;
+	margin: 20px;
 }
 #page-search {
-    width: calc(100% - 258px);
-    display: inline;
+	width: calc(100% - 258px);
+	display: inline;
 }
 #search-field .btn-success {
-    width: 110px;
+	width: 110px;
 }
 #search-field .btn-info {
-    width: 138px;
+	width: 138px;
 }
 #filters {
-    width: 20%;
-    height: 100%;
-    float: left;
+	width: 20%;
+	height: 100%;
+	float: left;
 }
 #search-results {
-    width: 70%;
-    height: 100%;
-    display: inline-block;
-    float: left;
-    margin-left: 20px;
+	width: 70%;
+	height: 100%;
+	display: inline-block;
+	float: left;
+	margin-left: 20px;
 }
 .search-item {
-    margin: 10px;
-    border-bottom: 1px solid #eee;
-    position: relative;
-    clear: both;
+	margin: 10px;
+	border-bottom: 1px solid #eee;
+	position: relative;
+	clear: both;
 }
 .search-item h3:hover {
-    text-decoration: underline;
-    cursor: pointer;
+	text-decoration: underline;
+	cursor: pointer;
 }
 .score:Before {
-    content: 'Score: ';
+	content: 'Score: ';
 }
 .nora {
-    position: absolute;
-    top: 0;
-    right: 0;
+	position: absolute;
+	top: 0;
+	right: 0;
 }
 .nora:after {
-    content: 'n';
+	content: 'n';
 }
 .owned {
-    position: absolute;
-    top: 0;
-    right: 0;
+	position: absolute;
+	top: 0;
+	right: 0;
 }
 .flavor {
-    font-style: italic;
+	font-style: italic;
 }
 .rune-set {
-    font-size: 80%;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    text-align: right;
+	font-size: 80%;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	text-align: right;
 }
 .artist:before {
-    content: 'Artist: ';
+	content: 'Artist: ';
 }
 .ability-set div {
-    position: relative;
-    padding-top: 10px;
+	position: relative;
+	padding-top: 10px;
 }
 .ability-set div span {
-    position: absolute;
-    top: 0;
-    left: 0;
-    font-size: 80%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	font-size: 80%;
 }
 .no-results {
-    text-align: center;
-    width: 100%;
+	text-align: center;
+	width: 100%;
 }
 #filters .filter-section {
-    margin: 10px 0;
+	margin: 10px 0;
 }
 #filters div label {
-    display: block;
+	display: block;
 }
 .item-title {
-    height: 26px;
+	height: 26px;
 }
 .img-small {
-    height: 100%;
-    display: inline-block;
-    width: auto;
+	height: 100%;
+	display: inline-block;
+	width: auto;
 }
