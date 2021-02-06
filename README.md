@@ -4,8 +4,7 @@
 
 PoxBrain is a database to aid users through the complex game of [PoxNora](http://www.poxnora.com)!
 There have been many other sites like this created, such as PoxPulse and PoxBase, but they all haven't been updated for quite a while and have lost active support, so PoxBrain aims to be the new PoxNora aid.
-You can find this website live at [https://poxbrain.jch.ooo](https://poxbrain.jch.ooo)
-Note that the website isn't always updated to the latest commit in this repo.
+This project is no longer being worked on since I am no longer actively playing the game. If you're interested, feel free ot take it up!
 
 Design inspired by [NetrunnerDB](https://netrunnerdb.com)
 
